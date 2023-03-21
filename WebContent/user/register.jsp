@@ -40,19 +40,26 @@
 	<script>
   	$(function(){
   		
-  		$('input[name="userId"]').keyup(function(){
+  		// 아이디 유효성 검사
+  		$('#userId').keyup(function(){
   			var userId = $(this).val();
   			var num = userId.search(/[0-9]/g);
  			var eng = userId.search(/[a-z]/ig);
+ 			var kor = userId.search(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g);
+ 			var spc = userId.search(/[~`!@#$%^&*()\-_+=|\\\[\]{}'";:?,.<>\/]/gi);
  			
  			if(userId==""){
   				$('#userIdConfirmResult').html(' &nbsp; ');
-  			}else if(userId.length < 2){
-  				$('#userIdConfirmResult').text('아이디는 2글자 이상');
+  			}else if(userId.length < 2 || userId.length > 20){
+  				$('#userIdConfirmResult').text('아이디는 2 ~ 20 글자 이내');
   			}else if(userId.search(/\s/)!=-1){
   				$('#userIdConfirmResult').text('공백 입력 금지');
-  			}else if(num < 0 || eng < 0){
-  				$('#userIdConfirmResult').text('아이디는 영문자와 숫자 혼합으로 입력해주세요');
+  			}else if(kor >= 0){
+  				$('#userIdConfirmResult').text('한글 입력 금지');
+  			}else if(spc >= 0){
+  				$('#userIdConfirmResult').text('특수문자 입력 금지');
+  			}else if(num < 0 && eng < 0){
+  				$('#userIdConfirmResult').text('아이디는 영문자나 숫자로만 입력해주세요');
   			}else{
   				$.ajax({
   					url : '${conPath}/userIdConfirm.do',
@@ -66,12 +73,14 @@
   			}
   		}); // 아이디 유효성검사 + 중복검사(ajax)
   		
+  		// 비밀번호 유효성 검사
   		$('#userPw, #userPwChk').keyup(function(){
   			var userPw = $('#userPw').val();
   			var userPwChk = $('#userPwChk').val();
  			var num = userPw.search(/[0-9]/g);
  			var eng = userPw.search(/[a-z]/ig);
- 			var spe = userPw.search(/[`~!@@#$%^&*|\\\'\";:\/?]/gi);
+ 			var kor = userPw.search(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g);
+ 			var spc = userPw.search(/[~`!@#$%^&*()\-_+=|\\\[\]{}'";:?,.<>\/]/gi);
  			
  			if(userPw=="" && userPwChk==""){
   				$('#userPwChkResult').html(' &nbsp; ');
@@ -79,7 +88,9 @@
   				$('#userPwChkResult').text('비밀번호는 공백 없이 입력해주세요');
   			}else if(userPw.length < 4 || userPw.length > 20){
   				$('#userPwChkResult').text('4자리 ~ 20자리 이내로 입력해주세요');
-  			}else if(num < 0 || eng < 0 || spe < 0 ){
+  			}else if(kor >= 0){
+  				$('#userPwChkResult').text('한글 입력 금지');
+  			}else if(num < 0 || eng < 0 || spc < 0 ){
   				$('#userPwChkResult').text('영문,숫자,특수문자를 혼합하여 입력하세요');
   			}else{
   				if(userPw == userPwChk){
@@ -90,7 +101,9 @@
   			}
   		}); // 비밀번호 유효성 검사
   		
-  		$('input[name="userName"]').keyup(function(){
+  		// 이름 유효성 검사
+  		$('#userName').keyup(function(){
+  			var reg_name = /^[가-힣]{2,20}$/;
   			var userName = $(this).val();
  			if(userName==""){
   				$('#userNameConfirmResult').html(' &nbsp; ');
@@ -98,11 +111,14 @@
   				$('#userNameConfirmResult').text('이름은 2글자 이상');
   			}else if(userName.search(/\s/)!=-1){
   				$('#userNameConfirmResult').text('공백 입력 금지');
+  			}else if(userName.match(reg_name)){
+  				$('#userNameConfirmResult').text('완벽합니다');
   			}else{
-  				$('#userNameConfirmResult').html('완벽합니다');
+  				$('#userNameConfirmResult').html('2~20자의 완성형 한글로 입력해주세요');
   			}
-  		}); // 이름 유효성 검사
+  		});// 이름 유효성 검사
   		
+  		// 이메일 유효성 검사
   		var patternMail = /^\w+@\w+(\.\w+){1,2}$/;
   		$('#userEmail').keyup(function(){
   			var userEmail = $(this).val();
@@ -124,34 +140,20 @@
   			}
   		}); // email 유효성검사 + 중복검사
   		
-  		$('input[name="userName"]').keyup(function(){
-  			var userName = $(this).val();
- 			if(userName==""){
-  				$('#userNameConfirmResult').html(' &nbsp; ');
-  			}else if(userName.length < 2){
-  				$('#userNameConfirmResult').text('이름은 2글자 이상');
-  			}else if(userName.search(/\s/)!=-1){
-  				$('#userNameConfirmResult').text('공백 입력 금지');
-  			}else{
-  				$('#userNameConfirmResult').html('완벽합니다');
-  			}
-  		}); // 이름 유효성 검사
   		
-
-  		
-  		var patternTell1 = /^[0-9]{3}$/;
-  		var patternTell2 = /^[0-9]{3,4}$/;
-  		var patternTell3 = /^[0-9]{4}$/;
-  		$('input[type="tel"]').keyup(function(){
-  			var tel1 = $('#tel1').val();
-  			var tel2 = $('#tel2').val();
-  			var tel3 = $('#tel3').val();
+//   		var patternTell1 = /^[0-9]{3}$/;
+//   		var patternTell2 = /^[0-9]{3,4}$/;
+//   		var patternTell3 = /^[0-9]{4}$/;
+//   		$('input[type="tel"]').keyup(function(){
+//   			var tel1 = $('#tel1').val();
+//   			var tel2 = $('#tel2').val();
+//   			var tel3 = $('#tel3').val();
   			
-  			if(tel1.match(patternTell1))
+//   			if(tel1.match(patternTell1)){
+  				
+//   			}
   			
-  			
-  			
-  		}); // 전화번호 유효성검사
+//   		}); // 전화번호 유효성검사
   		
   		
   		
