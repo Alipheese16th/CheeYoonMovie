@@ -6,13 +6,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
-	<link href="${conPath}/css/style.css" rel="stylesheet">
+<meta charset="UTF-8">
 </head>
 <body>
-	<%
-	response.sendRedirect("main.do");
-	%>
+<!-- Footer-->
+	<footer class="py-5 bg-light sticky-bottom">
+	    <div class="container sticky-bottom">
+	    	<p class="m-0 text-center">
+	    		Copyright &copy; CheeYoon_Movie 2023
+	    	</p>
+	    </div>
+	</footer>
 </body>
 </html>

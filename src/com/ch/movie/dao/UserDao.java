@@ -89,8 +89,8 @@ public class UserDao {
 		}
 		return result;
 	}
-	// 회원가입 join
-	public int joinUser(UserDto dto) {
+	// 회원가입
+	public int registerUser(UserDto dto) {
 		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
