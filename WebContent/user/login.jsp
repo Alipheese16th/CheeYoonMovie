@@ -16,11 +16,11 @@
 </head>
 <body>
 
-<section class="h-100 gradient-form" style="background-color: #eee;">
+<section class="h-100 gradient-form" style="background-color:black;">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-xl-10">
-        <div class="card rounded-3 text-black">
+        <div class="card rounded-3 text-black border-0">
           <div class="row g-0">
             <div class="col-lg-6">
               <div class="card-body p-md-5 mx-md-4">
@@ -49,7 +49,7 @@
                   </div>
 
                   <div class="text-center pt-1 mb-5 pb-1">
-                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">
+                    <button class="btn btn-primary btn-block fa-lg gradient-custom-1 mb-3" type="button">
 					로그인
                     </button>
                     <a class="text-muted" href="#!">비밀번호를 잊으셨나요?</a>
@@ -57,7 +57,7 @@
 
                   <div class="d-flex align-items-center justify-content-center pb-4">
                     <p class="mb-0 me-2">계정이 없으신가요?</p>
-                    <button type="button" class="btn btn-outline-danger" onclick="location.href='${conPath}/registerView.do'">
+                    <button type="button" class="btn btn-outline-dark" onclick="location.href='${conPath}/registerView.do'">
 					회원가입
 					</button>
                   </div>
@@ -66,7 +66,7 @@
 
               </div>
             </div>
-            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+            <div class="col-lg-6 d-flex align-items-center gradient-custom-1">
               <div class="text-white px-3 py-4 p-md-5 mx-md-4">
                 <h4 class="mb-4">저희는 영화 전문 리뷰사이트입니다</h4>
                 <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod

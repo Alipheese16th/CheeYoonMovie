@@ -1,5 +1,7 @@
 package com.ch.movie.service;
 
+import java.sql.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,24 +16,34 @@ public class RegisterService implements Service {
 		String userName = request.getParameter("userName");
 		
 		String birthStr = request.getParameter("userBirth");
-//		if("".equals(birthStr)) {
-//			
-//		}
+		Date userBirth = Date.valueOf(birthStr);
 		
 		String userGender = request.getParameter("userGender");
 		String userEmail = request.getParameter("userEmail");
-		String userTell = request.getParameter("userTell");
+		
+		
+		String tel1  = request.getParameter("tel1");
+		String tel2  = request.getParameter("tel2");
+		String tel3  = request.getParameter("tel3");
+		
+		String userTel = tel1 + "-" + tel2 + "-" + tel3;
+		
+		
 		
 		UserDao user = new UserDao();
+		// 작업 추가
+		
+		
+		
 		
 		System.out.println("----------------------------------");
 		System.out.println("userId:"+userId);
 		System.out.println("userPw:"+userPw);
 		System.out.println("userName:"+userName);
-		System.out.println("birthStr:"+birthStr);
+		System.out.println("birthStr:"+userBirth);
 		System.out.println("userGender:"+userGender);
 		System.out.println("userEmail:"+userEmail);
-		System.out.println("userTell:"+userTell);
+		System.out.println("userTel:"+userTel);
 
 	}
 

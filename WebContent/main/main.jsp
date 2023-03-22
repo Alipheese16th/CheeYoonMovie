@@ -18,7 +18,7 @@
 </head>
 <body>
 
-	<div class="d-flex" id="wrapper">
+	<div class="d-flex bg-black text-white" id="wrapper"> <!--  -->
 	
 		<jsp:include page="sidebar.jsp"/>
 		
@@ -29,10 +29,11 @@
 			<div class="container-fluid">
 			    <jsp:include page="content.jsp"/>
 			</div>
-			
-		</div>
-	</div>
 			<jsp:include page="footer.jsp"/>
+		</div>
+		
+	</div>
+			
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->

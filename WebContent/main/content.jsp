@@ -7,7 +7,70 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style>
+	#myCarousel{
+		width:900px;
+		margin:0 auto;
+	}
 
+	.box-container{ /* 캐러셀 안에 설명 넣기 (가장 아래쪽에)  */
+		display:flex;
+		align-items:flex-end;
+		text-align: start;
+	}
+	.box a{
+		text-decoration:none;
+		color:white;
+	}
+	.carousel-item:hover{
+		filter: brightness(80%);
+		cursor:pointer;
+	}
+	
+	.nowplaying .card{	/* 현재상영작 카드높이 고정 */
+		height:400px;
+	}
+	.trailer .card{	/* 예고편 카드높이 고정 */
+		height:250px;
+	}
+	.upcoming .card{	/* 상영예고작 카드높이 고정 */
+		height:400px;
+	}
+	
+ 	.nowplaying .card-body,.upcoming .card-body{ /* 카드배경색 폰트색 */
+ 		background-color:#262626; 
+ 		color:white;
+	} 
+	.gogo{		/* 카드 보러가기 배경색 폰트색 */
+		background-color:#444444;
+		color:white;
+	}
+	.gogo:hover{	/* 카드 보러가기 호버 */
+		background-color:#DDDDDD;
+	}
+	.card a{
+		text-decoration:none;
+		color:white;
+	}
+	
+	.nowplaying .card img:hover{
+		transform: scale(1.2);
+  		transition: transform 1s;
+ 		filter: brightness(70%);
+ 		cursor:pointer;
+	}
+	.trailer .card img:hover{
+ 		filter: brightness(80%);
+ 		cursor:pointer;
+	}
+	.upcoming .card img:hover{
+		transform: scale(1.2);
+  		transition: transform 1s;
+ 		filter: brightness(70%);
+ 		cursor:pointer;
+	}
+	
+</style>
 </head>
 <body>
         
@@ -21,91 +84,331 @@
 <!--     			</div> -->
 			<div class="carousel-inner">
    			
-				<div class="carousel-item">
-      				<div class="container">
-      					<div class="row justify-content-evenly">
-				      		<div class="col-3">
-							    <img src="${conPath}/img/dduk.jpg" class="m-0 d-block" width="200px" height="200px">
-				      		</div>
-				      		<div class="col-3">
-						      	<img src="${conPath}/img/dduk.jpg" class="m-0 d-block" width="200px" height="200px">
-				      		</div>
-				      		<div class="col-3">
-						      	<img src="${conPath}/img/dduk.jpg" class="m-0 d-block" width="200px" height="200px">
-				      		</div>
-				      		<div class="col-3">
-						      	<img src="${conPath}/img/dduk.jpg" class="m-0 d-block" width="200px" height="200px">
-				      		</div>
-				      	</div>
-				      	<div class="row justify-content-end">
-				      		<div class="col-3">
-						      	<img src="${conPath}/img/dduk.jpg" width="200px" height="200px">
-				      		</div>
-				      		<div class="col-3">
-						      	<img src="${conPath}/img/dduk.jpg" width="200px" height="200px">
-				      		</div>
-				      		<div class="col-3">
-						      	<img src="${conPath}/img/dduk.jpg" width="200px" height="200px">
-				      		</div>
-				      		<div class="col-3">
-						      	<img src="${conPath}/img/dduk.jpg" width="200px" height="200px">
-				      		</div>
-				      	</div>
+				<div class="carousel-item" onclick="location.href='${conPath}/loginView.do'">
+		        	<img class="bd-placeholder-img" width="100%" height="400px" src="${conPath}/img/CheeYoonMovie.PNG" >
+		       		<rect width="100%" height="100%" fill="#777"></rect>
+		       	 	<div class="container">
+		         		<div class="carousel-caption sticky-bottom p-0">
+		          
+		           			<div class="box-container row">
+		            			<div class="box col-3">
+		            				<img src="${conPath}/img/CheeYoonMovie.PNG" width="120px" height="180px">
+		            			</div>
+		            			<div class="box col-9">
+			            			<b>
+			            			예고편을 확인하시려면 클릭하세asdf<br>
+			            			이 영화의 예고편으로 이동합니다 감사합니다
+			            			</b>
+		            			</div>
+		            		</div>
+		          		</div>
 					</div>
 				</div>
 			      
-			      <div class="carousel-item">
-			        <svg class="bd-placeholder-img" width="100%" height="400px" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg>
+				<div class="carousel-item" onclick="location.href='${conPath}/loginView.do'">
+					<img class="bd-placeholder-img" width="100%" height="400px" src="${conPath}/img/sample2.jpg">
+		       		<rect width="100%" height="100%" fill="#777"></rect>
 			        <div class="container">
-			          <div class="carousel-caption">
-			            <h1>asdfasdfasdf</h1>
-			            <p>Some representative placeholder content for the second slide of the carousel.</p>
-			            <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
-			          </div>
-			        </div>
-			      </div>
+		         		<div class="carousel-caption sticky-bottom p-0">
+		          
+		           			<div class="box-container row">
+		            			<div class="box col-3">
+		            				<img src="${conPath}/img/harry.jpg" width="120px" height="180px">
+		            			</div>
+		            			<div class="box col-9">
+			            			<b>
+			            			예고편을 확인하시려면 클릭하세asdf<br>
+			            			이 영화의 예고편으로 이동합니다 감사합니다
+			            			</b>
+		            			</div>
+		            		</div>
+		          		</div>
+					</div>
+		      	</div>
 			      
-			      <div class="carousel-item active">
-			        <svg class="bd-placeholder-img" width="100%" height="400px" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg>
+				<div class="carousel-item active" onclick="location.href='${conPath}/loginView.do'">
+					<img class="bd-placeholder-img" width="100%" height="400px" src="${conPath}/img/sample.jpg">
+		       		<rect width="100%" height="100%" fill="#777"></rect>
 			        <div class="container">
-			          <div class="carousel-caption text-end">
-			            <h1>One more for good measure.</h1>
-			            <p>Some representative placeholder content for the third slide of this carousel.</p>
-			            <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
-			          </div>
-			        </div>
-			      </div>
+		         		<div class="carousel-caption sticky-bottom p-0">
+		          
+		           			<div class="box-container row">
+		            			<div class="box col-3">
+		            				<img src="${conPath}/img/sample2.jpg" width="120px" height="180px">
+		            			</div>
+		            			<div class="box col-9">
+			            			<b>
+			            			예고편을 확인하시려면 클릭하세asdf<br>
+			            			이 영화의 예고편으로 이동합니다 감사합니다
+			            			</b>
+		            			</div>
+		            		</div>
+		          		</div>
+					</div>
+				</div>
 			      
-			    </div>
-			    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-			      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			      <span class="visually-hidden">Previous</span>
-			    </button>
-			    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-			      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-			      <span class="visually-hidden">Next</span>
-			    </button>
-			  </div>
-		</div>
+				</div>
+				    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+					    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					    <span class="visually-hidden">Previous</span>
+				    </button>
+				    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+					    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+					    <span class="visually-hidden">Next</span>
+				    </button>
+				</div>
+			</div>
         <!-- carousel end -->
         
-        
-        <div class="container text-center">
+        <div class="container mt-5 py-2">
         	<div class="row">
-        		<div class="col-4">
-        			<h1>힘드네</h1>
-        			<p>개힘들어</p>
-        		</div>
-        		<div class="col-4">
-        			<h1>힘드네</h1>
-        			<p>개힘들어</p>
-        		</div>
-        		<div class="col-4">
-        			<h1>힘드네</h1>
-        			<p>개힘들어</p>
-        		</div>
+        		<h1 class="">현재 추천 영화들 !</h1>
         	</div>
         </div>
-      
+        
+        <!-- 카드리스트 -->
+        <div class="album pb-5 mb-5">
+		    <div class="container nowplaying">
+		      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 g-3">
+
+		        <div class="col">
+		          <div class="card shadow-sm border-0">
+					<img src="${conPath}/img/harry.jpg" class="card-img-top" width="100%" height="225" onclick="location.href='${conPath}/loginView.do'">
+		            <div class="card-body">
+			            <h5 class="card-title">해리포터</h5>
+			            <p class="card-text">1편 머시기</p>
+			            <div class="d-flex flex-column justify-content-end text-center">
+				            <button class="btn w-75 m-auto gogo mb-2">보러가기</button>
+		            		<a href="#"><img src="${conPath}/img/play.png"> 트레일러</a>
+			            </div>
+		            </div>
+		          </div>
+		        </div>
+		        <div class="col">
+		        	<div class="card shadow-sm border-0">
+						<img src="${conPath}/img/harry.jpg" class="card-img-top" width="100%" height="225" onclick="location.href='${conPath}/loginView.do'">
+			            <div class="card-body">
+				            <h5 class="card-title">해리포터</h5>
+				            <p class="card-text">1편 머시기</p>
+				            <div class="d-flex flex-column justify-content-end text-center">
+					            <button class="btn w-75 m-auto gogo mb-2">보러가기</button>
+		            			<a href="#"><img src="${conPath}/img/play.png"> 트레일러</a>
+				            </div>
+			            </div>
+		        	</div>
+		        </div>
+		        <div class="col">
+		        	<div class="card shadow-sm border-0">
+						<img src="${conPath}/img/harry.jpg" class="card-img-top" width="100%" height="225" onclick="location.href='${conPath}/loginView.do'">
+			            <div class="card-body">
+				            <h5 class="card-title">해리포터</h5>
+				            <p class="card-text">1편 머시기</p>
+				            <div class="d-flex flex-column justify-content-end text-center">
+					            <button class="btn w-75 m-auto gogo mb-2">보러가기</button>
+		            			<a href="#"><img src="${conPath}/img/play.png"> 트레일러</a>
+				            </div>
+			            </div>
+		        	</div>
+		        </div>
+		
+		        <div class="col">
+		        	<div class="card shadow-sm border-0">
+						<img src="${conPath}/img/harry.jpg" class="card-img-top" width="100%" height="225" onclick="location.href='${conPath}/loginView.do'">
+			            <div class="card-body">
+				            <h5 class="card-title">해리포터</h5>
+				            <p class="card-text">1편 머시기</p>
+				            <div class="d-flex flex-column justify-content-end text-center">
+					            <button class="btn w-75 m-auto gogo mb-2">보러가기</button>
+		            			<a href="#"><img src="${conPath}/img/play.png"> 트레일러</a>
+				            </div>
+			            </div>
+		        	</div>
+		        </div>
+		        <div class="col">
+					<div class="card shadow-sm border-0">
+						<img src="${conPath}/img/harry.jpg" class="card-img-top" width="100%" height="225" onclick="location.href='${conPath}/loginView.do'">
+			            <div class="card-body">
+				            <h5 class="card-title">해리포터</h5>
+				            <p class="card-text">1편 머시기</p>
+				            <div class="d-flex flex-column justify-content-end text-center">
+					            <button class="btn w-75 m-auto gogo mb-2">보러가기</button>
+		            			<a href="#"><img src="${conPath}/img/play.png"> 트레일러</a>
+				            </div>
+			            </div>
+		        	</div>
+		        </div>
+		        <div class="col">
+		        	<div class="card shadow-sm border-0">
+						<img src="${conPath}/img/harry.jpg" class="card-img-top" width="100%" height="225" onclick="location.href='${conPath}/loginView.do'">
+			            <div class="card-body">
+				            <h5 class="card-title">해리포터</h5>
+				            <p class="card-text">1편 머시기</p>
+				            <div class="d-flex flex-column justify-content-end text-center">
+					            <button class="btn w-75 m-auto gogo mb-2">보러가기</button>
+		            			<a href="#"><img src="${conPath}/img/play.png"> 트레일러</a>
+				            </div>
+			            </div>
+		        	</div>
+		        </div>
+		
+		      </div>
+		    </div>
+		  </div>
+		<!-- 카드리스트끝 -->
+
+
+
+		<div class="container mt-5 py-2">
+        	<div class="row">
+        		<h1 class="">예고편</h1>
+        	</div>
+        </div>
+		
+		<div class="album pb-5 mb-5">
+    		<div class="container trailer">
+      			<div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-3">
+		        
+			        <div class="col">
+			          	<div class="card border-0">
+						  <img src="${conPath}/img/ungnam.jpg" class="card-img" width="100%" height="100%" onclick="location.href='${conPath}/loginView.do'">
+						  
+						  <div class="card-body">
+				            <p class="card-text">
+				            	<a href="#">1편 머시기 이것이 예고편이다. 웅남이를 다같이 보러가자 아싸리바이 ㅎㄴㅁ아ㅣ럼닝ㄹ</a>
+				            </p>
+			              </div>
+			              
+						</div>
+			        </div>
+			        
+			        <div class="col">
+			          	<div class="card border-0">
+						  <img src="${conPath}/img/ungnam.jpg" class="card-img" width="100%" height="100%" onclick="location.href='${conPath}/loginView.do'">
+						  
+						  <div class="card-body">
+				            <p class="card-text">
+				            	<a href="#">1편 머시기 이것이 예고편이다. 웅남이를 다같이 보러가자 아싸리바이 ㅎㄴㅁ아ㅣ럼닝ㄹ</a>
+				            </p>
+			              </div>
+			              
+						</div>
+			        </div>
+		
+			        <div class="col">
+			          	<div class="card border-0">
+						  <img src="${conPath}/img/ungnam.jpg" class="card-img" width="100%" height="100%" onclick="location.href='${conPath}/loginView.do'">
+						  
+						  <div class="card-body">
+				            <p class="card-text">
+				            	<a href="#">1편 머시기 이것이 예고편이다. 웅남이를 다같이 보러가자 아싸리바이 ㅎㄴㅁ아ㅣ럼닝ㄹ</a>
+				            </p>
+			              </div>
+			              
+						</div>
+			        </div>
+			        
+		      	</div>
+		    </div>
+		</div>
+
+
+		<div class="container mt-5 pt-5 pb-2">
+        	<div class="row">
+        		<h1 class="">상영 예고 작품</h1>
+        	</div>
+        </div>
+        <!-- 카드리스트 -->
+        <div class="album pb-5 mb-5">
+		    <div class="container upcoming">
+		      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 g-3">
+
+		        <div class="col">
+		          <div class="card shadow-sm border-0">
+					<img src="${conPath}/img/harry.jpg" class="card-img-top" width="100%" height="225" onclick="location.href='${conPath}/loginView.do'">
+		            <div class="card-body">
+			            <h5 class="card-title">해리포터</h5>
+			            <p class="card-text">1편 머시기</p>
+			            <div class="d-flex flex-column justify-content-end text-center">
+				            <button class="btn w-75 m-auto gogo mb-2">보러가기</button>
+		            		<a href="#"><img src="${conPath}/img/play.png"> 트레일러</a>
+			            </div>
+		            </div>
+		          </div>
+		        </div>
+		        <div class="col">
+		        	<div class="card shadow-sm border-0">
+						<img src="${conPath}/img/harry.jpg" class="card-img-top" width="100%" height="225" onclick="location.href='${conPath}/loginView.do'">
+			            <div class="card-body">
+				            <h5 class="card-title">해리포터</h5>
+				            <p class="card-text">1편 머시기</p>
+				            <div class="d-flex flex-column justify-content-end text-center">
+					            <button class="btn w-75 m-auto gogo mb-2">보러가기</button>
+		            			<a href="#"><img src="${conPath}/img/play.png"> 트레일러</a>
+				            </div>
+			            </div>
+		        	</div>
+		        </div>
+		        <div class="col">
+		        	<div class="card shadow-sm border-0">
+						<img src="${conPath}/img/harry.jpg" class="card-img-top" width="100%" height="225" onclick="location.href='${conPath}/loginView.do'">
+			            <div class="card-body">
+				            <h5 class="card-title">해리포터</h5>
+				            <p class="card-text">1편 머시기</p>
+				            <div class="d-flex flex-column justify-content-end text-center">
+					            <button class="btn w-75 m-auto gogo mb-2">보러가기</button>
+		            			<a href="#"><img src="${conPath}/img/play.png"> 트레일러</a>
+				            </div>
+			            </div>
+		        	</div>
+		        </div>
+		
+		        <div class="col">
+		        	<div class="card shadow-sm border-0">
+						<img src="${conPath}/img/harry.jpg" class="card-img-top" width="100%" height="225" onclick="location.href='${conPath}/loginView.do'">
+			            <div class="card-body">
+				            <h5 class="card-title">해리포터</h5>
+				            <p class="card-text">1편 머시기</p>
+				            <div class="d-flex flex-column justify-content-end text-center">
+					            <button class="btn w-75 m-auto gogo mb-2">보러가기</button>
+		            			<a href="#"><img src="${conPath}/img/play.png"> 트레일러</a>
+				            </div>
+			            </div>
+		        	</div>
+		        </div>
+		        <div class="col">
+					<div class="card shadow-sm border-0">
+						<img src="${conPath}/img/harry.jpg" class="card-img-top" width="100%" height="225" onclick="location.href='${conPath}/loginView.do'">
+			            <div class="card-body">
+				            <h5 class="card-title">해리포터</h5>
+				            <p class="card-text">1편 머시기</p>
+				            <div class="d-flex flex-column justify-content-end text-center">
+					            <button class="btn w-75 m-auto gogo mb-2">보러가기</button>
+		            			<a href="#"><img src="${conPath}/img/play.png"> 트레일러</a>
+				            </div>
+			            </div>
+		        	</div>
+		        </div>
+		        <div class="col">
+		        	<div class="card shadow-sm border-0">
+						<img src="${conPath}/img/harry.jpg" class="card-img-top" width="100%" height="225" onclick="location.href='${conPath}/loginView.do'">
+			            <div class="card-body">
+				            <h5 class="card-title">해리포터</h5>
+				            <p class="card-text">1편 머시기</p>
+				            <div class="d-flex flex-column justify-content-end text-center">
+					            <button class="btn w-75 m-auto gogo mb-2">보러가기</button>
+		            			<a href="#"><img src="${conPath}/img/play.png"> 트레일러</a>
+				            </div>
+			            </div>
+		        	</div>
+		        </div>
+		
+		      </div>
+		    </div>
+		  </div>
+		<!-- 카드리스트끝 -->
+
+
+
+
 </body>
 </html>

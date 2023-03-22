@@ -10,7 +10,7 @@
 </head>
 <body>
 <!-- Footer-->
-	<footer class="py-5 bg-light sticky-bottom">
+	<footer class="py-5 bg-black text-white sticky-bottom">
 	    <div class="container sticky-bottom">
 	    	<p class="m-0 text-center">
 	    		Copyright &copy; CheeYoon_Movie 2023

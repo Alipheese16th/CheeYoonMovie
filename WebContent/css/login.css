@@ -20,3 +20,26 @@ border-top-right-radius: .3rem;
 border-bottom-right-radius: .3rem;
 }
 }
+
+
+.gradient-custom-1 {
+/* fallback for old browsers */
+background: #828282;
+
+/* Chrome 10-25, Safari 5.1-6 */
+background: -webkit-linear-gradient(to right, #646464, #4b4b4b, #2c2c2c, #000000);
+
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: linear-gradient(to right, #646464, #4b4b4b, #2c2c2c, #000000);
+}
+
+
+@media (min-width: 769px) {
+.gradient-custom-1 {
+border-top-right-radius: .3rem;
+border-bottom-right-radius: .3rem;
+}
+}
+
+
+

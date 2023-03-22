@@ -10,19 +10,19 @@ public class UserDto {
 	private Date userBirth;
 	private String userGender;
 	private String userEmail;
-	private String userTell;
+	private String userTel;
 	private Timestamp userDate;
 	private Timestamp userLimit;
 	
 	public UserDto(String userId, String userPw, String userName, Date userBirth, String userGender, String userEmail,
-			String userTell, Timestamp userDate, Timestamp userLimit) {
+			String userTel, Timestamp userDate, Timestamp userLimit) {
 		this.userId = userId;
 		this.userPw = userPw;
 		this.userName = userName;
 		this.userBirth = userBirth;
 		this.userGender = userGender;
 		this.userEmail = userEmail;
-		this.userTell = userTell;
+		this.userTel = userTel;
 		this.userDate = userDate;
 		this.userLimit = userLimit;
 	}
@@ -75,12 +75,12 @@ public class UserDto {
 		this.userEmail = userEmail;
 	}
 
-	public String getUserTell() {
-		return userTell;
+	public String getUserTel() {
+		return userTel;
 	}
 
-	public void setUserTell(String userTell) {
-		this.userTell = userTell;
+	public void setUserTel(String userTel) {
+		this.userTel = userTel;
 	}
 
 	public Timestamp getUserDate() {
@@ -102,7 +102,7 @@ public class UserDto {
 	@Override
 	public String toString() {
 		return "UserDto [userId=" + userId + ", userPw=" + userPw + ", userName=" + userName + ", userBirth="
-				+ userBirth + ", userGender=" + userGender + ", userEmail=" + userEmail + ", userTell=" + userTell
+				+ userBirth + ", userGender=" + userGender + ", userEmail=" + userEmail + ", userTel=" + userTel
 				+ ", userDate=" + userDate + ", userLimit=" + userLimit + "]";
 	}
 	

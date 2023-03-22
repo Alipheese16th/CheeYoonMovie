@@ -94,7 +94,7 @@ public class UserDao {
 		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO USERS(USERID, USERPW, USERNAME, USERBIRTH, USERGENDER, USEREMAIL, USERTELL) " + 
+		String sql = "INSERT INTO USERS(USERID, USERPW, USERNAME, USERBIRTH, USERGENDER, USEREMAIL, USERTEL) " + 
 				"  VALUES(?,?,?,?,?,?,?)";
 		try {
 			conn = ds.getConnection();
@@ -105,7 +105,7 @@ public class UserDao {
 			pstmt.setDate(4,dto.getUserBirth());
 			pstmt.setString(5,dto.getUserGender());
 			pstmt.setString(6,dto.getUserEmail());
-			pstmt.setString(7,dto.getUserTell());
+			pstmt.setString(7,dto.getUserTel());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -168,10 +168,10 @@ public class UserDao {
 				Date userBirth = rs.getDate("userBirth");
 				String userGender = rs.getString("userGender");
 				String userEmail = rs.getString("userEmail");
-				String userTell = rs.getString("userTell");
+				String userTel = rs.getString("userTel");
 				Timestamp userDate = rs.getTimestamp("userDate");
 				Timestamp userLimit = rs.getTimestamp("userLimit");
-				dto = new UserDto(userId, userPw, userName, userBirth, userGender, userEmail, userTell, userDate, userLimit);
+				dto = new UserDto(userId, userPw, userName, userBirth, userGender, userEmail, userTel, userDate, userLimit);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -198,7 +198,7 @@ public class UserDao {
 				"      USERBIRTH = ?, " + 
 				"      USERGENDER = ?, " + 
 				"      USEREMAIL = ?, " + 
-				"      USERTELL = ? " + 
+				"      USERTEL = ? " + 
 				"  WHERE USERID = ?";
 		try {
 			conn = ds.getConnection();
@@ -208,7 +208,7 @@ public class UserDao {
 			pstmt.setDate(3,dto.getUserBirth());
 			pstmt.setString(4,dto.getUserGender());
 			pstmt.setString(5,dto.getUserEmail());
-			pstmt.setString(6,dto.getUserTell());
+			pstmt.setString(6,dto.getUserTel());
 			pstmt.setString(7, dto.getUserId());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -247,10 +247,10 @@ public class UserDao {
 				Date userBirth = rs.getDate("userBirth");
 				String userGender = rs.getString("userGender");
 				String userEmail = rs.getString("userEmail");
-				String userTell = rs.getString("userTell");
+				String userTel = rs.getString("userTel");
 				Timestamp userDate = rs.getTimestamp("userDate");
 				Timestamp userLimit = rs.getTimestamp("userLimit");
-				dtos.add(new UserDto(userId, userPw, userName, userBirth, userGender, userEmail, userTell, userDate, userLimit));
+				dtos.add(new UserDto(userId, userPw, userName, userBirth, userGender, userEmail, userTel, userDate, userLimit));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
