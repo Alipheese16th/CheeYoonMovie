@@ -43,7 +43,7 @@
 			</div>
 		    
 		    <a class="list-group-item list-group-item-action p-3 mt-3" href="#!">영화 랭킹</a><!-- active -->
-		    <a class="list-group-item list-group-item-action p-3 mt-3" href="#!">자유게시판</a>
+		    <a class="list-group-item list-group-item-action p-3 mt-3" href="${conPath}/boardList.do">자유게시판</a>
 		    <a class="list-group-item list-group-item-action p-3 mt-3" href="#!">평점리스트</a>
 		    <a class="list-group-item list-group-item-action p-3 mt-3" href="#!">디렉토리</a>
 		    <a class="list-group-item list-group-item-action p-3 mt-3" href="#!">credit</a>

@@ -16,6 +16,18 @@
 </head>
 <body>
 
+<c:if test="${not empty registerResult}">
+	<script>
+		alert('${registerResult}');
+	</script>
+</c:if>
+<c:if test="${not empty registerError}">
+	<script>
+		alert('${registerError}');
+		history.back();
+	</script>
+</c:if>
+
 <section class="h-100 gradient-form bg-dark">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -37,29 +49,26 @@
                   <p>소유하신 계정으로 로그인하세요</p>
 
                   <div class="form-outline mb-4">
-                    <label class="form-label" for="form2Example11">아이디</label>
-                    <input type="email" id="form2Example11" class="form-control"
-                      placeholder="아이디" />
+                    <label class="form-label" for="userId">아이디</label>
+                    <input type="text" name="userId" id="userId" class="form-control"
+                      placeholder="아이디" value="${userId}"/>
                   </div>
 
                   <div class="form-outline mb-4">
-                    <label class="form-label" for="form2Example22">비밀번호</label>
-                    <input type="password" id="form2Example22" class="form-control" 
+                    <label class="form-label" for="userPw">비밀번호</label>
+                    <input type="password" name="userPw" id="userPw" class="form-control" 
                     	placeholder="비밀번호"/>
                   </div>
 
                   <div class="text-center pt-1 mb-5 pb-1">
-                    <button class="btn btn-primary btn-block fa-lg gradient-custom-1 mb-3" type="button">
-					로그인
-                    </button>
+                  	<input type="submit" class="btn btn-primary btn-block fa-lg gradient-custom-1 mb-3" value="로그인">
+                    <hr>
                     <a class="text-muted" href="#!">비밀번호를 잊으셨나요?</a>
                   </div>
 
                   <div class="d-flex align-items-center justify-content-center pb-4">
                     <p class="mb-0 me-2">계정이 없으신가요?</p>
-                    <button type="button" class="btn btn-outline-dark" onclick="location.href='${conPath}/registerView.do'">
-					회원가입
-					</button>
+                    <input type="button" class="btn btn-outline-dark" value="회원가입"  onclick="location.href='${conPath}/registerView.do'">
                   </div>
 
                 </form>
@@ -81,17 +90,6 @@
   </div>
 </section>
 
-<c:if test="${not empty registerResult}">
-	<script>
-		alert('${registerResult}');
-	</script>
-</c:if>
-<c:if test="${not empty registerError}">
-	<script>
-		alert('${registerError}');
-		history.back();
-	</script>
-</c:if>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->

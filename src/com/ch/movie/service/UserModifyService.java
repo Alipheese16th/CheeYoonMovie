@@ -8,13 +8,22 @@ import javax.servlet.http.HttpServletResponse;
 import com.ch.movie.dao.UserDao;
 import com.ch.movie.dto.UserDto;
 
-public class RegisterService implements Service {
+public class UserModifyService implements Service {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		
 		String userId = request.getParameter("userId");
-		String userPw = request.getParameter("userPw");
 		String userName = request.getParameter("userName");
+		
+		String oldPw = request.getParameter("oldPw");
+		String newPw = request.getParameter("newPw");
+		String userPw = null;
+		if("".equals(newPw)) {
+			userPw = oldPw;
+		}else {
+			userPw = newPw;
+		}
 		String birthStr = request.getParameter("userBirth");
 		Date userBirth = Date.valueOf(birthStr);
 		String userGender = request.getParameter("userGender");
@@ -25,13 +34,16 @@ public class RegisterService implements Service {
 		String userTel = tel1 + "-" + tel2 + "-" + tel3;
 		
 		UserDao user = new UserDao();
-		int result = user.registerUser(new UserDto(userId, userPw, userName, userBirth, userGender, userEmail, userTel, null, null));
+		UserDto dto = new UserDto(userId, userPw, userName, userBirth, userGender, userEmail, userTel, null, null);
+		int result = user.modifyUser(dto);
 		if(result == UserDao.SUCCESS) {
-			request.setAttribute("userId", userId);
-			request.setAttribute("registerResult", "회원가입이 완료되었습니다. 감사합니다.");
+			request.getSession().setAttribute("user", dto);
+			request.setAttribute("modifyResult", "회원정보 수정 성공");
 		}else {
-			request.setAttribute("registerError", "회원가입 실패");
+			request.setAttribute("modifyError", "회원정보 수정 실패");
+			
 		}
+		
 		
 	}
 

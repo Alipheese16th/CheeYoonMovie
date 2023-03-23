@@ -118,6 +118,19 @@ $(function(){
   			}
   		});// 이름 유효성 검사
   		
+	
+		// 생일 유효성 검사
+		var patternBirth = /^(19[0-9][0-9]|20\d{2})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+		$('input[name="userBirth"]').change(function(){
+			var userBirth = $(this).val();
+			if(userBirth==""){
+				$('#userBirthConfirmResult').html(' &nbsp; ');
+			}else if(!userBirth.match(patternBirth)){
+				$('#userBirthConfirmResult').text('올바르지 않은 날짜형식입니다');
+			}else{
+				$('#userBirthConfirmResult').html(' &nbsp; ');
+			}
+		});
 
   		// 이메일 유효성 검사
   		var patternMail = /^\w+@\w+(\.\w+){1,2}$/;
@@ -168,6 +181,7 @@ $(function(){
   			var userPwChkResult = $('#userPwChkResult').text().trim();
   			var userNameConfirmResult = $('#userNameConfirmResult').text().trim();
   			var userBirth = $('input[name="userBirth"]').val();
+			var userBirthConfirmResult = $('#userBirthConfirmResult').text().trim();
   			var userGender = $('input[name="userGender"]:radio:checked');
   			var userEmailConfirmResult = $('#userEmailConfirmResult').text().trim();
   			var userTelConfirmResult = $('#userTelConfirmResult').text().trim();
@@ -187,6 +201,9 @@ $(function(){
   			}else if(userBirth.length < 1){
   				alert('생일을 입력하세요');
   				return false;
+			}else if(userBirthConfirmResult == '올바르지 않은 날짜형식입니다'){
+  				alert('생일을 제대로 입력해주세요');
+				return false;
   			}else if(userGender.length < 1){
   				alert('성별을 선택하세요');
   				return false;

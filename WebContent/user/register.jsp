@@ -44,80 +44,81 @@
                 <h3 class="mb-5 text-center">회원가입 form</h3>
 
 
-                <div class="form-outline">
-                  <label class="form-label" for="userId">아이디</label>
+                <div class="form-outline mb-2">
+                  <label class="form-label" for="userId">아이디<b>*</b></label>
                   <input type="text" name="userId" id="userId" class="form-control form-control-lg" />
-                  <div id="userIdConfirmResult"> &nbsp; &nbsp; &nbsp; </div>
+                  <div id="userIdConfirmResult" class="form-text"> &nbsp; &nbsp; &nbsp; </div>
                 </div>
 
 
-				<div class="cotainer">
+				<div class="cotainer  mb-2">
 				
 	                <div class="row">
 	                  <div class="col-md-6">
 	                    <div class="form-outline">
-	                      <label class="form-label" for="userPw">비밀번호</label>
-	                      <input type="text" name="userPw" id="userPw" class="form-control form-control-lg" />
+	                      <label class="form-label" for="userPw">비밀번호<b>*</b></label>
+	                      <input type="password" name="userPw" id="userPw" class="form-control form-control-lg" />
 	                    </div>
 	                  </div>
 	                  <div class="col-md-6">
 	                    <div class="form-outline">
-	                      <label class="form-label" for="userPwChk">비밀번호 확인</label>
-	                      <input type="text" name="userPwChk" id="userPwChk" class="form-control form-control-lg" />
+	                      <label class="form-label" for="userPwChk">비밀번호 확인<b>*</b></label>
+	                      <input type="password" name="userPwChk" id="userPwChk" class="form-control form-control-lg" />
 	                    </div>
 	                  </div>
 	                </div>
 	                
 	                <div class="row">
-		            	<div id="userPwChkResult"> &nbsp; &nbsp; &nbsp; </div>
+		            	<div id="userPwChkResult" class="form-text"> &nbsp; &nbsp; &nbsp; </div>
 	                </div>
 	                
                 </div>
                 
 
-                <div class="form-outline">
-                  <label class="form-label" for="userName">이름</label>
+                <div class="form-outline  mb-2">
+                  <label class="form-label" for="userName">이름<b>*</b></label>
                   <input type="text" name="userName" id="userName" class="form-control form-control-lg" />
-                  <div id="userNameConfirmResult"> &nbsp; &nbsp; &nbsp; </div>
+                  <div id="userNameConfirmResult" class="form-text"> &nbsp; &nbsp; &nbsp; </div>
                 </div>
 
 
 				<div class="form-outline mb-4">
-                  <label class="form-label" for="datepicker">생일</label>
+                  <label class="form-label" for="datepicker">생일<b>*</b></label>
                   <input type="text" name="userBirth" id="datepicker" class="form-control form-control-lg" />
+                  <div id="userBirthConfirmResult" class="form-text"> &nbsp; &nbsp; &nbsp; </div>
                 </div>
 
 
 
                 <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
 
-                  <h6 class="me-4">성별 : </h6>
+                  <h6 class="me-4">성별<b>*</b> : </h6>
 
                   <div class="form-check form-check-inline me-4">
                     <input class="form-check-input" type="radio" name="userGender" id="femaleGender"
                       value="m" />
-                    <label class="form-check-label" for="femaleGender">여자</label>
+                    <label class="form-check-label" for="femaleGender">남자</label>
                   </div>
 
                   <div class="form-check form-check-inline me-4">
                     <input class="form-check-input" type="radio" name="userGender" id="maleGender"
                       value="f" />
-                    <label class="form-check-label" for="maleGender">남자</label>
+                    <label class="form-check-label" for="maleGender">여자</label>
                   </div>
 
                 </div>
 
                 
-                <div class="form-outline">
+                <div class="form-outline  mb-2">
                   <label class="form-label" for="userEmail">이메일(선택)</label>
-                  <input type="text" name="userEmail" id="userEmail" class="form-control form-control-lg" />
-                  <div id="userEmailConfirmResult"> &nbsp; &nbsp; &nbsp; </div>
+                  <input type="email" name="userEmail" id="userEmail" class="form-control form-control-lg" />
+                  <div id="userEmailConfirmResult" class="form-text"> &nbsp; &nbsp; &nbsp; </div>
                 </div>
                 
                 
                 <div class="container">
 	                <div class="row">
-	                	<label class="form-label ms-3" for="tel1">전화번호</label>
+	                	<label class="form-label ms-5" for="tel1">전화번호<b>*</b></label>
 	                </div>
 	                <div class="row justify-content-evenly">
 	                  <div class="col-md-3">
@@ -139,7 +140,7 @@
 	                  </div>
 	                </div>
 	                <div class="row">
-		                <div id="userTelConfirmResult"> &nbsp; &nbsp; &nbsp; </div>
+		                <div id="userTelConfirmResult" class="form-text ms-5"> &nbsp; &nbsp; &nbsp; </div>
 	                </div>
 				</div>
 

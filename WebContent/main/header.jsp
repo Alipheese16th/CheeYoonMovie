@@ -64,9 +64,6 @@
 						<li class="nav-item">
 							<a class="nav-link" href="${conPath}/loginView.do">로그인</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">나머지</a>
-						</li>
 					</ul>
 				
 					<form class="d-flex" role="search">
@@ -91,46 +88,40 @@
 			
 				<!-- 사이드바 토글 버튼 -->
 				<button class="btn" id="sidebarToggle">
-					<span class="navbar-toggler-icon"></span>
+					<img src="${conPath}/img/toggle.png">
 				</button>
 				
-				<a class="navbar-brand ps-5" href="${conPath}/main.do">CheeYoonMovie</a>
+				<a class="navbar-brand ms-5" id="main" href="${conPath}/main.do">CheeYoonMovie</a>
 			
 				<!-- 글로벌바 토글 버튼 -->
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
+				<button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+					<img src="${conPath}/img/toggle.png">
 				</button>
 			
 				<div class="collapse navbar-collapse" id="navbarCollapse">
 			
 					<ul class="navbar-nav me-auto mb-2 mb-md-0">
 						<li class="nav-item">
-							<a class="nav-link" href="${conPath}/registerView.do">회원가입</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="${conPath}/loginView.do">로그인</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">나머지</a>
+							<a class="nav-link" href="${conPath}/logout.do">로그아웃</a>
 						</li>
 					</ul>
 				
 					<div class="dropdown me-2">
-						<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-							신치윤님
+						<button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							${user.userName}님
 						</button>
 						<ul class="dropdown-menu dropdown-menu-dark">
-							<li><a class="dropdown-item active" href="#">정보수정</a></li>
-							<li><a class="dropdown-item" href="#">로그아웃</a></li>
+							<li><a class="dropdown-item active" href="${conPath}/modifyView.do">정보수정</a></li>
 							<li><a class="dropdown-item" href="#">마이메뉴</a></li>
+							<li><a class="dropdown-item" href="${conPath}/withdrawal.do">회원탈퇴</a></li>
 							<li><hr class="dropdown-divider"></li>
-							<li><a class="dropdown-item" href="#">Separated link</a></li>
+							<li><a class="dropdown-item" href="${conPath}/logout.do">로그아웃</a></li>
 						</ul>
 					</div>
 				
 					<form class="d-flex" role="search">
 						<input class="form-control me-2" type="search" name="search" placeholder="영화 검색" aria-label="검색">
-						<button class="btn btn-outline-primary w-25" id="submit" type="submit">검색</button>
+						<button class="btn w-25" id="submit" type="submit">검색</button>
 					</form>
 				
 				</div>

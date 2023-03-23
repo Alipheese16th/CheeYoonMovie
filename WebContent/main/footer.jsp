@@ -10,10 +10,13 @@
 </head>
 <body>
 <!-- Footer-->
-	<footer class="py-5 bg-black text-white sticky-bottom">
+	<footer class="py-5 mt-5 bg-black text-white sticky-bottom">
 	    <div class="container sticky-bottom">
-	    	<p class="m-0 text-center">
+	    	<p class="text-center">
 	    		Copyright &copy; CheeYoon_Movie 2023
+	    	</p>
+	    	<p class="text-center">
+	    	  제작자 : 신치윤 (CheeYoon Shin)
 	    	</p>
 	    </div>
 	</footer>

@@ -74,18 +74,18 @@
 </head>
 <body>
 
-<div class="ratio ratio-1x1">
-  <iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" title="YouTube video" allowfullscreen></iframe>
-</div>
-<div class="ratio ratio-4x3">
-  <iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" title="YouTube video" allowfullscreen></iframe>
-</div>
-<<div class="ratio ratio-16x9">
-  <iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" title="YouTube video" allowfullscreen></iframe>
-</div>
-   <div class="ratio ratio-21x9">
-  <iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" title="YouTube video" allowfullscreen></iframe>
-</div>     
+<!-- <div class="ratio ratio-1x1"> -->
+<!--   <iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" title="YouTube video" allowfullscreen></iframe> -->
+<!-- </div> -->
+<!-- <div class="ratio ratio-4x3"> -->
+<!--   <iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" title="YouTube video" allowfullscreen></iframe> -->
+<!-- </div> -->
+<!-- <div class="ratio ratio-16x9"> -->
+<!--   <iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" title="YouTube video" allowfullscreen></iframe> -->
+<!-- </div> -->
+<!--    <div class="ratio ratio-21x9"> -->
+<!--   <iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" title="YouTube video" allowfullscreen></iframe> -->
+<!-- </div>      -->
         
         <!-- carousel start -->
 	<div class="container py-5 px-lg-5">
@@ -270,7 +270,6 @@
 		<!-- 카드리스트끝 -->
 
 
-
 		<div class="container mt-5 py-2">
         	<div class="row">
         		<h1 class="">예고편</h1>
@@ -279,51 +278,24 @@
 		
 		<div class="album pb-5 mb-5">
     		<div class="container trailer">
-      			<div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-3">
+      			<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
 		        
 			        <div class="col">
-			          	<div class="card border-0">
-<%-- 						  <img src="${conPath}/img/ungnam.jpg" class="card-img" width="100%" height="100%" onclick="location.href='${conPath}/loginView.do'"> --%>
-						  
-						  <div class="ratio ratio-4x3">
-							 <iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" class="card-img" title="YouTube video" allowfullscreen></iframe>
-						  </div>
-													  
-						  
-						  
-						  <div class="card-body">
-				            <p class="card-text">
-				            	<a href="#">1편 머시기 이것이 예고편이다. 웅남이를 다같이 보러가자 아싸리바이 ㅎㄴㅁ아ㅣ럼닝ㄹ</a>
-				            </p>
-			              </div>
-			              
-						</div>
+					  <div class="ratio ratio-4x3">
+						 <iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" class="card-img" title="YouTube video" allowfullscreen></iframe>
+					  </div>
 			        </div>
 			        
 			        <div class="col">
-			          	<div class="card border-0">
-						  <img src="${conPath}/img/ungnam.jpg" class="card-img" width="100%" height="100%" onclick="location.href='${conPath}/loginView.do'">
-						  
-						  <div class="card-body">
-				            <p class="card-text">
-				            	<a href="#">1편 머시기 이것이 예고편이다. 웅남이를 다같이 보러가자 아싸리바이 ㅎㄴㅁ아ㅣ럼닝ㄹ</a>
-				            </p>
-			              </div>
-			              
-						</div>
+		          	  <div class="ratio ratio-4x3">
+						 <iframe src="https://www.youtube.com/embed/CReluPP1pMs?rel=0" class="card-img" title="YouTube video" allowfullscreen></iframe>
+					  </div>
 			        </div>
 		
 			        <div class="col">
-			          	<div class="card border-0">
-						  <img src="${conPath}/img/ungnam.jpg" class="card-img" width="100%" height="100%" onclick="location.href='${conPath}/loginView.do'">
-						  
-						  <div class="card-body">
-				            <p class="card-text">
-				            	<a href="#">1편 머시기 이것이 예고편이다. 웅남이를 다같이 보러가자 아싸리바이 ㅎㄴㅁ아ㅣ럼닝ㄹ</a>
-				            </p>
-			              </div>
-			              
-						</div>
+		          	  <div class="ratio ratio-4x3">
+						 <iframe src="https://www.youtube.com/embed/yT0DOyVUrRc?rel=0" class="card-img" title="YouTube video" allowfullscreen></iframe>
+					  </div>
 			        </div>
 			        
 		      	</div>
@@ -425,6 +397,69 @@
 		    </div>
 		  </div>
 		<!-- 카드리스트끝 -->
+
+
+
+
+
+
+
+
+
+
+		<div class="container mt-5 py-2">
+        	<div class="row">
+        		<h1 class="">예고편</h1>
+        	</div>
+        </div>
+		
+		<div class="album pb-5 mb-5">
+    		<div class="container trailer mb-5">
+      			<div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-3">
+		        
+			        <div class="col">
+			          	<div class="card border-0">
+						  <img src="${conPath}/img/harry.jpg" class="card-img" width="100%" height="100%" onclick="location.href='${conPath}/loginView.do'"> 
+						  
+						  <div class="card-body">
+				            <p class="card-text">
+				            	<a href="#">1편 머시기 이것이 예고편이다. 웅남이를 다같이 보러가자 아싸리바이 ㅎㄴㅁ아ㅣ럼닝ㄹ</a>
+				            </p>
+			              </div>
+			              
+						</div>
+			        </div>
+			        
+			        <div class="col">
+			          	<div class="card border-0">
+						  <img src="${conPath}/img/ungnam.jpg" class="card-img" width="100%" height="100%" onclick="location.href='${conPath}/loginView.do'">
+						  
+						  <div class="card-body">
+				            <p class="card-text">
+				            	<a href="#">1편 머시기 이것이 예고편이다. 웅남이를 다같이 보러가자 아싸리바이 ㅎㄴㅁ아ㅣ럼닝ㄹ</a>
+				            </p>
+			              </div>
+			              
+						</div>
+			        </div>
+		
+			        <div class="col">
+			          	<div class="card border-0">
+						  <img src="${conPath}/img/sample.jpg" class="card-img" width="100%" height="100%" onclick="location.href='${conPath}/loginView.do'">
+						  
+						  <div class="card-body">
+				            <p class="card-text">
+				            	<a href="#">1편 머시기 이것이 예고편이다. 웅남이를 다같이 보러가자 아싸리바이 ㅎㄴㅁ아ㅣ럼닝ㄹ</a>
+				            </p>
+			              </div>
+			              
+						</div>
+			        </div>
+			        
+		      	</div>
+		    </div>
+		</div>
+
 
 
 

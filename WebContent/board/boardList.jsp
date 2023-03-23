@@ -16,48 +16,54 @@
 	<!-- Core theme CSS (includes Bootstrap)-->
 	<link href="${conPath}/css/styles.css" rel="stylesheet" />
 	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+	<script>
+	$(document).ready(function(){
+		console.log('1');
+		$('.write').css('cursor','pointer').click(function(){
+			var user = "<c:out value='${user}'/>";
+			console.log('2');
+			if(!user){
+				alert('글쓰기는 로그인한 회원만 가능합니다');
+				console.log('3');
+			}else{
+				location.href ="${conPath}/boardWriteView.do?pageNum=${pageNum}";
+				console.log('4');
+			}
+		});
+		
+		$('tr').css('cursor','pointer').click(function(){
+			var boardNo = $(this).children().eq(0).text();
+			if(!isNaN(boardNo)){
+				location.href = "${conPath}/boardContent.do?boardNo="+boardNo+"&pageNum=${pageNum}";
+			}
+		});
+		
+	});
+	</script>
+	
 </head>
 <body>
 
-<c:if test="${not empty loginError}">
-	<script>
-		alert('${loginError}');
-		history.back();
-	</script>
-</c:if>
-
-<c:if test="${not empty modifyError}">
-	<script>
-		alert('${modifyError}');
-		history.back();
-	</script>
-</c:if>
-
-<c:if test="${not empty modifyResult}">
-	<script>
-		alert('${modifyResult}');
-	</script>
-</c:if>
-
-<c:if test="${not empty withdrawalResult }">
-	<script>
-		alert('${withdrawalResult}');
-	</script>
-</c:if>
-
-
-	<div class="d-flex bg-black text-white" id="wrapper"> <!--  -->
+	<div class="d-flex " id="wrapper"> <!-- bg-black text-white -->
 	
-		<jsp:include page="sidebar.jsp"/>
+		<jsp:include page="../main/sidebar.jsp"/>
 		
 		<div id="page-content-wrapper">
 		
-			<jsp:include page="header.jsp"/>
+			<jsp:include page="../main/header.jsp"/>
 			
 			<div class="container-fluid">
-			    <jsp:include page="content.jsp"/>
+			
+			
+		    <h1 class="my-5">자유게시판</h1>
+		    
+		    <h1 class="my-5">자유게시판</h1>
+				    
+			<jsp:include page="list.jsp"/>
+		    
+			    
 			</div>
-			<jsp:include page="footer.jsp"/>
+			<jsp:include page="../main/footer.jsp"/>
 		</div>
 		
 	</div>
