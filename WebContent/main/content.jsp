@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <style>
-	#myCarousel{
+	#myCarousel{ /*캐러샐 크기 고정 */
 		width:900px;
 		margin:0 auto;
 	}
@@ -18,7 +18,7 @@
 		align-items:flex-end;
 		text-align: start;
 	}
-	.box a{
+	.box a{	/* 캐러샐 a태그설명 폰트색상 */
 		text-decoration:none;
 		color:white;
 	}
@@ -73,6 +73,19 @@
 </style>
 </head>
 <body>
+
+<div class="ratio ratio-1x1">
+  <iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" title="YouTube video" allowfullscreen></iframe>
+</div>
+<div class="ratio ratio-4x3">
+  <iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" title="YouTube video" allowfullscreen></iframe>
+</div>
+<<div class="ratio ratio-16x9">
+  <iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" title="YouTube video" allowfullscreen></iframe>
+</div>
+   <div class="ratio ratio-21x9">
+  <iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" title="YouTube video" allowfullscreen></iframe>
+</div>     
         
         <!-- carousel start -->
 	<div class="container py-5 px-lg-5">
@@ -270,7 +283,13 @@
 		        
 			        <div class="col">
 			          	<div class="card border-0">
-						  <img src="${conPath}/img/ungnam.jpg" class="card-img" width="100%" height="100%" onclick="location.href='${conPath}/loginView.do'">
+<%-- 						  <img src="${conPath}/img/ungnam.jpg" class="card-img" width="100%" height="100%" onclick="location.href='${conPath}/loginView.do'"> --%>
+						  
+						  <div class="ratio ratio-4x3">
+							 <iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" class="card-img" title="YouTube video" allowfullscreen></iframe>
+						  </div>
+													  
+						  
 						  
 						  <div class="card-body">
 				            <p class="card-text">

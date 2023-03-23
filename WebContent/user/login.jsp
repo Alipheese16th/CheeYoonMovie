@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<section class="h-100 gradient-form" style="background-color:black;">
+<section class="h-100 gradient-form bg-dark">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-xl-10">
@@ -81,6 +81,17 @@
   </div>
 </section>
 
+<c:if test="${not empty registerResult}">
+	<script>
+		alert('${registerResult}');
+	</script>
+</c:if>
+<c:if test="${not empty registerError}">
+	<script>
+		alert('${registerError}');
+		history.back();
+	</script>
+</c:if>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ch.movie.dao.UserDao;
+import com.ch.movie.dto.UserDto;
 
 public class RegisterService implements Service {
 
@@ -25,26 +26,17 @@ public class RegisterService implements Service {
 		String tel1  = request.getParameter("tel1");
 		String tel2  = request.getParameter("tel2");
 		String tel3  = request.getParameter("tel3");
-		
 		String userTel = tel1 + "-" + tel2 + "-" + tel3;
 		
-		
-		
 		UserDao user = new UserDao();
-		// 작업 추가
+		int result = user.registerUser(new UserDto(userId, userPw, userName, userBirth, userGender, userEmail, userTel, null, null));
+		if(result == UserDao.SUCCESS) {
+			request.setAttribute("userId", userId);
+			request.setAttribute("registerResult", "회원가입이 완료되었습니다. 감사합니다.");
+		}else {
+			request.setAttribute("registerError", "회원가입 실패");
+		}
 		
-		
-		
-		
-		System.out.println("----------------------------------");
-		System.out.println("userId:"+userId);
-		System.out.println("userPw:"+userPw);
-		System.out.println("userName:"+userName);
-		System.out.println("birthStr:"+userBirth);
-		System.out.println("userGender:"+userGender);
-		System.out.println("userEmail:"+userEmail);
-		System.out.println("userTel:"+userTel);
-
 	}
 
 }
