@@ -24,7 +24,7 @@
 	<script>
 	$(document).ready(function(){
 		console.log('1');
-		$('.write').css('cursor','pointer').click(function(){
+		$('.write').click(function(){
 			var user = "<c:out value='${user}'/>";
 			console.log('2');
 			if(!user){
@@ -42,6 +42,53 @@
 				location.href = "${conPath}/boardContent.do?boardNo="+boardNo+"&pageNum=${pageNum}";
 			}
 		});
+		
+		$('.commentModifyView').click(function(){
+			var commentNo = $(this).attr('id');
+			$.ajax({
+				url : '${conPath}/commentModifyView.do',
+				type : 'post',
+				data : 'commentNo='+commentNo,
+				dataType : 'html',
+				success : function(data){
+					$('#comment'+commentNo).html(data);
+				}
+			});
+			
+		});
+		
+		$('.commentModify').click(function(){
+			var commentContent = $('#commentContent').val();
+			var commentNo = $('#commentNo').val();
+			var boardNo = "<c:out value='${board.boardNo}'/>";
+			
+			$.ajax({
+				url : '${conPath}/commentModify.do',
+				type : 'post',
+				data : 'commentNo='+commentNo+'&commentContent='+commentContent,
+				dataType : 'html',
+				success : function(data){
+					alert('good');
+					getCommentList(boardNo);
+				}
+			});
+			
+		});
+		
+		var getCommentList = function(boardNo){
+			$.ajax({
+				url : '${conPath}/commentList.do',
+				type : 'post',
+				data : 'boardNo='+boardNo,
+				dataType : 'html',
+				success : function(data){
+					$('.commentList').html(data);
+				}
+			});
+			
+		};
+		
+		
 		
 	});
 	</script>
@@ -95,32 +142,38 @@
 		    	<hr>
 		    	<hr>
 		    	
-		    	<div class="commentList">
-		    		
-		    		<c:if test="${commentList.size() ne 0}">
-		    			<c:forEach var="dto" items="${commentList}">
-		    			
-		    				<div class="card mb-3">
-							  <div class="card-header d-flex justify-content-between py-0">
-							  	<div>${dto.userId}</div>
-							  	<div><small><fmt:formatDate value="${dto.commentDate}" pattern="yy/MM/dd HH:mm:ss"/></small></div>
-							  </div>
-							  <div class="card-body">
-							    <pre class="card-text">${dto.commentContent}</pre>
-							  </div>
-							</div>
-		    			
-		    			</c:forEach>
-		    		</c:if>
-		    		
-		    	</div>
+		    	<jsp:include page="commentList.jsp"/>
+		    	
+		    	<c:if test="${not empty commentPaging}">
+					
+					<div class="paging text-center">
+						<c:if test="${commentStartPage > commentBLOCKSIZE }">
+							<a href="${conPath}/boardContent.do?commentPageNum=${commentStartPage-1}&boardNo=${board.boardNo}&pageNum=${pageNum}">[ 이전 ]</a>
+						</c:if>
+						
+						<c:forEach var="i" begin="${commentStartPage}" end="${commentEndPage}">
+							<c:if test="${i eq commentCurrentPage }">
+								[ <b>${i}</b> ]
+							</c:if>
+							<c:if test="${i ne commentCurrentPage }">
+								<a href="${conPath}/boardContent.do?commentPageNum=${i}&boardNo=${board.boardNo}&pageNum=${pageNum}">[ ${i} ]</a>
+							</c:if>
+						</c:forEach>
+						
+						<c:if test="${commentEndPage < commentPageCnt }">
+							<a href="${conPath}/boardContent.do?commentPageNum=${commentEndPage+1}&boardNo=${board.boardNo}&pageNum=${pageNum}">[ 다음 ]</a>
+						</c:if>
+					</div>
+					
+				</c:if>
+		    	
 		    	
 		    	<c:if test="${empty user}">
 		    		<h3>댓글 작성 권한이 없습니다</h3>
 		    	</c:if>
 		    	
 		    	<c:if test="${not empty user}">
-		    		<div class="card">
+		    		<div class="card mt-2">
 					  <div class="card-header">
 						댓글 작성 ${user.userName}님
 					  </div>
@@ -135,26 +188,6 @@
 					  </div>
 					</div>
 		    	</c:if>
-	    		
-	    		<h1>${commentList.size() }</h1>
-	    			<div class="paging">
-						<c:if test="${cstartPage > cBLOCKSIZE }">
-							<a href="${conPath}/boardContent.do?cpageNum=${cstartPage-1}">[ 이전 ]</a>
-						</c:if>
-						
-						<c:forEach var="i" begin="${cstartPage}" end="${cendPage}">
-							<c:if test="${i eq cpageNum }">
-								[ <b>${i}</b> ]
-							</c:if>
-							<c:if test="${i ne cpageNum }">
-								<a href="${conPath}/boardContent.do?cpageNum=${i}">[ ${i} ]</a>
-							</c:if>
-						</c:forEach>
-						
-						<c:if test="${cendPage < cpageCnt }">
-							<a href="${conPath}/boardContent.do?cpageNum=${cendPage+1}">[ 다음 ]</a>
-						</c:if>
-					</div>
 	    		
 
 		    	<div class="d-flex justify-content-between">

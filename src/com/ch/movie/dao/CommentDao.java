@@ -128,8 +128,8 @@ public class CommentDao {
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, commentNo);
-			pstmt.setString(2, commentContent);
+			pstmt.setString(1, commentContent);
+			pstmt.setInt(2, commentNo);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

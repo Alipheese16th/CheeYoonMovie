@@ -60,7 +60,9 @@
  		cursor:pointer;
 	}
 	.trailer .card img:hover{
- 		filter: brightness(80%);
+ 		transform: scale(1.2);
+  		transition: transform 1s;
+ 		filter: brightness(70%);
  		cursor:pointer;
 	}
 	.upcoming .card img:hover{
@@ -70,6 +72,9 @@
  		cursor:pointer;
 	}
 	
+	.card{
+		overflow:hidden;
+	}
 </style>
 </head>
 <body>
@@ -277,7 +282,7 @@
         </div>
 		
 		<div class="album pb-5 mb-5">
-    		<div class="container trailer">
+    		<div class="container youtube">
       			<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
 		        
 			        <div class="col">

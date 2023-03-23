@@ -18,16 +18,12 @@
 	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 	<script>
 	$(document).ready(function(){
-		console.log('1');
-		$('.write').css('cursor','pointer').click(function(){
+		$('.write').click(function(){
 			var user = "<c:out value='${user}'/>";
-			console.log('2');
 			if(!user){
 				alert('글쓰기는 로그인한 회원만 가능합니다');
-				console.log('3');
 			}else{
 				location.href ="${conPath}/boardWriteView.do?pageNum=${pageNum}";
-				console.log('4');
 			}
 		});
 		

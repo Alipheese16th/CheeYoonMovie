@@ -1,0 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="conPath" value="${pageContext.request.contextPath}"/>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8" />
+</head>
+<body>
+	<div class="card">
+	  <div class="card-header">
+		${param.commentNo}번 댓글 수정
+	  </div>
+	  <div class="card-body">
+	  	<input type="hidden" id="commentNo" value="${param.commentNo}">
+    	<textarea name="commentContent" id="commentContent" class="form-control ml-1 shadow-none textarea"></textarea>
+    	<button type="button" class="btn btn-outline-dark commentModify">댓글수정</button>
+	  </div>
+	</div>
+	
+</body>
+</html>

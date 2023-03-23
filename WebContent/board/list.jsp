@@ -30,7 +30,7 @@
 				<tr>
 					<td>${dto.boardNo }</td>
 					
-					<td class="w-25">
+					<td class="w-50">
 						<c:forEach var="i" begin="1" end="${dto.boardIndent }"><!-- 답글 들여쓰기 처리 -->
 							<c:if test="${i ne dto.boardIndent }">
 								&nbsp; &nbsp; 

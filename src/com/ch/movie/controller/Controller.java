@@ -20,6 +20,8 @@ import com.ch.movie.service.UserLoginService;
 import com.ch.movie.service.UserLogoutService;
 import com.ch.movie.service.UserModifyService;
 import com.ch.movie.service.UserWithdrawalService;
+import com.ch.movie.service.commentModifyService;
+import com.ch.movie.service.CommentListService;
 
 @WebServlet("*.do")
 public class Controller extends HttpServlet{
@@ -102,6 +104,8 @@ public class Controller extends HttpServlet{
 		}else if(command.equals("/boardContent.do")){
 			service = new BoardContentService();
 			service.execute(request, response);
+			Service service2 = new CommentListService();
+			service2.execute(request, response);
 			viewPage = "board/boardContent.jsp";
 			
 		}else if(command.equals("/commentWrite.do")){
@@ -109,10 +113,21 @@ public class Controller extends HttpServlet{
 			service.execute(request, response);
 			viewPage = "boardContent.do";
 			
-		}else if(command.equals("/")){
+		}else if(command.equals("/commentModifyView.do")){
+			viewPage = "board/commentModify.jsp";
 			
-		}else if(command.equals("/")){
-		}else if(command.equals("/")){
+		}else if(command.equals("/commentModify.do")){
+			service = new commentModifyService();
+			service.execute(request, response);
+			viewPage = "main.do";
+			
+		
+		}else if(command.equals("/commentList.do")){
+			service = new CommentListService();
+			service.execute(request, response);
+			viewPage = "board/commentList.jsp";
+			
+			
 		}else if(command.equals("/")){
 		}else if(command.equals("/")){
 		}else if(command.equals("/")){
