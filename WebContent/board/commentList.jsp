@@ -7,10 +7,16 @@
 <html lang="ko">
 <head>
 	<meta charset="utf-8" />
+	<title>CheeYoonMovie</title>
+	<!-- Favicon-->
+	<link rel="icon" type="image/x-icon" href="${conPath}/assets/favicon.ico" />
+	<!-- Core theme CSS (includes Bootstrap)-->
+	<link href="${conPath}/css/styles.css" rel="stylesheet" />
+	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 </head>
 <body>
 	
-	<div class="commentList">
+	<div class="commentList" id="commentList">
 		    		
    		<c:if test="${commentList.size() ne 0}">
    			<c:forEach var="dto" items="${commentList}">
@@ -36,8 +42,34 @@
    		</c:if>
    		
    	</div>
+   	
+   	<c:if test="${not empty commentPaging}">
+					
+		<div class="paging text-center">
+			<c:if test="${commentStartPage > commentBLOCKSIZE }">
+				<a href="${conPath}/boardContent.do?commentPageNum=${commentStartPage-1}&boardNo=${board.boardNo}&pageNum=${pageNum}">[ 이전 ]</a>
+			</c:if>
+			
+			<c:forEach var="i" begin="${commentStartPage}" end="${commentEndPage}">
+				<c:if test="${i eq commentCurrentPage }">
+					[ <b>${i}</b> ]
+				</c:if>
+				<c:if test="${i ne commentCurrentPage }">
+					<a href="${conPath}/boardContent.do?commentPageNum=${i}&boardNo=${board.boardNo}&pageNum=${pageNum}">[ ${i} ]</a>
+				</c:if>
+			</c:forEach>
+			
+			<c:if test="${commentEndPage < commentPageCnt }">
+				<a href="${conPath}/boardContent.do?commentPageNum=${commentEndPage+1}&boardNo=${board.boardNo}&pageNum=${pageNum}">[ 다음 ]</a>
+			</c:if>
+		</div>
+		
+	</c:if>
 	
-	
+	<!-- Bootstrap core JS-->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Core theme JS-->
+	<script src="${conPath}/js/scripts.js"></script>
 	
 </body>
 </html>

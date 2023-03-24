@@ -23,16 +23,12 @@
 	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 	<script>
 	$(document).ready(function(){
-		console.log('1');
 		$('.write').click(function(){
 			var user = "<c:out value='${user}'/>";
-			console.log('2');
 			if(!user){
 				alert('글쓰기는 로그인한 회원만 가능합니다');
-				console.log('3');
 			}else{
-				location.href ="${conPath}/boardWriteView.do?pageNum=${pageNum}";
-				console.log('4');
+				location.href ="${conPath}/boardWriteView.do";
 			}
 		});
 		
@@ -45,10 +41,13 @@
 		
 		$('.commentModifyView').click(function(){
 			var commentNo = $(this).attr('id');
+			var commentPageNum = $('#commentPageNum').val();
+			var pageNum = "<c:out value='${pageNum}'/>";
+			
 			$.ajax({
 				url : '${conPath}/commentModifyView.do',
 				type : 'post',
-				data : 'commentNo='+commentNo,
+				data : 'commentNo='+commentNo+'&commentPageNum='+commentPageNum+'&pageNum='+pageNum,
 				dataType : 'html',
 				success : function(data){
 					$('#comment'+commentNo).html(data);
@@ -56,51 +55,33 @@
 			});
 			
 		});
-		
-		$('.commentModify').click(function(){
-			var commentContent = $('#commentContent').val();
-			var commentNo = $('#commentNo').val();
-			var boardNo = "<c:out value='${board.boardNo}'/>";
-			
-			$.ajax({
-				url : '${conPath}/commentModify.do',
-				type : 'post',
-				data : 'commentNo='+commentNo+'&commentContent='+commentContent,
-				dataType : 'html',
-				success : function(data){
-					alert('good');
-					getCommentList(boardNo);
-				}
-			});
-			
-		});
-		
-		var getCommentList = function(boardNo){
-			$.ajax({
-				url : '${conPath}/commentList.do',
-				type : 'post',
-				data : 'boardNo='+boardNo,
-				dataType : 'html',
-				success : function(data){
-					$('.commentList').html(data);
-				}
-			});
-			
-		};
-		
-		
-		
 	});
+	function boardDelete() {
+		
+	  if (confirm("글 삭제를 진행하시겠습니까?")) {
+
+	    location.href = "${conPath}/boardDelete.do?boardNo=${board.boardNo}&pageNum=${pageNum}";
+
+	  }
+
+	}
 	</script>
 	
 </head>
 <body>
 
 <c:if test="${not empty commentWriteError}">
-<script>
-	alert('${commentWriteError}');
-</script>
+	<script>
+		alert('${commentWriteError}');
+	</script>
 </c:if>
+<c:if test="${not empty boardModifyError}">
+	<script>
+		alert('${boardModifyError}');
+	</script>
+</c:if>
+
+<input type="hidden" name="commentPageNum" id="commentPageNum" value="${commentPageNum}">
 
 	<div class="d-flex " id="wrapper"> <!-- bg-black text-white -->
 	
@@ -113,11 +94,8 @@
 			<div class="container-fluid">
 			
 		    <div class="container">
-			    <div>
-			    	<h1>
-			    		자유게시판
-			    	</h1>
-			    </div>
+			    <h1>자유게시판</h1>
+
 			    <hr>
 			    <div>
 			    	${board.boardTitle}
@@ -142,10 +120,39 @@
 		    	<hr>
 		    	<hr>
 		    	
-		    	<jsp:include page="commentList.jsp"/>
-		    	
-		    	<c:if test="${not empty commentPaging}">
-					
+		    	<!-- 댓글리스트 시작 -->
+		    	<div class="commentList" id="commentList">
+		    		
+			   		<c:if test="${commentList.size() ne 0}">
+			   			<c:forEach var="dto" items="${commentList}">
+			   			
+			   				<div class="card mb-3" id="comment${dto.commentNo}">
+							  <div class="card-header d-flex justify-content-between py-0">
+							  	<div>${dto.userId}</div>
+							  	<div>
+							  		<small><fmt:formatDate value="${dto.commentDate}" pattern="yy/MM/dd HH:mm:ss"/></small>
+							  		<c:if test="${user.userId eq dto.userId}">
+								  		<button type="button" id="${dto.commentNo}" class="btn btn-sm btn-outline-dark py-0 px-1 ms-2 commentModifyView">수정</button>
+								  		<button type="button" class="btn btn-sm btn-outline-dark py-0 px-1" 
+onclick="location.href='${conPath}/commentDelete.do?boardNo=${dto.boardNo}&commentNo=${dto.commentNo}&commentPageNum=${commentPageNum}&pageNum=${pageNum}'">삭제</button>
+							  		</c:if>
+							  		
+							  	</div>
+							  </div>
+							  <div class="card-body">
+							    <pre class="card-text">${dto.commentContent}</pre>
+							  </div>
+							</div>
+			   			
+			   			</c:forEach>
+			   		</c:if>
+			   		
+			   	</div>
+			   	<!-- 댓글리스트 끝 -->
+			   	
+			   	<!-- 댓글페이징 시작 -->
+			   	<c:if test="${not empty commentPaging}">
+								
 					<div class="paging text-center">
 						<c:if test="${commentStartPage > commentBLOCKSIZE }">
 							<a href="${conPath}/boardContent.do?commentPageNum=${commentStartPage-1}&boardNo=${board.boardNo}&pageNum=${pageNum}">[ 이전 ]</a>
@@ -166,6 +173,7 @@
 					</div>
 					
 				</c:if>
+		    	<!-- 댓글페이징 끝 -->
 		    	
 		    	
 		    	<c:if test="${empty user}">
@@ -179,7 +187,7 @@
 					  </div>
 					  <div class="card-body">
 					    <form action="${conPath}/commentWrite.do">
-					    	<input type="hidden" name="pageNum" value="${pageNum}">
+					    	<input type="hidden" name="pageNum" id="pageNum" value="${pageNum}">
 					    	<input type="hidden" name="boardNo" value="${board.boardNo}">
 					    	<input type="hidden" name="userId" value="${user.userId}">
 					    	<textarea name="commentContent" class="form-control ml-1 shadow-none textarea"></textarea>
@@ -196,9 +204,18 @@
 		    			<button type="button" class="btn btn-primary">개념글</button>
 			    	</div>
 			    	<div >
-				    	<button type="button" class="btn btn-primary">수정</button>
-			    		<button type="button" class="btn btn-primary">삭제</button>
-			    		<button type="button" class="btn btn-primary">답변글</button>
+			    		<c:if test="${user.userId eq board.userId}">
+			    			<button type="button" class="btn btn-primary" 
+			    				onclick="location.href='${conPath}/boardModifyView.do?boardNo=${board.boardNo}&pageNum=${pageNum}'">
+			    				수정
+			    			</button>
+			    			<button type="button" class="btn btn-primary" onclick="boardDelete()">
+			    				삭제
+			    			</button>
+			    		</c:if>
+				    	<c:if test="${not empty user}">
+				    		<button type="button" class="btn btn-primary" onclick="location.href='${conPath}/boardReplyView.do?boardNo=${board.boardNo}&pageNum=${pageNum}'">답변글</button>
+				    	</c:if>
 			    	</div>
 			    </div>
 			    

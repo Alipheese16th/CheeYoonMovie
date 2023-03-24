@@ -114,7 +114,7 @@ public class BoardDao {
 			result = SUCCESS;
 			System.out.println("원글쓰기 성공");
 		} catch (SQLException e) {
-			System.out.println(e.getMessage()+"원글쓰기 실패");
+			System.out.println(e.getMessage()+"원글쓰기 실패"+dto);
 		}finally {
 			try {
 				if(pstmt!=null)pstmt.close();

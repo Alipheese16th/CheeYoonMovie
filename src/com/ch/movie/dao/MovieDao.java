@@ -103,13 +103,14 @@ public class MovieDao {
 		}
 		return result;
 	}
-	// 현재 상영중 영화리스트
+	// 현재 상영중 영화리스트 (개봉일 최근순)
 	public ArrayList<MovieDto> nowPlayingMovie() {
 		ArrayList<MovieDto> dtos = new ArrayList<MovieDto>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM MOVIE WHERE STATE = 2 ORDER BY MOVIEDATE DESC";
+		String sql = "SELECT M.*,(SELECT ROUND(AVG(RATINGSCORE),1) FROM RATING WHERE MOVIEID = M.MOVIEID) as avgSCORE " + 
+				"  FROM MOVIE M WHERE STATE = 2 ORDER BY MOVIEDATE DESC";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -124,7 +125,8 @@ public class MovieDao {
 				String movieGrade = rs.getString("movieGrade");
 				int movieAudience = rs.getInt("movieAudience");
 				int state = rs.getInt("state");
-				dtos.add(new MovieDto(movieId, movieName, movieSummary, movieRunning, movieImage, movieDate, movieGrade, movieAudience, state));
+				int avgScore = rs.getInt("avgScore");
+				dtos.add(new MovieDto(movieId, movieName, movieSummary, movieRunning, movieImage, movieDate, movieGrade, movieAudience, state,avgScore));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -140,13 +142,14 @@ public class MovieDao {
 		}
 		return dtos;
 	}
-	// 상영예고 영화리스트
+	// 상영예고 영화리스트 (가장 빨리 개봉되는 순)
 	public ArrayList<MovieDto> upComingMovie() {
 		ArrayList<MovieDto> dtos = new ArrayList<MovieDto>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM MOVIE WHERE STATE = 1 ORDER BY MOVIEDATE";
+		String sql = "SELECT M.*,(SELECT ROUND(AVG(RATINGSCORE),1) FROM RATING WHERE MOVIEID = M.MOVIEID) as avgSCORE " + 
+				"  FROM MOVIE M WHERE STATE = 1 ORDER BY MOVIEDATE";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -161,7 +164,8 @@ public class MovieDao {
 				String movieGrade = rs.getString("movieGrade");
 				int movieAudience = rs.getInt("movieAudience");
 				int state = rs.getInt("state");
-				dtos.add(new MovieDto(movieId, movieName, movieSummary, movieRunning, movieImage, movieDate, movieGrade, movieAudience, state));
+				int avgScore = rs.getInt("avgScore");
+				dtos.add(new MovieDto(movieId, movieName, movieSummary, movieRunning, movieImage, movieDate, movieGrade, movieAudience, state,avgScore));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -209,7 +213,8 @@ public class MovieDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM MOVIE WHERE MOVIENAME LIKE '%' || ? || '%'";
+		String sql = "SELECT M.*,(SELECT ROUND(AVG(RATINGSCORE),1) FROM RATING WHERE MOVIEID = M.MOVIEID) as avgScore " + 
+				"  FROM MOVIE M WHERE MOVIENAME LIKE '%' || ? || '%'";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -225,7 +230,8 @@ public class MovieDao {
 				String movieGrade = rs.getString("movieGrade");
 				int movieAudience = rs.getInt("movieAudience");
 				int state = rs.getInt("state");
-				dtos.add(new MovieDto(movieId, movieName, movieSummary, movieRunning, movieImage, movieDate, movieGrade, movieAudience, state));
+				int avgScore = rs.getInt("avgScore");
+				dtos.add(new MovieDto(movieId, movieName, movieSummary, movieRunning, movieImage, movieDate, movieGrade, movieAudience, state, avgScore));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -247,7 +253,8 @@ public class MovieDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM MOVIE WHERE MOVIEID IN (SELECT MOVIEID FROM TAG WHERE TAG = ?)";
+		String sql = "SELECT M.*,(SELECT ROUND(AVG(RATINGSCORE),1) FROM RATING WHERE MOVIEID = M.MOVIEID) as avgScore " + 
+				"  FROM MOVIE M WHERE MOVIEID IN (SELECT MOVIEID FROM TAG WHERE TAG = ?)";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -263,7 +270,8 @@ public class MovieDao {
 				String movieGrade = rs.getString("movieGrade");
 				int movieAudience = rs.getInt("movieAudience");
 				int state = rs.getInt("state");
-				dtos.add(new MovieDto(movieId, movieName, movieSummary, movieRunning, movieImage, movieDate, movieGrade, movieAudience, state));
+				int avgScore = rs.getInt("avgScore");
+				dtos.add(new MovieDto(movieId, movieName, movieSummary, movieRunning, movieImage, movieDate, movieGrade, movieAudience, state, avgScore));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -285,7 +293,8 @@ public class MovieDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM MOVIE WHERE MOVIEID = ?";
+		String sql = "SELECT M.*,(SELECT ROUND(AVG(RATINGSCORE),1) FROM RATING WHERE MOVIEID = M.MOVIEID) as avgScore " + 
+				"  FROM MOVIE M WHERE MOVIEID = ?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -300,7 +309,8 @@ public class MovieDao {
 				String movieGrade = rs.getString("movieGrade");
 				int movieAudience = rs.getInt("movieAudience");
 				int state = rs.getInt("state");
-				dto = new MovieDto(movieId, movieName, movieSummary, movieRunning, movieImage, movieDate, movieGrade, movieAudience, state);
+				int avgScore = rs.getInt("avgScore");
+				dto = new MovieDto(movieId, movieName, movieSummary, movieRunning, movieImage, movieDate, movieGrade, movieAudience, state, avgScore);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -368,7 +378,7 @@ public class MovieDao {
 				String movieGrade = rs.getString("movieGrade");
 				int movieAudience = rs.getInt("movieAudience");
 				int state = rs.getInt("state");
-				dtos.add(new MovieDto(movieId, movieName, movieSummary, movieRunning, movieImage, movieDate, movieGrade, movieAudience, state));
+				dtos.add(new MovieDto(movieId, movieName, movieSummary, movieRunning, movieImage, movieDate, movieGrade, movieAudience, state, 0));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

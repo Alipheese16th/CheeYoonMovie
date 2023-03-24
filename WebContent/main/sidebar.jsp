@@ -21,7 +21,7 @@
 		}
 	</style>
 </head>
-<body>
+<body class="sb-sidenav-toggled">
 	
 	<div class="bg-black text-center" id="sidebar-wrapper">
 		<div class="sidebar-heading">
@@ -36,7 +36,7 @@
 			 
 		    <div class="collapse" id="collapseExample">
 		    	<ul class="list-group list-group-flush">
-				  <li class="list-group-item list-group-item-action p-3" onclick="location.href='${conPath}/main.do'">현재 상영영화</li>
+				  <li class="list-group-item list-group-item-action p-3" onclick="location.href='${conPath}/nowPlayingList.do'">현재 상영영화</li>
 				  <li class="list-group-item list-group-item-action p-3" onclick="location.href='${conPath}/main.do'">개봉 예정영화</li>
 				  <li class="list-group-item list-group-item-action p-3" onclick="location.href='${conPath}/main.do'">예고편</li>
 				</ul>

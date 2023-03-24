@@ -23,7 +23,7 @@
 			if(!user){
 				alert('글쓰기는 로그인한 회원만 가능합니다');
 			}else{
-				location.href ="${conPath}/boardWriteView.do?pageNum=${pageNum}";
+				location.href ="${conPath}/boardWriteView.do";
 			}
 		});
 		
@@ -40,6 +40,18 @@
 </head>
 <body>
 
+<c:if test="${not empty boardWriteError}">
+	<script>
+		alert('${boardWriteError}');
+	</script>
+</c:if>
+<c:if test="${not empty boardDeleteError}">
+	<script>
+		alert('${boardWriteError}');
+	</script>
+</c:if>
+
+
 	<div class="d-flex " id="wrapper"> <!-- bg-black text-white -->
 	
 		<jsp:include page="../main/sidebar.jsp"/>
@@ -50,13 +62,9 @@
 			
 			<div class="container-fluid">
 			
-			
 		    <h1 class="my-5">자유게시판</h1>
 		    
-		    <h1 class="my-5">자유게시판</h1>
-				    
 			<jsp:include page="list.jsp"/>
-		    
 			    
 			</div>
 			<jsp:include page="../main/footer.jsp"/>

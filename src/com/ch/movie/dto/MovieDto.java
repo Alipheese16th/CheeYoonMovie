@@ -12,9 +12,13 @@ public class MovieDto {
 	private String movieGrade;
 	private int movieAudience;
 	private int state;
+	private int avgScore;
+
 	
+
 	public MovieDto(String movieId, String movieName, String movieSummary, int movieRunning, String movieImage,
-			Date movieDate, String movieGrade, int movieAudience, int state) {
+			Date movieDate, String movieGrade, int movieAudience, int state, int avgScore) {
+		super();
 		this.movieId = movieId;
 		this.movieName = movieName;
 		this.movieSummary = movieSummary;
@@ -24,6 +28,17 @@ public class MovieDto {
 		this.movieGrade = movieGrade;
 		this.movieAudience = movieAudience;
 		this.state = state;
+		this.avgScore = avgScore;
+	}
+
+	
+
+	public int getAvgScore() {
+		return avgScore;
+	}
+
+	public void setAvgScore(int avgScore) {
+		this.avgScore = avgScore;
 	}
 
 	public String getMovieId() {
@@ -98,11 +113,16 @@ public class MovieDto {
 		this.state = state;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "MovieDto [movieId=" + movieId + ", movieName=" + movieName + ", movieSummary=" + movieSummary
 				+ ", movieRunning=" + movieRunning + ", movieImage=" + movieImage + ", movieDate=" + movieDate
-				+ ", movieGrade=" + movieGrade + ", movieAudience=" + movieAudience + ", state=" + state + "]";
+				+ ", movieGrade=" + movieGrade + ", movieAudience=" + movieAudience + ", state=" + state + ", avgScore="
+				+ avgScore + "]";
 	}
-	
+
+
+
 }

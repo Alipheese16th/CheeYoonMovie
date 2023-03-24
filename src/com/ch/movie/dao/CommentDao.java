@@ -91,6 +91,42 @@ public class CommentDao {
 		}
 		return total;
 	}
+	
+	// 댓글번호로 댓글dto가져오기
+	public CommentDto getComment(int commentNo) {
+		CommentDto dto = null;
+		Connection 		   conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet 			 rs = null;
+		String sql = "SELECT * FROM COMMENTS WHERE COMMENTNO = ?";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, commentNo);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				int boardNo = rs.getInt("boardNo");
+				String userId = rs.getString("userId");
+				String commentContent = rs.getString("commentContent");
+				Timestamp commentDate = rs.getTimestamp("commentDate");
+				dto = new CommentDto(commentNo, boardNo, userId, commentContent, commentDate);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			System.out.println("댓글 정보가져오기 실패"+commentNo+dto);
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return dto;
+	}
+	
+	
 	// 댓글 작성
 	public int writeComment(CommentDto dto) {
 		int 			 result = FAIL;
@@ -106,7 +142,6 @@ public class CommentDao {
 			pstmt.setString(3, dto.getCommentContent());
 			pstmt.executeUpdate();
 			result = SUCCESS;
-			System.out.println("댓글쓰기 성공");
 		} catch (SQLException e) {
 			System.out.println(e.getMessage()+"댓글쓰기 실패:"+dto);
 		}finally {

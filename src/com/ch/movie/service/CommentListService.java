@@ -10,12 +10,13 @@ public class CommentListService implements Service {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
+		String _boardNo = request.getParameter("boardNo");
+		int boardNo = Integer.parseInt(_boardNo);
+		
 		String commentPageNum = request.getParameter("commentPageNum");
 		if(commentPageNum == null || commentPageNum.equals("")) {
 			commentPageNum = "1";
 		}
-		String _boardNo = request.getParameter("boardNo");
-		int boardNo = Integer.parseInt(_boardNo);
 		
 		int commentCurrentPage = Integer.parseInt(commentPageNum);
 		final int commentPAGESIZE = 10, commentBLOCKSIZE = 10;

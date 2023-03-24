@@ -9,6 +9,7 @@
 	<meta charset="utf-8" />
 </head>
 <body>
+
 	<table class="table table-hover table-striped caption-top mx-2">
 		<caption>자유롭게 적으십시오</caption>
 		<thead>
@@ -63,7 +64,7 @@
 	</table>
     <button class="write btn btn-outline-dark">글쓰기</button>
     
-    
+    <!-- 자유게시판 페이징 -->
     <nav aria-label="Page navigation example">
 	  <ul class="pagination justify-content-center">
 	  	<c:if test="${startPage <= BLOCKSIZE }">
@@ -92,5 +93,6 @@
 	    
 	  </ul>
 	</nav>
+	<!-- 자유게시판 페이징 끝 -->
 </body>
 </html>

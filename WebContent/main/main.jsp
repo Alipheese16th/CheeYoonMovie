@@ -25,20 +25,17 @@
 		history.back();
 	</script>
 </c:if>
-
 <c:if test="${not empty modifyError}">
 	<script>
 		alert('${modifyError}');
 		history.back();
 	</script>
 </c:if>
-
 <c:if test="${not empty modifyResult}">
 	<script>
 		alert('${modifyResult}');
 	</script>
 </c:if>
-
 <c:if test="${not empty withdrawalResult }">
 	<script>
 		alert('${withdrawalResult}');
@@ -48,16 +45,16 @@
 
 	<div class="d-flex bg-black text-white" id="wrapper"> <!--  -->
 	
-		<jsp:include page="sidebar.jsp"/>
+		<jsp:include page="../main/sidebar.jsp"/>
 		
 		<div id="page-content-wrapper">
 		
-			<jsp:include page="header.jsp"/>
+			<jsp:include page="../main/header.jsp"/>
 			
 			<div class="container-fluid">
 			    <jsp:include page="content.jsp"/>
 			</div>
-			<jsp:include page="footer.jsp"/>
+			<jsp:include page="../main/footer.jsp"/>
 		</div>
 		
 	</div>

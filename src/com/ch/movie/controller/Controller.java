@@ -10,8 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ch.movie.service.BoardContentService;
+import com.ch.movie.service.BoardDeleteService;
 import com.ch.movie.service.BoardListService;
+import com.ch.movie.service.BoardModifyService;
+import com.ch.movie.service.BoardModifyViewService;
+import com.ch.movie.service.BoardReplyService;
+import com.ch.movie.service.BoardReplyViewService;
+import com.ch.movie.service.BoardWriteService;
+import com.ch.movie.service.CommentDeleteService;
 import com.ch.movie.service.CommentWriteService;
+import com.ch.movie.service.NowPlayingListService;
 import com.ch.movie.service.RegisterService;
 import com.ch.movie.service.Service;
 import com.ch.movie.service.UserEmailConfirmService;
@@ -21,7 +29,7 @@ import com.ch.movie.service.UserLogoutService;
 import com.ch.movie.service.UserModifyService;
 import com.ch.movie.service.UserWithdrawalService;
 import com.ch.movie.service.commentModifyService;
-import com.ch.movie.service.CommentListService;
+import com.ch.movie.service.CommentModifyViewService;
 
 @WebServlet("*.do")
 public class Controller extends HttpServlet{
@@ -95,7 +103,11 @@ public class Controller extends HttpServlet{
 			service = new UserWithdrawalService();
 			service.execute(request, response);
 			viewPage = "main.do";
+		
 			
+		/* * * * * * * * * * * * * * * * * * * * * *
+		 * * * * * * * * board 관련 요청 * * * * * * * * 
+		 * * * * * * * * * * * * * * * * * * * * * */
 		}else if(command.equals("/boardList.do")){
 			service = new BoardListService();
 			service.execute(request, response);
@@ -104,29 +116,79 @@ public class Controller extends HttpServlet{
 		}else if(command.equals("/boardContent.do")){
 			service = new BoardContentService();
 			service.execute(request, response);
-			Service service2 = new CommentListService();
-			service2.execute(request, response);
 			viewPage = "board/boardContent.jsp";
 			
+		}else if(command.equals("/boardWriteView.do")){
+			viewPage = "board/boardWrite.jsp";
+			
+		}else if(command.equals("/boardWrite.do")){
+			service = new BoardWriteService();
+			service.execute(request, response);
+			viewPage = "boardList.do";
+			
+		}else if(command.equals("/boardModifyView.do")){
+			service = new BoardModifyViewService();
+			service.execute(request, response);
+			viewPage = "board/boardModify.jsp";
+			
+		}else if(command.equals("/boardModify.do")){
+			service = new BoardModifyService();
+			service.execute(request, response);
+			viewPage = "boardContent.do";
+			
+		}else if(command.equals("/boardDelete.do")){
+			service = new BoardDeleteService();
+			service.execute(request, response);
+			viewPage = "boardList.do";
+		
+		/* * * * * * * * * * * * * * * * * * * * * *
+		 * * * * * * *  comment 관련 요청  * * * * * * *
+		 * * * * * * * * * * * * * * * * * * * * * */
 		}else if(command.equals("/commentWrite.do")){
 			service = new CommentWriteService();
 			service.execute(request, response);
 			viewPage = "boardContent.do";
 			
-		}else if(command.equals("/commentModifyView.do")){
+		}else if(command.equals("/commentModifyView.do")){	// boardContent자유게시판 상세보기페이지에서 ajax로 요청
+			service = new CommentModifyViewService();
+			service.execute(request, response);
 			viewPage = "board/commentModify.jsp";
 			
 		}else if(command.equals("/commentModify.do")){
 			service = new commentModifyService();
 			service.execute(request, response);
-			viewPage = "main.do";
+			viewPage = "boardContent.do";
 			
-		
-		}else if(command.equals("/commentList.do")){
-			service = new CommentListService();
+		}else if(command.equals("/commentDelete.do")){
+			service = new CommentDeleteService();
 			service.execute(request, response);
-			viewPage = "board/commentList.jsp";
+			viewPage = "boardContent.do";
 			
+		}else if(command.equals("/boardReplyView.do")){
+			service = new BoardReplyViewService();
+			service.execute(request, response);
+			viewPage = "board/boardReply.jsp";
+			
+		}else if(command.equals("/boardReply.do")){
+			service = new BoardReplyService();
+			service.execute(request, response);
+			viewPage = "boardList.do";
+			
+		/* * * * * * * * * * * * * * * * * * * * * *
+		 * * * * * * * * movie 관련 요청  * * * * * * *
+		 * * * * * * * * * * * * * * * * * * * * * */
+		}else if(command.equals("/nowPlayingList.do")){
+			service = new NowPlayingListService();
+			service.execute(request, response);
+			viewPage = "movie/nowPlayingList.jsp";
+			
+		}else if(command.equals("/")){
+			
+		}else if(command.equals("/")){
+			
+		}else if(command.equals("/")){
+			
+		}else if(command.equals("/")){
 			
 		}else if(command.equals("/")){
 		}else if(command.equals("/")){
@@ -138,10 +200,6 @@ public class Controller extends HttpServlet{
 		}else if(command.equals("/")){
 		}else if(command.equals("/")){
 		}else if(command.equals("/")){
-		}else if(command.equals("/")){
-		}else if(command.equals("/")){
-		}else if(command.equals("/")){
-			
 			
 		}
 		

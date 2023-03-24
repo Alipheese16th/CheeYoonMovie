@@ -13,9 +13,14 @@
 		${param.commentNo}번 댓글 수정
 	  </div>
 	  <div class="card-body">
-	  	<input type="hidden" id="commentNo" value="${param.commentNo}">
-    	<textarea name="commentContent" id="commentContent" class="form-control ml-1 shadow-none textarea"></textarea>
-    	<button type="button" class="btn btn-outline-dark commentModify">댓글수정</button>
+	  	<form action="${conPath}/commentModify.do">
+	  		<input type="hidden" name="commentPageNum" value="${param.commentPageNum}">
+	  		<input type="hidden" name="pageNum" value="${param.pageNum}">
+	  		<input type="hidden" name="commentNo" value="${comment.commentNo}">
+	  		<input type="hidden" name="boardNo" value="${comment.boardNo}">
+	  		<textarea name="commentContent" class="form-control ml-1 shadow-none textarea">${comment.commentContent}</textarea>
+			<input type="submit" class="btn btn-outline-dark" value="댓글수정">
+	  	</form>
 	  </div>
 	</div>
 	
