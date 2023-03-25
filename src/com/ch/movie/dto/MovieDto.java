@@ -1,10 +1,12 @@
 package com.ch.movie.dto;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class MovieDto {
 	private String movieId;
-	private String movieName;
+	private String originalTitle;
+	private String movieTitle;
 	private String movieSummary;
 	private int movieRunning;
 	private String movieImage;
@@ -13,14 +15,17 @@ public class MovieDto {
 	private int movieAudience;
 	private int state;
 	private int avgScore;
-
+	private ArrayList<String> tagList;
+	private ArrayList<PersonDto> personList;
+	private ArrayList<TrailerDto> trailerList;
 	
-
-	public MovieDto(String movieId, String movieName, String movieSummary, int movieRunning, String movieImage,
-			Date movieDate, String movieGrade, int movieAudience, int state, int avgScore) {
+	public MovieDto(String movieId, String originalTitle, String movieTitle, String movieSummary, int movieRunning,
+			String movieImage, Date movieDate, String movieGrade, int movieAudience, int state, int avgScore,
+			ArrayList<String> tagList, ArrayList<PersonDto> personList, ArrayList<TrailerDto> trailerList) {
 		super();
 		this.movieId = movieId;
-		this.movieName = movieName;
+		this.originalTitle = originalTitle;
+		this.movieTitle = movieTitle;
 		this.movieSummary = movieSummary;
 		this.movieRunning = movieRunning;
 		this.movieImage = movieImage;
@@ -29,9 +34,51 @@ public class MovieDto {
 		this.movieAudience = movieAudience;
 		this.state = state;
 		this.avgScore = avgScore;
+		this.tagList = tagList;
+		this.personList = personList;
+		this.trailerList = trailerList;
 	}
 
 	
+	public String getOriginalTitle() {
+		return originalTitle;
+	}
+
+	public void setOriginalTitle(String originalTitle) {
+		this.originalTitle = originalTitle;
+	}
+
+	public String getMovieTitle() {
+		return movieTitle;
+	}
+
+	public void setMovieTitle(String movieTitle) {
+		this.movieTitle = movieTitle;
+	}
+
+	public ArrayList<TrailerDto> getTrailerList() {
+		return trailerList;
+	}
+
+	public void setTrailerList(ArrayList<TrailerDto> trailerList) {
+		this.trailerList = trailerList;
+	}
+
+	public ArrayList<String> getTagList() {
+		return tagList;
+	}
+
+	public void setTagList(ArrayList<String> tagList) {
+		this.tagList = tagList;
+	}
+
+	public ArrayList<PersonDto> getPersonList() {
+		return personList;
+	}
+
+	public void setPersonList(ArrayList<PersonDto> personList) {
+		this.personList = personList;
+	}
 
 	public int getAvgScore() {
 		return avgScore;
@@ -47,14 +94,6 @@ public class MovieDto {
 
 	public void setMovieId(String movieId) {
 		this.movieId = movieId;
-	}
-
-	public String getMovieName() {
-		return movieName;
-	}
-
-	public void setMovieName(String movieName) {
-		this.movieName = movieName;
 	}
 
 	public String getMovieSummary() {
@@ -113,16 +152,13 @@ public class MovieDto {
 		this.state = state;
 	}
 
-
-
 	@Override
 	public String toString() {
-		return "MovieDto [movieId=" + movieId + ", movieName=" + movieName + ", movieSummary=" + movieSummary
-				+ ", movieRunning=" + movieRunning + ", movieImage=" + movieImage + ", movieDate=" + movieDate
-				+ ", movieGrade=" + movieGrade + ", movieAudience=" + movieAudience + ", state=" + state + ", avgScore="
-				+ avgScore + "]";
+		return "MovieDto [movieId=" + movieId + ", originalTitle=" + originalTitle + ", movieTitle=" + movieTitle
+				+ ", movieSummary=" + movieSummary + ", movieRunning=" + movieRunning + ", movieImage=" + movieImage
+				+ ", movieDate=" + movieDate + ", movieGrade=" + movieGrade + ", movieAudience=" + movieAudience
+				+ ", state=" + state + ", avgScore=" + avgScore + ", tagList=" + tagList + ", personList=" + personList
+				+ ", trailerList=" + trailerList + "]";
 	}
-
-
-
+	
 }

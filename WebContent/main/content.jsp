@@ -406,12 +406,6 @@
 
 
 
-
-
-
-
-
-
 		<div class="container mt-5 py-2">
         	<div class="row">
         		<h1 class="">예고편</h1>

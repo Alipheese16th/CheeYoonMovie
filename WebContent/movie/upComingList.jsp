@@ -16,14 +16,6 @@
 	<!-- Core theme CSS (includes Bootstrap)-->
 	<link href="${conPath}/css/styles.css" rel="stylesheet" />
 	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
-	<!-- 별점기능추가 -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="${conPath}/css/star-rating.css" media="all" type="text/css"/>
-    <link rel="stylesheet" href="${conPath}/css/theme.css" media="all" type="text/css"/>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="${conPath}/js/star-rating.js" type="text/javascript"></script>
-    <script src="${conPath}/js/theme.js" type="text/javascript"></script>
-	<!-- star-rating -->
 	
 	<style>
 		.card img {
@@ -31,9 +23,10 @@
 			height: 150px;
 			object-fit: cover;
 		}
-		.card img, .card-title, .card-text{
+		.card img:hover, .card-title, .card-text{
 			cursor:pointer;
 		}
+		
 		
 	</style>
 	<script>
@@ -65,7 +58,7 @@
 			<div class="container">
 			
 			
-		    	<h1 class="my-5">현재상영작 영화 리스트</h1>
+		    	<h1 class="my-5">상영예고 영화 리스트</h1>
 		    	
 		    	<hr>
 		    	
@@ -73,12 +66,12 @@
 		    	<div class="container px-5">
 		    	
 
-					<c:if test="${empty nowPlayingList}">
-						<h1>현재 상영중인 영화가 없습니다</h1>
+					<c:if test="${empty upComingList}">
+						<h1>상영 예고작품 영화가 없습니다</h1>
 					</c:if>
 					
-			    	<c:if test="${not empty nowPlayingList}">
-			    		<c:forEach var="movie" items="${nowPlayingList}">
+			    	<c:if test="${not empty upComingList}">
+			    		<c:forEach var="movie" items="${upComingList}" varStatus="status">
 			    			
 				    		<div class="card mb-3 border-0" id="${movie.movieId}">
 								<div class="row g-0">
@@ -120,9 +113,15 @@
 													</div>
 													<div class="col-md-4 d-flex align-items-center">
 														<p>
-															네티즌 평점 : 
-															<input type="text" class="kv-fa rating-loading" name="star5" value="${movie.avgScore}" data-size="xs">
+														D-day : 
+														<jsp:useBean id="now" class="java.util.Date"/>
+														<fmt:formatDate var="today" value="${now}" pattern="yyyyMMdd000000" />
+														<fmt:parseDate var="nowfmt" value="${today}" pattern="yyyyMMddHHmmss"/>
+														<fmt:parseNumber var="nowfmtTime" value="${nowfmt.time / (1000*60*60*24)}" integerOnly="true" scope="request"/>
+														<fmt:parseNumber var="dbDtParse" value="${movie.movieDate.time / (1000*60*60*24)}" integerOnly="true" scope="request"/>
+														${dbDtParse - nowfmtTime}
 														</p>
+														
 													</div>
 												</div>
 											</div>
@@ -150,36 +149,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="${conPath}/js/scripts.js"></script>
-<script>
-	$(document).on('ready', function () {
-		//별점기능 추가
-        $('.kv-fa').rating({
-            theme: 'krajee-fa',
-            filledStar: '<i class="fa fa-star"></i>',
-            emptyStar: '<i class="fa fa-star-o"></i>',
-            stars:10,
-            max:10,
-            step:1,
-            readonly:true,
-            starCaptions:{
-            	0: '0',
-            	1: '1',
-            	2: '2',
-            	3: '3',
-            	4: '4',
-            	5: '5',
-            	6: '6',
-            	7: '7',
-            	8: '8',
-            	9: '9',
-            	10: '10'
-            }
-        });
-        $('.rating,.kv-fa').on(
-                'change', function () {
-                    console.log('Rating selected: ' + $(this).val());
-        });
-    });
-</script>
+
 </body>
 </html>

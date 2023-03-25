@@ -17,6 +17,8 @@ import com.ch.movie.dto.RatingDto;
 public class RatingDao {
 	public static final int FAIL = 0;
 	public static final int SUCCESS = 1;
+	public static final int EXISTENT = 0;
+	public static final int NONE_EXISTENT = 1;
 	private DataSource ds;
 
 	public RatingDao() {
@@ -27,6 +29,38 @@ public class RatingDao {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	// 평점 중복 확인
+	public int confirmId(String movieId, String userId) {
+		int result = EXISTENT;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM RATING WHERE MOVIEID = ? AND USERID = ?";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, movieId);
+			pstmt.setString(2, userId);
+			rs = pstmt.executeQuery();
+			if(!rs.next()) {
+				result = NONE_EXISTENT;
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			System.out.println("평점중복체크실패:"+movieId+userId);
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return result;
+	}
+	
 	// 평점 리스트(영화아이디에 해당하는 평점들만 출력)
 	public ArrayList<RatingDto> movieHasRating(String movieId, int startRow, int endRow){
 		ArrayList<RatingDto> dtos = new ArrayList<RatingDto>();

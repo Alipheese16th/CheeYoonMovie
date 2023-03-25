@@ -4,37 +4,48 @@ import java.sql.Date;
 
 public class PersonDto {
 	private String personId;
-	private String personJob;
 	private String personName;
 	private String personImage;
-	private String personGender;
 	private String personNation;
 	private Date personBirth;
-	private String personDetail;
+	private String casting;
+	private String role;
 	
-	public PersonDto(String personId, String personJob, String personName, String personImage, String personGender,
-			String personNation, Date personBirth, String personDetail) {
+	public PersonDto(String personId, String personName, String personImage, String personNation, Date personBirth,
+			String casting, String role) {
+		super();
 		this.personId = personId;
-		this.personJob = personJob;
 		this.personName = personName;
 		this.personImage = personImage;
-		this.personGender = personGender;
 		this.personNation = personNation;
 		this.personBirth = personBirth;
-		this.personDetail = personDetail;
+		this.casting = casting;
+		this.role = role;
 	}
+	
+	public String getCasting() {
+		return casting;
+	}
+
+	public void setCasting(String casting) {
+		this.casting = casting;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	public String getPersonId() {
 		return personId;
 	}
 	public void setPersonId(String personId) {
 		this.personId = personId;
 	}
-	public String getPersonJob() {
-		return personJob;
-	}
-	public void setPersonJob(String personJob) {
-		this.personJob = personJob;
-	}
+	
 	public String getPersonName() {
 		return personName;
 	}
@@ -47,12 +58,7 @@ public class PersonDto {
 	public void setPersonImage(String personImage) {
 		this.personImage = personImage;
 	}
-	public String getPersonGender() {
-		return personGender;
-	}
-	public void setPersonGender(String personGender) {
-		this.personGender = personGender;
-	}
+	
 	public String getPersonNation() {
 		return personNation;
 	}
@@ -65,16 +71,13 @@ public class PersonDto {
 	public void setPersonBirth(Date personBirth) {
 		this.personBirth = personBirth;
 	}
-	public String getPersonDetail() {
-		return personDetail;
-	}
-	public void setPersonDetail(String personDetail) {
-		this.personDetail = personDetail;
-	}
+
 	@Override
 	public String toString() {
-		return "PersonDto [personId=" + personId + ", personJob=" + personJob + ", personName=" + personName
-				+ ", personImage=" + personImage + ", personGender=" + personGender + ", personNation=" + personNation
-				+ ", personBirth=" + personBirth + ", personDetail=" + personDetail + "]";
+		return "PersonDto [personId=" + personId + ", personName=" + personName + ", personImage=" + personImage
+				+ ", personNation=" + personNation + ", personBirth=" + personBirth + ", casting=" + casting + ", role="
+				+ role + "]";
 	}
+	
+	
 }

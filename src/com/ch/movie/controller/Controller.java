@@ -19,6 +19,7 @@ import com.ch.movie.service.BoardReplyViewService;
 import com.ch.movie.service.BoardWriteService;
 import com.ch.movie.service.CommentDeleteService;
 import com.ch.movie.service.CommentWriteService;
+import com.ch.movie.service.MovieContentService;
 import com.ch.movie.service.NowPlayingListService;
 import com.ch.movie.service.RegisterService;
 import com.ch.movie.service.Service;
@@ -29,6 +30,7 @@ import com.ch.movie.service.UserLogoutService;
 import com.ch.movie.service.UserModifyService;
 import com.ch.movie.service.UserWithdrawalService;
 import com.ch.movie.service.commentModifyService;
+import com.ch.movie.service.UpComingListService;
 import com.ch.movie.service.CommentModifyViewService;
 
 @WebServlet("*.do")
@@ -141,6 +143,16 @@ public class Controller extends HttpServlet{
 			service.execute(request, response);
 			viewPage = "boardList.do";
 		
+		}else if(command.equals("/boardReplyView.do")){
+			service = new BoardReplyViewService();
+			service.execute(request, response);
+			viewPage = "board/boardReply.jsp";
+			
+		}else if(command.equals("/boardReply.do")){
+			service = new BoardReplyService();
+			service.execute(request, response);
+			viewPage = "boardList.do";
+		
 		/* * * * * * * * * * * * * * * * * * * * * *
 		 * * * * * * *  comment 관련 요청  * * * * * * *
 		 * * * * * * * * * * * * * * * * * * * * * */
@@ -149,7 +161,7 @@ public class Controller extends HttpServlet{
 			service.execute(request, response);
 			viewPage = "boardContent.do";
 			
-		}else if(command.equals("/commentModifyView.do")){	// boardContent자유게시판 상세보기페이지에서 ajax로 요청
+		}else if(command.equals("/commentModifyView.do")){	// boardContent 자유게시판 상세보기페이지에서 ajax로 요청
 			service = new CommentModifyViewService();
 			service.execute(request, response);
 			viewPage = "board/commentModify.jsp";
@@ -164,15 +176,6 @@ public class Controller extends HttpServlet{
 			service.execute(request, response);
 			viewPage = "boardContent.do";
 			
-		}else if(command.equals("/boardReplyView.do")){
-			service = new BoardReplyViewService();
-			service.execute(request, response);
-			viewPage = "board/boardReply.jsp";
-			
-		}else if(command.equals("/boardReply.do")){
-			service = new BoardReplyService();
-			service.execute(request, response);
-			viewPage = "boardList.do";
 			
 		/* * * * * * * * * * * * * * * * * * * * * *
 		 * * * * * * * * movie 관련 요청  * * * * * * *
@@ -182,9 +185,15 @@ public class Controller extends HttpServlet{
 			service.execute(request, response);
 			viewPage = "movie/nowPlayingList.jsp";
 			
-		}else if(command.equals("/")){
+		}else if(command.equals("/upComingList.do")){
+			service = new UpComingListService();
+			service.execute(request, response);
+			viewPage = "movie/upComingList.jsp";
 			
-		}else if(command.equals("/")){
+		}else if(command.equals("/movieContent.do")){
+			service = new MovieContentService();
+			service.execute(request, response);
+			viewPage = "movie/movieContent.jsp";
 			
 		}else if(command.equals("/")){
 			
