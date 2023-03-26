@@ -22,7 +22,7 @@ public class BoardReplyService implements Service {
 		String boardContent = request.getParameter("boardContent");
 		String boardIp = request.getRemoteAddr();
 		
-		BoardDto dto = new BoardDto(0, userId, boardTitle, boardContent, 0, null, null, boardGroup, boardStep, boardIndent, boardIp);
+		BoardDto dto = new BoardDto(0, userId, boardTitle, boardContent, 0, null, null, boardGroup, boardStep, boardIndent, boardIp, 0);
 		BoardDao board = new BoardDao();
 		int result = board.replyBoard(dto);
 		if(result == BoardDao.FAIL) {

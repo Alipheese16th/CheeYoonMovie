@@ -14,10 +14,12 @@ public class BoardDto {
 	private int boardStep;
 	private int boardIndent;
 	private String boardIp;
+	private int commentCnt;
 	
 	public BoardDto(int boardNo, String userId, String boardTitle, String boardContent, int boardHit,
-			Timestamp boardDate, Timestamp boardUpdate, int boardGroup, int boardStep, int boardIndent,
-			String boardIp) {
+			Timestamp boardDate, Timestamp boardUpdate, int boardGroup, int boardStep, int boardIndent, String boardIp,
+			int commentCnt) {
+		super();
 		this.boardNo = boardNo;
 		this.userId = userId;
 		this.boardTitle = boardTitle;
@@ -29,6 +31,14 @@ public class BoardDto {
 		this.boardStep = boardStep;
 		this.boardIndent = boardIndent;
 		this.boardIp = boardIp;
+		this.commentCnt = commentCnt;
+	}
+	
+	public int getCommentCnt() {
+		return commentCnt;
+	}
+	public void setCommentCnt(int commentCnt) {
+		this.commentCnt = commentCnt;
 	}
 	public int getBoardNo() {
 		return boardNo;
@@ -96,11 +106,13 @@ public class BoardDto {
 	public void setBoardIp(String boardIp) {
 		this.boardIp = boardIp;
 	}
+
 	@Override
 	public String toString() {
 		return "BoardDto [boardNo=" + boardNo + ", userId=" + userId + ", boardTitle=" + boardTitle + ", boardContent="
 				+ boardContent + ", boardHit=" + boardHit + ", boardDate=" + boardDate + ", boardUpdate=" + boardUpdate
 				+ ", boardGroup=" + boardGroup + ", boardStep=" + boardStep + ", boardIndent=" + boardIndent
-				+ ", boardIp=" + boardIp + "]";
+				+ ", boardIp=" + boardIp + ", commentCnt=" + commentCnt + "]";
 	}
+	
 }

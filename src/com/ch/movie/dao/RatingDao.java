@@ -31,7 +31,7 @@ public class RatingDao {
 	}
 	
 	// 평점 중복 확인
-	public int confirmId(String movieId, String userId) {
+	public int ratingConfirm(String movieId, String userId) {
 		int result = EXISTENT;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -62,13 +62,14 @@ public class RatingDao {
 	}
 	
 	// 평점 리스트(영화아이디에 해당하는 평점들만 출력)
-	public ArrayList<RatingDto> movieHasRating(String movieId, int startRow, int endRow){
+	public ArrayList<RatingDto> ratingList(String movieId, int startRow, int endRow){
 		ArrayList<RatingDto> dtos = new ArrayList<RatingDto>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT * FROM " + 
-				"  (SELECT ROW_NUMBER() OVER(ORDER BY RATINGDATE DESC) RN, R.* FROM RATING R WHERE MOVIEID = ?) " + 
+				"  (SELECT ROW_NUMBER() OVER(ORDER BY RATINGDATE DESC) RN ,USERNAME, R.*  " + 
+				"    FROM RATING R, USERS U WHERE R.USERID = U.USERID AND MOVIEID = ?) " + 
 				"  WHERE RN BETWEEN ? AND ?";
 		try {
 			conn = ds.getConnection();
@@ -82,7 +83,8 @@ public class RatingDao {
 				String ratingContent = rs.getString("ratingContent");
 				int ratingScore = rs.getInt("ratingScore");
 				Timestamp ratingDate = rs.getTimestamp("ratingDate");
-				dtos.add(new RatingDto(userId, movieId, ratingContent, ratingScore, ratingDate));
+				String userName = rs.getString("userName");
+				dtos.add(new RatingDto(userId, movieId, ratingContent, ratingScore, ratingDate, userName));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage()+"평점리스트에러:"+movieId);
@@ -98,7 +100,7 @@ public class RatingDao {
 		return dtos;
 	}
 	// 평점 갯수 (페이징) (영화 아이디에 해당하는 평점만)
-	public int totalComment(String movieId) {
+	public int totalRating(String movieId) {
 		int total = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -138,7 +140,7 @@ public class RatingDao {
 			pstmt.setString(1, dto.getUserId());
 			pstmt.setString(2, dto.getMovieId());
 			pstmt.setString(3, dto.getRatingContent());
-			pstmt.setInt(3, dto.getRatingScore());
+			pstmt.setInt(4, dto.getRatingScore());
 			result = pstmt.executeUpdate();
 			System.out.println("평점 작성 성공");
 		} catch (SQLException e) {
@@ -160,15 +162,16 @@ public class RatingDao {
 		PreparedStatement pstmt = null;
 		String sql = "UPDATE RATING " + 
 				"  SET RATINGCONTENT = ?, " + 
-				"      RATINGSCORE = ? " + 
+				"      RATINGSCORE = ?, " + 
+				"      RATINGDATE = SYSDATE " + 
 				"  WHERE USERID = ? AND MOVIEID = ?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getRatingContent());
 			pstmt.setInt(2, dto.getRatingScore());
-			pstmt.setString(2, dto.getUserId());
-			pstmt.setString(2, dto.getMovieId());
+			pstmt.setString(3, dto.getUserId());
+			pstmt.setString(4, dto.getMovieId());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -184,7 +187,7 @@ public class RatingDao {
 		return result;
 	}
 	// 평점삭제
-	public int deleteComment(String movieId, String userId) {
+	public int deleteRating(String movieId, String userId) {
 		int 			 result = FAIL;
 		Connection 		   conn = null;
 		PreparedStatement pstmt = null;
@@ -192,8 +195,8 @@ public class RatingDao {
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, movieId);
-			pstmt.setString(2, userId);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, movieId);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

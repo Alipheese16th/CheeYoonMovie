@@ -19,9 +19,15 @@ import com.ch.movie.service.BoardReplyViewService;
 import com.ch.movie.service.BoardWriteService;
 import com.ch.movie.service.CommentDeleteService;
 import com.ch.movie.service.CommentWriteService;
+import com.ch.movie.service.MainService;
 import com.ch.movie.service.MovieContentService;
 import com.ch.movie.service.NowPlayingListService;
+import com.ch.movie.service.RatingConfirmService;
+import com.ch.movie.service.RatingDeleteService;
+import com.ch.movie.service.RatingModifyService;
+import com.ch.movie.service.RatingWriteService;
 import com.ch.movie.service.RegisterService;
+import com.ch.movie.service.SearchMovieService;
 import com.ch.movie.service.Service;
 import com.ch.movie.service.UserEmailConfirmService;
 import com.ch.movie.service.UserIdConfirmService;
@@ -53,8 +59,14 @@ public class Controller extends HttpServlet{
 		Service service = null;
 		
 		if(command.equals("/main.do")) {
+			service = new MainService();
+			service.execute(request, response);
 			viewPage = "main/main.jsp";
 		
+		}else if(command.equals("/search.do")){
+			service = new SearchMovieService();
+			service.execute(request, response);
+			viewPage = "main/search.jsp";
 			
 		/* * * * * * * * * * * * * * * * * * * * * *
 		 * * * * * * * * 비회원 관련 요청 * * * * * * * * 
@@ -194,14 +206,31 @@ public class Controller extends HttpServlet{
 			service = new MovieContentService();
 			service.execute(request, response);
 			viewPage = "movie/movieContent.jsp";
+		
+		/* * * * * * * * * * * * * * * * * * * * * *
+		 * * * * * * * * rating 관련 요청  * * * * * * *
+		 * * * * * * * * * * * * * * * * * * * * * */
+		}else if(command.equals("/ratingConfirm.do")){
+			service = new RatingConfirmService();
+			service.execute(request, response);
+			viewPage = "movie/ratingConfirm.jsp";
 			
-		}else if(command.equals("/")){
+		}else if(command.equals("/ratingWrite.do")){
+			service = new RatingWriteService();
+			service.execute(request, response);
+			viewPage = "movieContent.do";
 			
-		}else if(command.equals("/")){
+		}else if(command.equals("/ratingModify.do")){
+			service = new RatingModifyService();
+			service.execute(request, response);
+			viewPage = "movieContent.do";
 			
-		}else if(command.equals("/")){
-		}else if(command.equals("/")){
-		}else if(command.equals("/")){
+		}else if(command.equals("/ratingDelete.do")){
+			service = new RatingDeleteService();
+			service.execute(request, response);
+			viewPage = "movieContent.do";
+			
+		
 		}else if(command.equals("/")){
 		}else if(command.equals("/")){
 		}else if(command.equals("/")){

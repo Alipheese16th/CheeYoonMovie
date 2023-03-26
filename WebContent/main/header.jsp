@@ -66,8 +66,8 @@
 						</li>
 					</ul>
 				
-					<form class="d-flex" role="search">
-						<input class="form-control me-2" type="search" name="search" placeholder="영화 검색" aria-label="검색">
+					<form action="${conPath}/search.do" class="d-flex" role="search">
+						<input class="form-control me-2" type="search" name="q" placeholder="영화 검색" aria-label="검색">
 						<button class="btn w-25" id="submit" type="submit">검색</button>
 					</form>
 				
@@ -119,8 +119,8 @@
 						</ul>
 					</div>
 				
-					<form class="d-flex" role="search">
-						<input class="form-control me-2" type="search" name="search" placeholder="영화 검색" aria-label="검색">
+					<form action="${conPath}/search.do" class="d-flex" role="search">
+						<input class="form-control me-2" type="search" name="q" placeholder="영화 검색" aria-label="검색">
 						<button class="btn w-25" id="submit" type="submit">검색</button>
 					</form>
 				

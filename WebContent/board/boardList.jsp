@@ -52,7 +52,7 @@
 </c:if>
 
 
-	<div class="d-flex " id="wrapper"> <!-- bg-black text-white -->
+	<div class="d-flex" id="wrapper"> <!-- bg-black text-white -->
 	
 		<jsp:include page="../main/sidebar.jsp"/>
 		
@@ -60,9 +60,9 @@
 		
 			<jsp:include page="../main/header.jsp"/>
 			
-			<div class="container-fluid">
+			<div class="container">
 			
-		    <h1 class="my-5">자유게시판</h1>
+		    <h1 class="my-5 text-center"><a href="${conPath}/boardList.do" class="text-decoration-none text-black">자유게시판</a></h1>
 		    
 			<jsp:include page="list.jsp"/>
 			    

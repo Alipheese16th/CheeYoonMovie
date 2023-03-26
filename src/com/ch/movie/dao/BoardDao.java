@@ -27,14 +27,15 @@ public class BoardDao {
 			System.out.println(e.getMessage());
 		}
 	}
-	// 글목록 출력
+	// 글목록 출력 (댓글 갯수 서브쿼리 추가)
 	public ArrayList<BoardDto> getBoardList(int startRow, int endRow){
 		ArrayList<BoardDto> dtos = new ArrayList<BoardDto>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT * FROM " + 
-				"  (SELECT ROW_NUMBER() OVER(ORDER BY BOARDGROUP DESC, BOARDSTEP) RN, B.* FROM BOARD B) " + 
+				"  (SELECT ROW_NUMBER() OVER(ORDER BY BOARDGROUP DESC, BOARDSTEP) RN ,B.*, " + 
+				"    (SELECT COUNT(*) FROM COMMENTS WHERE BOARDNO = B.BOARDNO) COMMENTCNT  FROM BOARD B) " + 
 				"  WHERE RN BETWEEN ? AND ?";
 		try {
 			conn = ds.getConnection();
@@ -54,7 +55,8 @@ public class BoardDao {
 				int boardStep = rs.getInt("boardStep");
 				int boardIndent = rs.getInt("boardIndent");
 				String boardIp = rs.getString("boardIp");
-				dtos.add(new BoardDto(boardNo, userId, boardTitle, boardContent, boardHit, boardDate, boardUpdate, boardGroup, boardStep, boardIndent, boardIp));
+				int commentCnt = rs.getInt("commentCnt");
+				dtos.add(new BoardDto(boardNo, userId, boardTitle, boardContent, boardHit, boardDate, boardUpdate, boardGroup, boardStep, boardIndent, boardIp, commentCnt));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -152,7 +154,8 @@ public class BoardDao {
 		Connection 		   conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet 			 rs = null;
-		String sql = "SELECT * FROM BOARD WHERE BOARDNO = ?";
+		String sql = "SELECT B.*,(SELECT COUNT(*) FROM COMMENTS WHERE BOARDNO = B.BOARDNO) COMMENTCNT " + 
+				"  FROM BOARD B WHERE BOARDNO = ?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -169,7 +172,8 @@ public class BoardDao {
 				int boardStep = rs.getInt("boardStep");
 				int boardIndent = rs.getInt("boardIndent");
 				String boardIp = rs.getString("boardIp");
-				dto = new BoardDto(boardNo, userId, boardTitle, boardContent, boardHit, boardDate, boardUpdate, boardGroup, boardStep, boardIndent, boardIp);
+				int commentCnt = rs.getInt("commentCnt");
+				dto = new BoardDto(boardNo, userId, boardTitle, boardContent, boardHit, boardDate, boardUpdate, boardGroup, boardStep, boardIndent, boardIp, commentCnt);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

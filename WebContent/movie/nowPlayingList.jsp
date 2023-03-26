@@ -25,6 +25,7 @@
     <script src="${conPath}/js/theme.js" type="text/javascript"></script>
 	<!-- star-rating -->
 	
+	
 	<style>
 		.card img {
 			width: 100px;
@@ -64,8 +65,9 @@
 			
 			<div class="container">
 			
-			
-		    	<h1 class="my-5">현재상영작 영화 리스트</h1>
+				<div class="container">
+				
+		    	<h1 class="my-5 text-center">현재상영작 영화 리스트</h1>
 		    	
 		    	<hr>
 		    	
@@ -121,7 +123,7 @@
 													<div class="col-md-4 d-flex align-items-center">
 														<p>
 															네티즌 평점 : 
-															<input type="text" class="kv-fa rating-loading" name="star5" value="${movie.avgScore}" data-size="xs">
+															<input type="text" class="kv-fa rating-loading" name="star5" value="${movie.avgScore/2}" data-size="xs">
 														</p>
 													</div>
 												</div>
@@ -139,6 +141,7 @@
 		    	
 		    	</div>
 				<!-- 영화리스트 끝 -->
+			    </div>
 			    
 			</div>
 			<jsp:include page="../main/footer.jsp"/>
@@ -157,22 +160,22 @@
             theme: 'krajee-fa',
             filledStar: '<i class="fa fa-star"></i>',
             emptyStar: '<i class="fa fa-star-o"></i>',
-            stars:10,
-            max:10,
-            step:1,
+            stars:5,
+            max:5,
+            step:0.5,
             readonly:true,
             starCaptions:{
             	0: '0',
-            	1: '1',
-            	2: '2',
-            	3: '3',
-            	4: '4',
-            	5: '5',
-            	6: '6',
-            	7: '7',
-            	8: '8',
-            	9: '9',
-            	10: '10'
+            	0.5: '1',
+            	1: '2',
+            	1.5: '3',
+            	2: '4',
+            	2.5: '5',
+            	3: '6',
+            	3.5: '7',
+            	4: '8',
+            	4.5: '9',
+            	5: '10'
             }
         });
         $('.rating,.kv-fa').on(

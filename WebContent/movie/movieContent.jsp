@@ -27,6 +27,7 @@
 	<!-- star-rating -->
 	
 	<style>
+	
 		.myHeight{
 			height:300px;
 		}
@@ -37,16 +38,46 @@
 			width: 20rem; min-width: 10rem;
 		}
 		.personcard{
-			width: 8rem;
+			width: 8.5rem;
 		}
 		.personimg{
 			height:10rem;
 		}
+		#ratingForm{
+			position:absolute;
+			top:100%;
+			left:12.5%;
+			display:none;
+		}
+		#modifyForm{
+			position:absolute;
+			top:60%;
+			left:12.5%;
+			display:none;
+		}
+		
 	</style>
 </head>
 <body>
 
-	<div class="d-flex" id="wrapper"> <!-- bg-black text-white -->
+<c:if test="${not empty ratingWriteError}">
+	<script>
+		alert('${ratingWriteError}');
+	</script>
+</c:if>
+<c:if test="${not empty ratingModifyError}">
+	<script>
+		alert('${ratingModifyError}');
+	</script>
+</c:if>
+<c:if test="${not empty ratingDeleteError}">
+	<script>
+		alert('${ratingDeleteError}');
+	</script>
+</c:if>
+
+
+	<div class="d-flex bg-secondary" id="wrapper"> <!-- bg-black text-white -->
 	
 		<jsp:include page="../main/sidebar.jsp"/>
 		
@@ -56,64 +87,87 @@
 			
 			<div class="container-fluid">
 			    
+			    <div class="container mt-5 card m-auto mw-75 mw-25">
 			    
-			    <div class="container mt-5 card w-75 m-auto">
-			    
-				    <div class="row text-center card-header">
-				    	<h1>${movie.movieTitle}</h1>
+				    <div class="row text-center card-header noto">
+				    	<div class="d-flex justify-content-center align-items-center">
+				    		<h1>
+				    		${movie.movieTitle}
+				    		</h1>
+				    		<c:if test="${movie.state eq 2}">
+				    			&nbsp;
+				    			<a href="${conPath}/nowPlayingList.do">
+				    				<span class="badge badge-sm bg-primary">
+						    			상영중
+						    		</span>
+				    			</a>
+				    		</c:if>
+				    	</div>
+				    	<c:if test="${movie.state eq 1}">
+			    			<a href="${conPath}/upComingList.do">
+			    				<span class="badge bg-secondary">
+				    			개봉예정
+				    			D -
+								<jsp:useBean id="nows" class="java.util.Date"/>
+								<fmt:formatDate var="todays" value="${nows}" pattern="yyyyMMdd000000" />
+								<fmt:parseDate var="nowfmt" value="${todays}" pattern="yyyyMMddHHmmss"/>
+								<fmt:parseNumber var="nowfmtTime" value="${nowfmt.time / (1000*60*60*24)}" integerOnly="true" scope="request"/>
+								<fmt:parseNumber var="dbDtParse" value="${movie.movieDate.time / (1000*60*60*24)}" integerOnly="true" scope="request"/>
+								${dbDtParse - nowfmtTime}
+					    		</span>
+			    			</a>
+			    		</c:if>
 				    	<h5 class="text-truncate">${movie.originalTitle}</h5>
 				    </div>
 				    
 				    <div class="row mx-2">
-				    	<div class="col-md-4">
+				    	<div class="col-md-3">
 				    		<img class="img-fluid myHeight" src="${conPath}/movieImg/${movie.movieImage}">
 				    	</div>
-				    	<div class="col-md-8">
+				    	<div class="col-md-9">
 						  
-						  <c:forEach var="trailer" items="${movie.trailerList}">
-						  	<c:if test="${trailer.trailerName eq '메인 예고편'}">
-						  	  <div class="ratio ratio-16x9 myHeight">
-							 	<iframe src="https://www.youtube.com/embed/${trailer.trailerUrl}" title="YouTube video" allowfullscreen></iframe>
-							  </div>
-						  	</c:if>
-						  </c:forEach>
+					  	  <div class="ratio ratio-16x9 myHeight mw-50">
+						 	<iframe class="mw-50" src="https://www.youtube.com/embed/${movie.trailerList[0].trailerUrl}" title="YouTube video" allowfullscreen></iframe>
+						  </div>
 						  
 				    	</div>
 				    </div>
-				    <div class="d-flex mx-5">
-					    <div class="fs-3">
-							네티즌 평점 : 
+				    <br>
+				    <c:if test="${movie.state ne 1}">
+				    	<div class="d-flex mx-5 justify-content-center">
+						    <div class="fs-3 noto">
+								네티즌 평점 &nbsp;
+						    </div>
+						    <div>
+						    	<input type="text" class="kv-fa rating-loading" name="avgScore" value="${movie.avgScore / 2}" data-size="sm" readonly>
+						    </div>
 					    </div>
-					    <div class="">
-					    	<input type="text" class="kv-fa rating-loading" name="avgScore" value="${movie.avgScore}" data-size="sm" readonly>
-					    </div>
-				    </div>
+				    </c:if>
 				    
 				    <hr>
 				    
 				    <div class="d-flex justify-content-between mx-5" style="padding:0 1rem;">
 				    	<div>
-				    		개요 : &nbsp; 
+				    		<b>개요</b> &nbsp; 
 				    		<c:forEach var="tag" items="${movie.tagList}" varStatus="i">
 							${tag}<c:if test="${i.last eq false}">,</c:if>
 							</c:forEach>
 				    	</div>
 				    	<div>
-				    		개봉일 : 
-				    		${movie.movieDate} 개봉
+				    		${movie.movieDate} <b>개봉</b>
 				    	</div>
 				    </div>
 				    
 				    <div class="row mx-5">
 					    <div>
-				    		상영시간 : 
+				    		<b>상영시간</b> &nbsp;
 				    		${movie.movieRunning}분
 				    	</div>
 				    </div>
 				    
 				    <div class="row mx-5">
 				    	<div>
-				    		감독 : 
+				    		<b>감독</b>  &nbsp;
 							<c:forEach var="person" items="${movie.personList}">
 								<c:if test="${person.casting eq '감독'}">
 									${person.personName}
@@ -125,7 +179,7 @@
 				    
 				    <div class="row mx-5">
 				    	<div>
-				    		출연 : 
+				    		<b>출연</b>  &nbsp;
 							<c:forEach var="person" items="${movie.personList}" varStatus="i">
 								<c:if test="${person.casting ne '감독'}">
 									${person.personName}<c:if test="${i.last eq false}">,</c:if>
@@ -136,20 +190,22 @@
 				    
 				    <div class="row mx-5">
 				    	<div>
-				    		등급 : 
+				    		<b>등급</b>  &nbsp;
 				    		${movie.movieGrade}
 				    	</div>
 				    </div>
 				    
-				    <div class="row mx-5">
-				    	<div>
-				    		흥행 &nbsp; 누적관객 
-					    	${movie.movieAudience}명
-					    	<jsp:useBean id="now" class="java.util.Date"/>
-							<fmt:formatDate var="today" value="${now}" pattern="MM.dd"/>
-							<small>(${today} 기준)</small>
-				    	</div>
-				    </div>
+				    <c:if test="${movie.state ne 1}">
+				    	<div class="row mx-5">
+					    	<div>
+					    		<b>흥행</b> &nbsp; 누적관객 
+						    	${movie.movieAudience}명
+						    	<jsp:useBean id="now" class="java.util.Date"/>
+								<fmt:formatDate var="today" value="${now}" pattern="MM.dd"/>
+								<small>(${today} 기준)</small>
+					    	</div>
+					    </div>
+				    </c:if>
 				    
 				    <hr>
 				    
@@ -172,11 +228,17 @@
 									  <img src="${conPath}/personImg/${person.personImage}" class="card-img-top personimg">
 									  <div class="card-body py-0">
 									  	<p class="card-title my-1">
-									  		${person.personName}
+									  		<b>${person.personName}</b>
 									  	</p>
 									    <p class="card-text my-1">
-									    	${person.casting}
-									    	${person.role}
+									    	<small>
+									    		<b class="text-danger">
+										    	${person.casting}
+										    	</b>
+										    	<c:if test="${not empty person.role}">
+											    	${person.role} 역
+										    	</c:if>
+									    	</small>
 									    </p>
 									  </div>
 									</div>
@@ -185,6 +247,8 @@
 				    		</div>
 				    	</div>
 				    </div>
+				    
+				    <hr>
 				    
 				    <div class="row mx-5">
 				    	<div>
@@ -209,32 +273,147 @@
 				    	</div>
 				    </div>
 				    
-				    <div class="row"></div>
-				    <div class="row"></div>
+				    <hr>
+				    
+				    <div class="row mx-5 mb-5">
+				    	<div>
+				    		<h3>평점</h3>
+				    		 <p class="my-2">네티즌 평점</p>
+			    			<div class="progress" style="height:30px;">
+				    			<div class="progress-bar progress-bar-striped progress-bar-animated" style="width:${movie.avgScore * 10}%">평점 ${movie.avgScore}</div>
+				    		</div>
+				    		<br>
+				    	</div>
+				    	
+			    		<!-- 평점 리스트 -->
+			    		<table class="table caption-top">
+							<caption class="text-black">
+								관람객 평점 <b>${totCnt}</b>건 
+								&nbsp;
+								<button class="write btn btn-outline-dark btn-sm">내 평점 등록</button>
+							</caption>
+							<thead class="mb-2">
+								<tr>
+									<td colspan="2">이 영화에 대한 의견을 들려주세요.</td>
+								</tr>
+							</thead>
+							<tbody class="table-group-divider">
+								<c:forEach var="rating" items="${list}">
+									<tr>
+										<td><input type="text" class="kv-fa rating-loading" value="${rating.ratingScore/2}" data-size="xs" readonly></td>
+										<td class="w-100 d-flex justify-content-between m-0">
+											<div>
+												${rating.ratingContent}
+												<br>
+												<small class="fw-lighter">
+												${rating.userName}(${rating.userId}) &nbsp;
+												| &nbsp;
+												<span style="font-size:12px"><fmt:formatDate value="${rating.ratingDate}" pattern="yyyy-MM-dd HH:mm:ss" /></span>
+												</small>
+											</div>
+											<div>
+												<c:if test="${user.userId eq rating.userId}">
+													<button type="button" class="btn btn-sm btn-outline-primary modify">수정</button>
+													<button type="button" class="btn btn-sm btn-outline-primary" onclick="ratingDelete()">삭제</button>
+													
+													<div class="card w-75" id="modifyForm">
+													  <form action="${conPath}/ratingModify.do">
+													  
+													      <input type="hidden" name="movieId" value="${movie.movieId}">
+													      <input type="hidden" name="userId" value="${user.userId}">
+													      <input type="hidden" name="pageNum" value="${pageNum}">
+													      
+														  <div class="card-header bg-black text-white">
+														    내 평점 수정
+														  </div>
+														  <div class="card-body">
+														  	<div class="justify-content-center">
+																<h3 class="card-title text-center">
+																<b>
+																${movie.movieTitle}
+																</b>
+																<br>
+																<small>${movie.originalTitle}</small>
+																</h3>
+																<div class="d-flex mx-5 justify-content-center">
+																    <div>
+																    	<input type="text" class="kv-fa rating-loading" name="ratingScore" value="${rating.ratingScore / 2}" data-size="lg">
+																    </div>
+															    </div>
+														  	</div>
+														    <hr>
+														    <p class="card title border-0">
+														    	감상평을 남겨주세요. 영화와 상관없는 내용은 약관에 의해 제재를 받을 수 있습니다.
+														    </p>
+														    <textarea name="ratingContent" class="w-100 mb-2" rows="5">${rating.ratingContent}</textarea>
+														    <br>
+														    <br>
+														    <div class="d-flex justify-content-center mb-2">
+															    <input type="button" value="취소" id="modifycancel" class="btn btn-outline-dark w-25 mx-2">
+															    <input type="submit" value="확인" class="btn btn-dark w-25 mx-2">
+														    </div>
+														  </div>
+													  </form>
+													</div>
+													
+												</c:if>
+											</div>
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					    <!-- 평점리스트끝 -->
+			    		 <!-- 평점리스트 페이징 -->
+					    <nav aria-label="Page navigation example">
+						  <ul class="pagination justify-content-center pagination-sm">
+						  	<c:if test="${startPage <= BLOCKSIZE }">
+							    <li class="page-item disabled">
+							    	<a class="page-link">
+								    <span aria-hidden="true">&laquo;</span>
+							    	</a>
+							    </li>
+					   	 	</c:if>
+					   	 	<c:if test="${startPage > BLOCKSIZE }">
+							    <li class="page-item">
+							    	<a class="page-link" href="${conPath}/movieContent.do?pageNum=${startPage-1}">
+								    <span aria-hidden="true">&laquo;</span>
+							    	</a>
+							    </li>
+					    	</c:if>
+					   	 	
+					   	 	<c:forEach var="i" begin="${startPage}" end="${endPage}">
+					   	 		<c:if test="${i eq currentPage }">
+									<li class="page-item active"><a class="page-link">${i}</a></li>
+								</c:if>
+					   	 		<c:if test="${i ne currentPage }">
+									<li class="page-item"><a class="page-link" href="${conPath}/movieContent.do?pageNum=${i}">${i}</a></li>
+								</c:if>
+					   	 	
+					   	 	</c:forEach>
+					   	 	
+					   	 	<c:if test="${endPage < pageCnt }">
+								<li class="page-item">
+									<a class="page-link" href="${conPath}/movieContent.do?pageNum=${endPage+1}">
+									<span aria-hidden="true">&raquo;</span>
+									</a>
+								</li>
+							</c:if>
+					   	 	<c:if test="${endPage >= pageCnt }">
+								<li class="page-item disabled">
+									<a class="page-link">
+									<span aria-hidden="true">&raquo;</span>
+									</a>
+								</li>
+							</c:if>
+						    
+						  </ul>
+						</nav>
+						<!-- 평점리스트 페이징 끝 -->
+				    	
+				    </div>
 			    
-			    </div>
-			    
-			    
-			    
-		        
-			    
-			    
-			    
-			    
-<!-- 		        <form action="asdf.do"> -->
-<!-- 		        	<input type="text" class="kv-fa rating-loading" name="star1" value="3.75" data-size="xl" title=""> -->
-<!-- 			        <br> -->
-<!-- 			        <input type="text" class="kv-fa rating-loading" name="star2" value="2.5" data-size="lg" title=""> -->
-<!-- 			        <br> -->
-<!-- 			        <input type="text" class="kv-fa rating-loading" name="star3" value="1.75" data-size="md" title=""> -->
-<!-- 			        <br> -->
-<!-- 			        <input type="text" class="kv-fa rating-loading" name="star4" value="4" data-size="sm" title=""> -->
-<!-- 			        <br> -->
-<!-- 			        <input type="text" class="kv-fa rating-loading" name="star5" value="2" data-size="xs" title=""> -->
-<!-- 			        <br> -->
-<!-- 			        <input type="submit"> -->
-<!-- 		        </form> -->
-			    
+			    </div><!-- card container 끝 -->
 			    
 			</div>
 			<jsp:include page="../main/footer.jsp"/>
@@ -242,39 +421,144 @@
 		
 	</div>
 			
+	<div class="card w-75" id="ratingForm">
+	  <form action="${conPath}/ratingWrite.do">
+	  
+	      <input type="hidden" id="movieId" name="movieId" value="${movie.movieId}">
+	      <input type="hidden" id="userId" name="userId" value="${user.userId}">
+	      
+		  <div class="card-header bg-black text-white">
+		    내 평점 등록
+		  </div>
+		  <div class="card-body">
+		  	<div class="justify-content-center">
+				<h3 class="card-title text-center">
+				<b>
+				${movie.movieTitle}
+				</b>
+				<br>
+				<small>${movie.originalTitle}</small>
+				</h3>
+				<div class="d-flex mx-5 justify-content-center">
+				    <div>
+				    	<input type="text" class="kv-fa rating-loading" name="ratingScore" value="0" data-size="lg">
+				    </div>
+			    </div>
+		  	</div>
+		    <hr>
+		    <p class="card title border-0">
+		    	감상평을 남겨주세요. 영화와 상관없는 내용은 약관에 의해 제재를 받을 수 있습니다.
+		    </p>
+		    <textarea name="ratingContent" class="w-100 mb-2" rows="5"></textarea>
+		    <br>
+		    <br>
+		    <div class="d-flex justify-content-center mb-2">
+			    <input type="button" value="취소" id="cancel" class="btn btn-outline-dark w-25 mx-2">
+			    <input type="submit" value="확인" class="btn btn-dark w-25 mx-2">
+		    </div>
+		  </div>
+	  </form>
+	</div>
+	
+	<div id="result" style="display:none"></div>
+	
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="${conPath}/js/scripts.js"></script>
 <script>
-	$(document).on('ready', function () {
-		//별점기능 추가
-        $('.kv-fa').rating({
-            theme: 'krajee-fa',
-            filledStar: '<i class="fa fa-star"></i>',
-            emptyStar: '<i class="fa fa-star-o"></i>',
-            stars:10,
-            max:10,
-            step:1,
-            starCaptions:{
-            	0: '0',
-            	1: '1',
-            	2: '2',
-            	3: '3',
-            	4: '4',
-            	5: '5',
-            	6: '6',
-            	7: '7',
-            	8: '8',
-            	9: '9',
-            	10: '10'
-            }
-        });
-        $('.rating,.kv-fa').on(
-                'change', function () {
-                    console.log('Rating selected: ' + $(this).val());
-        });
-    });
+
+function ratingDelete() {
+	
+  if (confirm("평점 삭제를 진행하시겠습니까?")) {
+
+    location.href = "${conPath}/ratingDelete.do?userId=${user.userId}&movieId=${movie.movieId}&pageNum=${pageNum}";
+
+  }
+
+}
+
+$(document).on('ready', function () {
+	
+	$('.modify').click(function(){
+		if ($('#modifyForm').css('display') == 'none') {
+	        $('#modifyForm').css('display', 'block');
+	    }
+	});
+	
+	$('#modifycancel').click(function(){
+		if ($('#modifyForm').css('display') == 'block') {
+	        $('#modifyForm').css('display', 'none');
+	    }
+	});
+	
+	
+	
+	
+	$('.write').click(function(){
+		var user = "<c:out value='${user}'/>";
+		if(!user){
+			alert('평점등록은 로그인한 회원만 가능합니다');
+		}else{
+			var movieId = $('#movieId').val();
+			var userId = $('#userId').val();
+			
+			$.ajax({
+				url : '${conPath}/ratingConfirm.do',
+				type : 'get',
+				data : 'movieId='+movieId+'&userId='+userId,
+				dataType : 'html',
+				success : function(data){
+					$('#result').html(data);
+					if($('#result').text().trim() == '이미존재하는평점'){
+						alert('이미 평점을 등록하셨습니다');
+					}else{
+						if ($('#ratingForm').css('display') == 'none') {
+					        $('#ratingForm').css('display', 'block');
+					    }
+					}
+				}
+			});
+			
+		}
+	});
+	
+	$('#cancel').click(function(){
+		if ($('#ratingForm').css('display') == 'block') {
+	        $('#ratingForm').css('display', 'none');
+	    }
+	});
+	
+	//별점기능 추가
+       $('.kv-fa').rating({
+           theme: 'krajee-fa',
+           filledStar: '<i class="fa fa-star"></i>',
+           emptyStar: '<i class="fa fa-star-o"></i>',
+           stars:5,
+           max:5,
+           step:0.5,
+           starCaptions:{
+           	0: '0',
+           	0.5: '1',
+           	1: '2',
+           	1.5: '3',
+           	2: '4',
+           	2.5: '5',
+           	3: '6',
+           	3.5: '7',
+           	4: '8',
+           	4.5: '9',
+           	5: '10'
+           }
+       });
+       $('.rating,.kv-fa').on(
+               'change', function () {
+                   console.log('Rating selected: ' + $(this).val());
+       });
+       
+       
+ 	  });
+
 </script>
 </body>
 </html>

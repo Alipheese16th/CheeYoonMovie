@@ -91,10 +91,11 @@
 		
 			<jsp:include page="../main/header.jsp"/>
 			
-			<div class="container-fluid">
+			<div class="container">
 			
 		    <div class="container">
-			    <h1>자유게시판</h1>
+		    
+			    <h1 class="my-5 text-center"><a href="${conPath}/boardList.do" class="text-decoration-none text-black">자유게시판</a></h1>
 
 			    <hr>
 			    <div>
@@ -118,6 +119,7 @@
 		    	</div>
 		    	
 		    	<hr>
+		    	전체 댓글 <b style="color:red;">${board.commentCnt}</b>개
 		    	<hr>
 		    	
 		    	<!-- 댓글리스트 시작 -->

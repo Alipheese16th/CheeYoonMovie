@@ -20,7 +20,6 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	<script src="${conPath}/js/register.js"></script>
-	
 </head>
 <body>
 
@@ -32,7 +31,7 @@
           <div class="row g-0">
           
             <div class="col-xl-6 d-none d-xl-block">
-              <img src="${conPath}/img/register2.jpg" class="img-fluid h-100"/>
+              <img src="${conPath}/img/register.jpg" class="img-fluid h-100"/>
             </div>
             
             <div class="col-xl-6">

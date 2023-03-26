@@ -16,6 +16,7 @@
 	<!-- Core theme CSS (includes Bootstrap)-->
 	<link href="${conPath}/css/styles.css" rel="stylesheet" />
 	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+	
 </head>
 <body>
 

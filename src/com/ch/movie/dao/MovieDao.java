@@ -56,7 +56,7 @@ public class MovieDao {
 				int state = rs.getInt("state");
 				int avgScore = rs.getInt("avgScore");
 				dtos.add(new MovieDto(movieId, originalTitle, movieTitle, movieSummary, movieRunning, movieImage, movieDate, movieGrade, 
-						movieAudience, state, avgScore, getTagList(movieId), MovieHasPersonList(movieId), null));
+						movieAudience, state, avgScore, getTagList(movieId), MovieHasPersonList(movieId), getTrailerList(movieId)));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -97,7 +97,7 @@ public class MovieDao {
 				int state = rs.getInt("state");
 				int avgScore = rs.getInt("avgScore");
 				dtos.add(new MovieDto(movieId, originalTitle, movieTitle, movieSummary, movieRunning, movieImage, movieDate, movieGrade, 
-						movieAudience, state, avgScore, getTagList(movieId), MovieHasPersonList(movieId), null));
+						movieAudience, state, avgScore, getTagList(movieId), MovieHasPersonList(movieId), getTrailerList(movieId)));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -253,6 +253,78 @@ public class MovieDao {
 			}
 		}
 		return trailerList;
+	}
+	// 모든 트레일러 리스트 (메인페이지 용)
+	public ArrayList<TrailerDto> getTrailerList(){
+		ArrayList<TrailerDto> trailerList = new ArrayList<TrailerDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM TRAILER ORDER BY MOVIEID DESC";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				String movieId = rs.getString("movieId");
+				String trailerName = rs.getString("trailerName");
+				String trailerUrl = rs.getString("trailerUrl");
+				trailerList.add(new TrailerDto(movieId, trailerName, trailerUrl));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			System.out.println("메인트레일러리스트 가져오는중 에러:"+trailerList);
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return trailerList;
+	}
+	// 관람객 순 현재 상영 영화 (메인페이지용 캐러셀)
+	public ArrayList<MovieDto> nowPlayingByAudience() {
+		ArrayList<MovieDto> dtos = new ArrayList<MovieDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT M.*,(SELECT ROUND(AVG(RATINGSCORE),1) FROM RATING WHERE MOVIEID = M.MOVIEID) as avgScore " + 
+				"  FROM MOVIE M WHERE STATE = 2 ORDER BY MOVIEAUDIENCE DESC";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				String movieId = rs.getString("movieId");
+				String originalTitle = rs.getString("originalTitle");
+				String movieTitle = rs.getString("movieTitle");
+				String movieSummary = rs.getString("movieSummary");
+				int movieRunning = rs.getInt("movieRunning");
+				String movieImage = rs.getString("movieImage");
+				Date movieDate = rs.getDate("movieDate");
+				String movieGrade = rs.getString("movieGrade");
+				int movieAudience = rs.getInt("movieAudience");
+				int state = rs.getInt("state");
+				int avgScore = rs.getInt("avgScore");
+				dtos.add(new MovieDto(movieId, originalTitle, movieTitle, movieSummary, movieRunning, movieImage, movieDate, movieGrade, 
+						movieAudience, state, avgScore, getTagList(movieId), MovieHasPersonList(movieId), getTrailerList(movieId)));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			System.out.println("캐러셀 - 관람객순 현재상영작 리스트 에러:"+dtos);
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return dtos;
 	}
 	
 	

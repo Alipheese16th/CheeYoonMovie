@@ -11,7 +11,7 @@
 <body>
 
 	<table class="table table-hover table-striped caption-top mx-2">
-		<caption>자유롭게 적으십시오</caption>
+		<caption>자유롭게 원하시는 글을 작성하세요</caption>
 		<thead>
 			<tr>
 				<th>번호</th>
@@ -41,6 +41,9 @@
 							</c:if>
 						</c:forEach>
 							${dto.boardTitle }
+						<c:if test="${dto.commentCnt ne 0}">
+							[${dto.commentCnt}]
+						</c:if>
 						<c:if test="${dto.boardHit > 10 }">
 							<img src="${conPath}/img/hot.gif">
 						</c:if>
@@ -68,10 +71,18 @@
     <nav aria-label="Page navigation example">
 	  <ul class="pagination justify-content-center">
 	  	<c:if test="${startPage <= BLOCKSIZE }">
-		    <li class="page-item disabled"><a class="page-link">Previous</a></li>
+		    <li class="page-item disabled">
+			    <a class="page-link">
+			    <span aria-hidden="true">&laquo;</span>
+			    </a>
+		    </li>
    	 	</c:if>
    	 	<c:if test="${startPage > BLOCKSIZE }">
-		    <li class="page-item"><a class="page-link" href="${conPath}/boardList.do?pageNum=${startPage-1}">Previous</a></li>
+		    <li class="page-item">
+			    <a class="page-link" href="${conPath}/boardList.do?pageNum=${startPage-1}">
+			    <span aria-hidden="true">&laquo;</span>
+			    </a>
+		    </li>
     	</c:if>
    	 	
    	 	<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -85,10 +96,18 @@
    	 	</c:forEach>
    	 	
    	 	<c:if test="${endPage < pageCnt }">
-			<li class="page-item"><a class="page-link" href="${conPath}/boardList.do?pageNum=${endPage+1}">Next</a></li>
+			<li class="page-item">
+				<a class="page-link" href="${conPath}/boardList.do?pageNum=${endPage+1}">
+				<span aria-hidden="true">&raquo;</span>
+				</a>
+			</li>
 		</c:if>
    	 	<c:if test="${endPage >= pageCnt }">
-			<li class="page-item disabled"><a class="page-link">Next</a></li>
+			<li class="page-item disabled">
+				<a class="page-link">
+				<span aria-hidden="true">&raquo;</span>
+				</a>
+			</li>
 		</c:if>
 	    
 	  </ul>

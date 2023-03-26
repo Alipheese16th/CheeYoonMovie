@@ -17,6 +17,7 @@
 	<link href="${conPath}/css/styles.css" rel="stylesheet" />
 	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 	
+	
 	<style>
 		.card img {
 			width: 100px;
@@ -47,7 +48,7 @@
 </head>
 <body>
 
-	<div class="d-flex " id="wrapper"> <!-- bg-black text-white -->
+	<div class="d-flex" id="wrapper"> <!-- bg-black text-white -->
 	
 		<jsp:include page="../main/sidebar.jsp"/>
 		
@@ -58,7 +59,9 @@
 			<div class="container">
 			
 			
-		    	<h1 class="my-5">상영예고 영화 리스트</h1>
+				<div class="container">
+				
+		    	<h1 class="my-5 text-center">개봉예정 영화 리스트</h1>
 		    	
 		    	<hr>
 		    	
@@ -138,6 +141,7 @@
 		    	
 		    	</div>
 				<!-- 영화리스트 끝 -->
+			    </div>
 			    
 			</div>
 			<jsp:include page="../main/footer.jsp"/>
