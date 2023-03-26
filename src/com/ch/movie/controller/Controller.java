@@ -67,6 +67,9 @@ public class Controller extends HttpServlet{
 			service = new SearchMovieService();
 			service.execute(request, response);
 			viewPage = "main/search.jsp";
+		
+		}else if(command.equals("/credit.do")){
+			viewPage = "main/credit.jsp";
 			
 		/* * * * * * * * * * * * * * * * * * * * * *
 		 * * * * * * * * 비회원 관련 요청 * * * * * * * * 
@@ -231,7 +234,7 @@ public class Controller extends HttpServlet{
 			viewPage = "movieContent.do";
 			
 		
-		}else if(command.equals("/")){
+		
 		}else if(command.equals("/")){
 		}else if(command.equals("/")){
 		}else if(command.equals("/")){
