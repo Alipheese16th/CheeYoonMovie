@@ -104,7 +104,7 @@
 			    <hr>
 			    <div class="d-flex justify-content-between">
 			    	<div >
-			    		${board.userId}
+			    		${board.userName}(${board.userId})
 			    	</div>
 			    	<div >
 				    	<small>댓글 12</small>
@@ -130,7 +130,7 @@
 			   			
 			   				<div class="card mb-3" id="comment${dto.commentNo}">
 							  <div class="card-header d-flex justify-content-between py-0">
-							  	<div>${dto.userId}</div>
+							  	<div>${dto.userName}(${dto.userId})</div>
 							  	<div>
 							  		<small><fmt:formatDate value="${dto.commentDate}" pattern="yy/MM/dd HH:mm:ss"/></small>
 							  		<c:if test="${user.userId eq dto.userId}">
@@ -188,7 +188,7 @@ onclick="location.href='${conPath}/commentDelete.do?boardNo=${dto.boardNo}&comme
 						댓글 작성 ${user.userName}님
 					  </div>
 					  <div class="card-body">
-					    <form action="${conPath}/commentWrite.do">
+					    <form action="${conPath}/commentWrite.do" method="post">
 					    	<input type="hidden" name="pageNum" id="pageNum" value="${pageNum}">
 					    	<input type="hidden" name="boardNo" value="${board.boardNo}">
 					    	<input type="hidden" name="userId" value="${user.userId}">

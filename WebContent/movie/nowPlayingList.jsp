@@ -123,7 +123,7 @@
 													<div class="col-md-4 d-flex align-items-center">
 														<p>
 															네티즌 평점 : 
-															<input type="text" class="kv-fa rating-loading" name="star5" value="${movie.avgScore/2}" data-size="xs">
+															<input type="text" class="kv-fa rating-loading" value="${movie.avgScore/2}" data-size="sm">
 														</p>
 													</div>
 												</div>
@@ -163,20 +163,8 @@
             stars:5,
             max:5,
             step:0.5,
-            readonly:true,
-            starCaptions:{
-            	0: '0',
-            	0.5: '1',
-            	1: '2',
-            	1.5: '3',
-            	2: '4',
-            	2.5: '5',
-            	3: '6',
-            	3.5: '7',
-            	4: '8',
-            	4.5: '9',
-            	5: '10'
-            }
+            showCaption:false,
+            displayOnly:true,
         });
         $('.rating,.kv-fa').on(
                 'change', function () {

@@ -244,15 +244,15 @@
 				
 				<div class="container my-5 text-center">
 					<p>영화정보의 수정이나 신규생성이 필요한 경우 운영자에게 제보로 문의해주세요</p>
-					<form action="${conPath}/search.do" class="d-flex" role="search">
+					<form action="${conPath}/search.do" class="d-flex forms" role="search">
 						<div class="d-flex w-75 m-auto">
-							<input class="form-control mx-2" type="search" name="q" placeholder="영화 통합 검색">
+							<input class="form-control mx-2" type="search" name="q" id="qs" placeholder="영화 통합 검색">
 							<button class="btn w-25" id="submit" type="submit">검색</button>
 						</div>
 					</form>
 				</div>
 				
-			    </div>
+		    </div>
 			    
 			</div>
 			<jsp:include page="../main/footer.jsp"/>
@@ -265,6 +265,15 @@
 <script src="${conPath}/js/scripts.js"></script>
 <script>
 	$(document).on('ready', function () {
+			
+		$('.forms').submit(function(){
+			var qs = $('#qs').val();
+			if(qs.trim() == ''){
+				alert('빈칸은 검색할 수 없습니다');
+				return false;
+			}
+		});
+		
 		//별점기능 추가
         $('.kv-fa').rating({
             theme: 'krajee-fa',
@@ -273,20 +282,8 @@
             stars:5,
             max:5,
             step:0.5,
-            readonly:true,
-            starCaptions:{
-            	0: '0',
-            	0.5: '1',
-            	1: '2',
-            	1.5: '3',
-            	2: '4',
-            	2.5: '5',
-            	3: '6',
-            	3.5: '7',
-            	4: '8',
-            	4.5: '9',
-            	5: '10'
-            }
+            showCaption:false,
+            displayOnly:true,
         });
         $('.rating,.kv-fa').on(
                 'change', function () {

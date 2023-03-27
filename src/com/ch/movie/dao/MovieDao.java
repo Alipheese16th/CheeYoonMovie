@@ -54,7 +54,7 @@ public class MovieDao {
 				String movieGrade = rs.getString("movieGrade");
 				int movieAudience = rs.getInt("movieAudience");
 				int state = rs.getInt("state");
-				int avgScore = rs.getInt("avgScore");
+				double avgScore = rs.getDouble("avgScore");
 				dtos.add(new MovieDto(movieId, originalTitle, movieTitle, movieSummary, movieRunning, movieImage, movieDate, movieGrade, 
 						movieAudience, state, avgScore, getTagList(movieId), MovieHasPersonList(movieId), getTrailerList(movieId)));
 			}
@@ -95,7 +95,7 @@ public class MovieDao {
 				String movieGrade = rs.getString("movieGrade");
 				int movieAudience = rs.getInt("movieAudience");
 				int state = rs.getInt("state");
-				int avgScore = rs.getInt("avgScore");
+				double avgScore = rs.getDouble("avgScore");
 				dtos.add(new MovieDto(movieId, originalTitle, movieTitle, movieSummary, movieRunning, movieImage, movieDate, movieGrade, 
 						movieAudience, state, avgScore, getTagList(movieId), MovieHasPersonList(movieId), getTrailerList(movieId)));
 			}
@@ -137,7 +137,7 @@ public class MovieDao {
 				String movieGrade = rs.getString("movieGrade");
 				int movieAudience = rs.getInt("movieAudience");
 				int state = rs.getInt("state");
-				int avgScore = rs.getInt("avgScore");
+				double avgScore = rs.getDouble("avgScore");
 				dto = new MovieDto(movieId, originalTitle, movieTitle, movieSummary, movieRunning, movieImage, movieDate, movieGrade, 
 						movieAudience, state, avgScore, getTagList(movieId), MovieHasPersonList(movieId), getTrailerList(movieId));
 			}
@@ -308,7 +308,7 @@ public class MovieDao {
 				String movieGrade = rs.getString("movieGrade");
 				int movieAudience = rs.getInt("movieAudience");
 				int state = rs.getInt("state");
-				int avgScore = rs.getInt("avgScore");
+				double avgScore = rs.getDouble("avgScore");
 				dtos.add(new MovieDto(movieId, originalTitle, movieTitle, movieSummary, movieRunning, movieImage, movieDate, movieGrade, 
 						movieAudience, state, avgScore, getTagList(movieId), MovieHasPersonList(movieId), getTrailerList(movieId)));
 			}
@@ -333,7 +333,7 @@ public class MovieDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT M.*,(SELECT ROUND(AVG(RATINGSCORE),1) FROM RATING WHERE MOVIEID = M.MOVIEID) as avgScore\r\n" + 
+		String sql = "SELECT M.*,(SELECT ROUND(AVG(RATINGSCORE),1) FROM RATING WHERE MOVIEID = M.MOVIEID) as avgScore " + 
 				"  FROM MOVIE M WHERE MOVIETITLE LIKE '%' || ? || '%' ORDER BY MOVIEDATE DESC";
 		try {
 			conn = ds.getConnection();
@@ -351,7 +351,7 @@ public class MovieDao {
 				String movieGrade = rs.getString("movieGrade");
 				int movieAudience = rs.getInt("movieAudience");
 				int state = rs.getInt("state");
-				int avgScore = rs.getInt("avgScore");
+				double avgScore = rs.getDouble("avgScore");
 				dtos.add(new MovieDto(movieId, originalTitle, movieTitle, movieSummary, movieRunning, movieImage, movieDate, movieGrade, 
 						movieAudience, state, avgScore, getTagList(movieId), MovieHasPersonList(movieId), getTrailerList(movieId)));
 			}
@@ -393,7 +393,7 @@ public class MovieDao {
 				String movieGrade = rs.getString("movieGrade");
 				int movieAudience = rs.getInt("movieAudience");
 				int state = rs.getInt("state");
-				int avgScore = rs.getInt("avgScore");
+				double avgScore = rs.getDouble("avgScore");
 				dtos.add(new MovieDto(movieId, originalTitle, movieTitle, movieSummary, movieRunning, movieImage, movieDate, movieGrade, 
 						movieAudience, state, avgScore, getTagList(movieId), MovieHasPersonList(movieId), getTrailerList(movieId)));
 			}
@@ -578,7 +578,7 @@ public class MovieDao {
 					String movieGrade = rs.getString("movieGrade");
 					int movieAudience = rs.getInt("movieAudience");
 					int state = rs.getInt("state");
-					int avgScore = rs.getInt("avgScore");
+					double avgScore = rs.getDouble("avgScore");
 					dtos.add(new MovieDto(movieId, originalTitle, movieTitle, movieSummary, movieRunning, movieImage, movieDate, movieGrade, 
 							movieAudience, state, avgScore, getTagList(movieId), MovieHasPersonList(movieId), null));
 				}

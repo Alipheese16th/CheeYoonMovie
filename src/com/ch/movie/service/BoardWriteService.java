@@ -14,7 +14,7 @@ public class BoardWriteService implements Service {
 		String boardTitle = request.getParameter("boardTitle");
 		String boardContent = request.getParameter("boardContent");
 		String boardIp = request.getRemoteAddr();
-		BoardDto dto = new BoardDto(0, userId, boardTitle, boardContent, 0, null, null, 0, 0, 0, boardIp, 0);
+		BoardDto dto = new BoardDto(0, userId, boardTitle, boardContent, 0, null, null, 0, 0, 0, boardIp, 0, null);
 		BoardDao board = new BoardDao();
 		int result = board.writeBoard(dto);
 		if(result == BoardDao.FAIL) {

@@ -45,7 +45,7 @@
 	                <h4 class="mt-1 mb-5 pb-1">영화 리뷰 사이트</h4>
                 </div>
 
-                <form action="${conPath}/login.do">
+                <form action="${conPath}/login.do" method="post">
                   <p>소유하신 계정으로 로그인하세요</p>
 
                   <div class="form-outline mb-4">

@@ -30,7 +30,7 @@
 		$('tr').css('cursor','pointer').click(function(){
 			var boardNo = $(this).children().eq(0).text();
 			if(!isNaN(boardNo)){
-				location.href = "${conPath}/boardContent.do?boardNo="+boardNo+"&pageNum=${pageNum}";
+				location.href = "${conPath}/boardContent.do?boardNo="+boardNo+"&pageNum=${pageNum}&search=${param.search}&type=${param.type}";
 			}
 		});
 		

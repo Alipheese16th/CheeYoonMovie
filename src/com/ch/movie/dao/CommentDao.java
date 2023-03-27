@@ -34,7 +34,8 @@ public class CommentDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT * FROM " + 
-				"  (SELECT ROW_NUMBER() OVER(ORDER BY COMMENTDATE DESC) RN, C.* FROM COMMENTS C WHERE BOARDNO = ?) " + 
+				"  (SELECT ROW_NUMBER() OVER(ORDER BY COMMENTDATE DESC) RN, USERNAME, C.* " + 
+				"    FROM COMMENTS C, USERS U WHERE C.USERID = U.USERID AND BOARDNO = ?) " + 
 				"  WHERE RN BETWEEN ? AND ?";
 		try {
 			conn = ds.getConnection();
@@ -48,7 +49,8 @@ public class CommentDao {
 				String userId = rs.getString("userId");
 				String commentContent = rs.getString("commentContent");
 				Timestamp commentDate = rs.getTimestamp("commentDate");
-				dtos.add(new CommentDto(commentNo, boardNo, userId, commentContent, commentDate));
+				String userName = rs.getString("userName");
+				dtos.add(new CommentDto(commentNo, boardNo, userId, commentContent, commentDate, userName));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -109,7 +111,7 @@ public class CommentDao {
 				String userId = rs.getString("userId");
 				String commentContent = rs.getString("commentContent");
 				Timestamp commentDate = rs.getTimestamp("commentDate");
-				dto = new CommentDto(commentNo, boardNo, userId, commentContent, commentDate);
+				dto = new CommentDto(commentNo, boardNo, userId, commentContent, commentDate, null);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

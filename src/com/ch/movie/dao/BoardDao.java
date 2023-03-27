@@ -34,8 +34,9 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT * FROM " + 
-				"  (SELECT ROW_NUMBER() OVER(ORDER BY BOARDGROUP DESC, BOARDSTEP) RN ,B.*, " + 
-				"    (SELECT COUNT(*) FROM COMMENTS WHERE BOARDNO = B.BOARDNO) COMMENTCNT  FROM BOARD B) " + 
+				"  (SELECT ROW_NUMBER() OVER(ORDER BY BOARDGROUP DESC, BOARDSTEP) RN,USERNAME ,B.*, " + 
+				"      (SELECT COUNT(*) FROM COMMENTS WHERE BOARDNO = B.BOARDNO) COMMENTCNT  FROM BOARD B, USERS U " + 
+				"      WHERE B.USERID = U.USERID) " + 
 				"  WHERE RN BETWEEN ? AND ?";
 		try {
 			conn = ds.getConnection();
@@ -56,7 +57,8 @@ public class BoardDao {
 				int boardIndent = rs.getInt("boardIndent");
 				String boardIp = rs.getString("boardIp");
 				int commentCnt = rs.getInt("commentCnt");
-				dtos.add(new BoardDto(boardNo, userId, boardTitle, boardContent, boardHit, boardDate, boardUpdate, boardGroup, boardStep, boardIndent, boardIp, commentCnt));
+				String userName = rs.getString("userName");
+				dtos.add(new BoardDto(boardNo, userId, boardTitle, boardContent, boardHit, boardDate, boardUpdate, boardGroup, boardStep, boardIndent, boardIp, commentCnt,userName));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -86,7 +88,7 @@ public class BoardDao {
 			total = rs.getInt(1);
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
-			System.out.println("전체 자게 글갯수 에러:"+total);
+			System.out.println("자유게시판 페이징 에러:"+total);
 		}finally {
 			try {
 				if(rs!=null)rs.close();
@@ -154,8 +156,8 @@ public class BoardDao {
 		Connection 		   conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet 			 rs = null;
-		String sql = "SELECT B.*,(SELECT COUNT(*) FROM COMMENTS WHERE BOARDNO = B.BOARDNO) COMMENTCNT " + 
-				"  FROM BOARD B WHERE BOARDNO = ?";
+		String sql = "SELECT USERNAME, B.*,(SELECT COUNT(*) FROM COMMENTS WHERE BOARDNO = B.BOARDNO) COMMENTCNT " + 
+				"  FROM BOARD B, USERS U WHERE B.USERID = U.USERID AND BOARDNO = ?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -173,7 +175,8 @@ public class BoardDao {
 				int boardIndent = rs.getInt("boardIndent");
 				String boardIp = rs.getString("boardIp");
 				int commentCnt = rs.getInt("commentCnt");
-				dto = new BoardDto(boardNo, userId, boardTitle, boardContent, boardHit, boardDate, boardUpdate, boardGroup, boardStep, boardIndent, boardIp, commentCnt);
+				String userName = rs.getString("userName");
+				dto = new BoardDto(boardNo, userId, boardTitle, boardContent, boardHit, boardDate, boardUpdate, boardGroup, boardStep, boardIndent, boardIp, commentCnt, userName);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -302,5 +305,324 @@ public class BoardDao {
 		}
 		return result;
 	}
+	
+	
+	// 글 전체 검색
+	public ArrayList<BoardDto> searchBoardFull(String searchFull, int startRow, int endRow) {
+		ArrayList<BoardDto> dtos = new ArrayList<BoardDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM " + 
+				"  (SELECT ROW_NUMBER() OVER(ORDER BY BOARDGROUP DESC, BOARDSTEP) RN,USERNAME, B.*, " + 
+				"      (SELECT COUNT(*) FROM COMMENTS WHERE BOARDNO = B.BOARDNO) COMMENTCNT  FROM BOARD B, USERS U " + 
+				"      WHERE B.USERID = U.USERID AND ( " + 
+				"          BOARDTITLE LIKE '%' || ? || '%' " + 
+				"          OR BOARDCONTENT LIKE '%' || ? || '%' " + 
+				"          OR USERNAME LIKE '%' || ? || '%')) " + 
+				"  WHERE RN BETWEEN ? AND ?";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchFull);
+			pstmt.setString(2, searchFull);
+			pstmt.setString(3, searchFull);
+			pstmt.setInt(4, startRow);
+			pstmt.setInt(5, endRow);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int boardNo = rs.getInt("boardNo");
+				String userId = rs.getString("userId");
+				String boardTitle = rs.getString("boardTitle");
+				String boardContent = rs.getString("boardContent");
+				int boardHit = rs.getInt("boardHit");
+				Timestamp boardDate = rs.getTimestamp("boardDate");
+				Timestamp boardUpdate = rs.getTimestamp("boardUpdate");
+				int boardGroup = rs.getInt("boardGroup");
+				int boardStep = rs.getInt("boardStep");
+				int boardIndent = rs.getInt("boardIndent");
+				String boardIp = rs.getString("boardIp");
+				int commentCnt = rs.getInt("commentCnt");
+				String userName = rs.getString("userName");
+				dtos.add(new BoardDto(boardNo, userId, boardTitle, boardContent, boardHit, boardDate, boardUpdate, boardGroup, boardStep, boardIndent, boardIp, commentCnt, userName));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			System.out.println("자유글 검색(전체) 에러:"+searchFull);
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return dtos;
+	}
+	// 글 전체 검색 갯수(페이징)
+	public int totalsearchFull(String searchFull) {
+		int total = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT COUNT(*) FROM BOARD B, USERS U " + 
+				"      WHERE B.USERID = U.USERID AND " + 
+				"          (BOARDTITLE LIKE '%' || ? || '%' " + 
+				"          OR BOARDCONTENT LIKE '%' || ? || '%' " + 
+				"          OR USERNAME LIKE '%' || ? || '%')";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchFull);
+			pstmt.setString(2, searchFull);
+			pstmt.setString(3, searchFull);
+			rs = pstmt.executeQuery();
+			rs.next();
+			total = rs.getInt(1);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			System.out.println("글 전체검색 페이징 에러:"+total);
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return total;
+	}
+	
+	// 글제목으로 글 검색
+	public ArrayList<BoardDto> searchBoardTitle(String searchTitle, int startRow, int endRow) {
+		ArrayList<BoardDto> dtos = new ArrayList<BoardDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM " + 
+				"  (SELECT ROW_NUMBER() OVER(ORDER BY BOARDGROUP DESC, BOARDSTEP) RN,USERNAME ,B.*, " + 
+				"      (SELECT COUNT(*) FROM COMMENTS WHERE BOARDNO = B.BOARDNO) COMMENTCNT  FROM BOARD B, USERS U " + 
+				"      WHERE B.USERID = U.USERID AND BOARDTITLE LIKE '%' || ? || '%') " + 
+				"  WHERE RN BETWEEN ? AND ?";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchTitle);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int boardNo = rs.getInt("boardNo");
+				String userId = rs.getString("userId");
+				String boardTitle = rs.getString("boardTitle");
+				String boardContent = rs.getString("boardContent");
+				int boardHit = rs.getInt("boardHit");
+				Timestamp boardDate = rs.getTimestamp("boardDate");
+				Timestamp boardUpdate = rs.getTimestamp("boardUpdate");
+				int boardGroup = rs.getInt("boardGroup");
+				int boardStep = rs.getInt("boardStep");
+				int boardIndent = rs.getInt("boardIndent");
+				String boardIp = rs.getString("boardIp");
+				int commentCnt = rs.getInt("commentCnt");
+				String userName = rs.getString("userName");
+				dtos.add(new BoardDto(boardNo, userId, boardTitle, boardContent, boardHit, boardDate, boardUpdate, boardGroup, boardStep, boardIndent, boardIp, commentCnt, userName));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			System.out.println("자유글 검색(제목) 에러:"+searchTitle);
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return dtos;
+	}
+	// 글 제목 검색 갯수(페이징)
+	public int totalsearchTitle(String searchTitle) {
+		int total = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT COUNT(*) FROM BOARD B, USERS U " + 
+				"      WHERE B.USERID = U.USERID AND BOARDTITLE LIKE '%' || ? || '%'";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchTitle);
+			rs = pstmt.executeQuery();
+			rs.next();
+			total = rs.getInt(1);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			System.out.println("글 제목검색 페이징 에러:"+total);
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return total;
+	}
+	
+	// 글 내용으로 글 검색
+	public ArrayList<BoardDto> searchBoardContent(String searchContent, int startRow, int endRow) {
+		ArrayList<BoardDto> dtos = new ArrayList<BoardDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM " + 
+				"  (SELECT ROW_NUMBER() OVER(ORDER BY BOARDGROUP DESC, BOARDSTEP) RN,USERNAME ,B.*, " + 
+				"      (SELECT COUNT(*) FROM COMMENTS WHERE BOARDNO = B.BOARDNO) COMMENTCNT  FROM BOARD B, USERS U " + 
+				"      WHERE B.USERID = U.USERID AND BOARDCONTENT LIKE '%' || ? || '%') " + 
+				"  WHERE RN BETWEEN ? AND ?";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchContent);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int boardNo = rs.getInt("boardNo");
+				String userId = rs.getString("userId");
+				String boardTitle = rs.getString("boardTitle");
+				String boardContent = rs.getString("boardContent");
+				int boardHit = rs.getInt("boardHit");
+				Timestamp boardDate = rs.getTimestamp("boardDate");
+				Timestamp boardUpdate = rs.getTimestamp("boardUpdate");
+				int boardGroup = rs.getInt("boardGroup");
+				int boardStep = rs.getInt("boardStep");
+				int boardIndent = rs.getInt("boardIndent");
+				String boardIp = rs.getString("boardIp");
+				int commentCnt = rs.getInt("commentCnt");
+				String userName = rs.getString("userName");
+				dtos.add(new BoardDto(boardNo, userId, boardTitle, boardContent, boardHit, boardDate, boardUpdate, boardGroup, boardStep, boardIndent, boardIp, commentCnt, userName));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			System.out.println("자유글 검색(본문) 에러:"+searchContent);
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return dtos;
+	}
+	
+	// 작성자 이름으로 글 검색
+	public ArrayList<BoardDto> searchBoardUserName(String searchUserName, int startRow, int endRow) {
+		ArrayList<BoardDto> dtos = new ArrayList<BoardDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM " + 
+				"  (SELECT ROW_NUMBER() OVER(ORDER BY BOARDGROUP DESC, BOARDSTEP) RN,USERNAME ,B.*, " + 
+				"      (SELECT COUNT(*) FROM COMMENTS WHERE BOARDNO = B.BOARDNO) COMMENTCNT  FROM BOARD B, USERS U " + 
+				"      WHERE B.USERID = U.USERID AND USERNAME LIKE '%' || ? || '%') " + 
+				"  WHERE RN BETWEEN ? AND ?";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchUserName);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int boardNo = rs.getInt("boardNo");
+				String userId = rs.getString("userId");
+				String boardTitle = rs.getString("boardTitle");
+				String boardContent = rs.getString("boardContent");
+				int boardHit = rs.getInt("boardHit");
+				Timestamp boardDate = rs.getTimestamp("boardDate");
+				Timestamp boardUpdate = rs.getTimestamp("boardUpdate");
+				int boardGroup = rs.getInt("boardGroup");
+				int boardStep = rs.getInt("boardStep");
+				int boardIndent = rs.getInt("boardIndent");
+				String boardIp = rs.getString("boardIp");
+				int commentCnt = rs.getInt("commentCnt");
+				String userName = rs.getString("userName");
+				dtos.add(new BoardDto(boardNo, userId, boardTitle, boardContent, boardHit, boardDate, boardUpdate, boardGroup, boardStep, boardIndent, boardIp, commentCnt, userName));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			System.out.println("자유글 검색(작성자) 에러:"+searchUserName);
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return dtos;
+	}
+	
+	
+	// 댓글로 글 검색
+//	public ArrayList<BoardDto> searchComment(String searchComment, int startRow, int endRow) {
+//		ArrayList<BoardDto> dtos = new ArrayList<BoardDto>();
+//		Connection conn = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		String sql = "SELECT * FROM " + 
+//				"  (SELECT USERNAME, B.*, COMMENTNO,COMMENTCONTENT,COMMENTDATE, (SELECT COUNT(*) FROM COMMENTS WHERE BOARDNO = B.BOARDNO) COMMENTCNT, " + 
+//				"          ROW_NUMBER() OVER(ORDER BY COMMENTDATE DESC) RN " + 
+//				"    FROM COMMENTS C, BOARD B, USERS U " + 
+//				"    WHERE C.BOARDNO = B.BOARDNO AND C.USERID = U.USERID AND COMMENTCONTENT LIKE '' || ? || '') " + 
+//				"  WHERE RN BETWEEN ? AND ?";
+//		try {
+//			conn = ds.getConnection();
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setString(1, searchComment);
+//			pstmt.setInt(2, startRow);
+//			pstmt.setInt(3, endRow);
+//			rs = pstmt.executeQuery();
+//			while(rs.next()) {
+//				int boardNo = rs.getInt("boardNo");
+//				String userId = rs.getString("userId");
+//				String boardTitle = rs.getString("boardTitle");
+//				String boardContent = rs.getString("boardContent");
+//				int boardHit = rs.getInt("boardHit");
+//				Timestamp boardDate = rs.getTimestamp("boardDate");
+//				Timestamp boardUpdate = rs.getTimestamp("boardUpdate");
+//				int boardGroup = rs.getInt("boardGroup");
+//				int boardStep = rs.getInt("boardStep");
+//				int boardIndent = rs.getInt("boardIndent");
+//				String boardIp = rs.getString("boardIp");
+//				int commentCnt = rs.getInt("commentCnt");
+//				String userName = rs.getString("userName");
+//				dtos.add(new BoardDto(boardNo, userId, boardTitle, boardContent, boardHit, boardDate, boardUpdate, boardGroup, boardStep, boardIndent, boardIp, commentCnt, userName));
+//			}
+//		} catch (SQLException e) {
+//			System.out.println(e.getMessage());
+//			System.out.println("자유글 검색(작성자) 에러:"+searchComment);
+//		}finally {
+//			try {
+//				if(rs!=null)rs.close();
+//				if(pstmt!=null)pstmt.close();
+//				if(conn!=null)conn.close();
+//			} catch (SQLException e) {
+//				System.out.println(e.getMessage());
+//			}
+//		}
+//		return dtos;
+//	}
+	
+	
+	
 	
 }

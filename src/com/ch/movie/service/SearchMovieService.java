@@ -9,7 +9,7 @@ public class SearchMovieService implements Service {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		String q = request.getParameter("q");
+		String q = request.getParameter("q").trim();
 		MovieDao movie = new MovieDao();
 		request.setAttribute("titleResultList", movie.searchMovieTitle(q));
 		request.setAttribute("tagResultList", movie.searchMovieTag(q));

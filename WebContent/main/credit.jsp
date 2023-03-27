@@ -38,11 +38,15 @@
 						<div class="col-md-6 col-xl-5">
 							<h1 class="fw-bold text-info">신치윤</h1>
 							<p class="text-muted">공부중인 개발자 지망생</p>
-							<p>asdfasdfasdfasdfasfdasdfasasdfasdfasdfasdfasdf
-							asdfasdfasfdasdfasasdfasdfasdfasdfasfdasdfasdfasdf
-							asdfassadfasdfasdfasdfasadsfasdfasdfasdfasfdas</p>
+							
+							<p>방문해 주셔서 감사합니다.<br>
+							본 웹사이트는 이젠 아카데미에서 운영하는<br>
+							"디지털컨버전스 풀스택 웹개발자 과정"<br>
+							훈련생 신치윤이 만든 첫 개별 프로젝트입니다.<br>
+							 미흡하지만 열심히 만들었습니다. 감사합니다.</p>
+							 
 							<p class="text-muted">email | shwoo1103@gmail.com</p>
-							<a href="https://www.facebook.com/cheeyuns" class="btn btn-outline-info mt-3 rounded-pill">프로필 보기</a>
+							<a href="https://github.com/Alipheese16th" target="_blank" class="btn btn-outline-info mt-3 rounded-pill">프로필 보기</a>
 						</div>
 					</div>
 				</section>

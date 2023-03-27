@@ -7,15 +7,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
-<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 <style>
-/* #adminLogin{ */
-/* 	position:fixed; */
-/* 	bottom:0%; */
-/* 	left:12.5%; */
-/* 	display:none; */
-/* } */
+#adminLogin{
+	position:fixed;
+	bottom:10%;
+	left:25%;
+	display:none;
+	z-index:10;
+}
 
 </style>
 
@@ -39,62 +38,50 @@
 	    </div>
 	    
 	    <!-- 관리자로그인창 -->
-<!-- 	    <div class="card w-75" id="adminLogin"> -->
-<%-- 		  <form action="${conPath}/adminLogin.do"> --%>
-		  
-<!-- 			  <div class="card-header bg-black text-white"> -->
-<!-- 			   관리자 로그인 -->
-<!-- 			  </div> -->
-<!-- 			  <div class="card-body"> -->
-<!-- 			  	<div class="justify-content-center"> -->
-<!-- 					<h3 class="card-title text-center"> -->
-<!-- 					<b> -->
-<!-- 					asdfasdf -->
-<!-- 					</b> -->
-<!-- 					<br> -->
-<!-- 					<small>asdfasfd</small> -->
-<!-- 					</h3> -->
-<!-- 					<div class="d-flex mx-5 justify-content-center"> -->
-<!-- 						<p>asdfasdf</p> -->
-<!-- 				    </div> -->
-<!-- 			  	</div> -->
-<!-- 			    <hr> -->
-<!-- 			    <p class="card title border-0"> -->
-<!-- 			    	감상평을 남겨주세요. 영화와 상관없는 내용은 약관에 의해 제재를 받을 수 있습니다. -->
-<!-- 			    </p> -->
-<!-- 			    <textarea name="ratingContent" class="w-100 mb-2" rows="5">asdfasdfasdf</textarea> -->
-<!-- 			    <br> -->
-<!-- 			    <br> -->
-<!-- 			    <div class="d-flex justify-content-center mb-2"> -->
-<!-- 				    <input type="button" value="취소" id="loginCancel" class="btn btn-outline-dark w-25 mx-2"> -->
-<!-- 				    <input type="submit" value="확인" class="btn btn-dark w-25 mx-2"> -->
-<!-- 			    </div> -->
-<!-- 			  </div> -->
-<!-- 		  </form> -->
-<!-- 		</div> -->
+	    <div class="card w-50" id="adminLogin">
+		  <form action="${conPath}/adminLogin.do">
+	  
+			  <div class="card-header bg-black text-white">
+			  	 관리자 로그인
+			  </div>
+			  <div class="card-body text-black">
+			  	<div class="d-flex justify-content-center">
+			  		<p class="me-3">관리자 아이디</p>
+			  		<input type="text" name="adminId" class="form-control form-control-sm w-50 h-50" required/>
+			  	</div>
+			  	<div class="d-flex justify-content-center">
+			  		<p class="me-3">관리자 비밀번호</p>
+			  		<input type="password" name="adminPw" class="form-control form-control-sm w-50 h-50" required/>
+			  	</div>
+			    <hr>
+			    <div class="d-flex justify-content-center mb-2">
+				    <input type="button" value="취소" id="loginCancel" class="btn btn-outline-dark w-25 mx-2">
+				    <input type="submit" value="확인" class="btn btn-dark w-25 mx-2">
+			    </div>
+			    
+			  </div>
+		  </form>
+		</div>
 	    <!-- 관리자로그인창 끝 -->
-	    
 	    
 	</footer>
 	
 <script>
-// $(function(){
+$(function(){
 	
-// 	$('.adminLogin').click(function(){
-// 		if ($('#adminLogin').css('display') == 'none') {
-// 	        $('#adminLogin').css('display', 'block');
-// 	    }
-// 	});
+	$('.adminLogin').click(function(){
+		if ($('#adminLogin').css('display') == 'none') {
+	        $('#adminLogin').css('display', 'block');
+	    }
+	});
 	
-// 	$('#loginCancel').click(function(){
-// 		if ($('#adminLogin').css('display') == 'block') {
-// 	        $('#adminLogin').css('display', 'none');
-// 	    }
-// 	});
+	$('#loginCancel').click(function(){
+		if ($('#adminLogin').css('display') == 'block') {
+	        $('#adminLogin').css('display', 'none');
+	    }
+	});
 	
-// });
-
+});
 </script>
-
 </body>
 </html>

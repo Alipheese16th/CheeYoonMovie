@@ -21,6 +21,12 @@ public class RatingDto {
 		this.userName = userName;
 	}
 	
+	public int getRatingScore() {
+		return ratingScore;
+	}
+	public void setRatingScore(int ratingScore) {
+		this.ratingScore = ratingScore;
+	}
 	public String getUserName() {
 		return userName;
 	}
@@ -44,12 +50,6 @@ public class RatingDto {
 	}
 	public void setRatingContent(String ratingContent) {
 		this.ratingContent = ratingContent;
-	}
-	public int getRatingScore() {
-		return ratingScore;
-	}
-	public void setRatingScore(int ratingScore) {
-		this.ratingScore = ratingScore;
 	}
 	public Timestamp getRatingDate() {
 		return ratingDate;

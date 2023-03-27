@@ -15,6 +15,7 @@
 	<link rel="icon" type="image/x-icon" href="${conPath}/assets/favicon.ico" />
 	<!-- Core theme CSS (includes Bootstrap)-->
 	<link href="${conPath}/css/styles.css" rel="stylesheet" />
+	
 	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 	
     <!-- 별점기능추가 -->
@@ -35,7 +36,7 @@
 			width:200px;
 		}
 		.trailercard{
-			width: 20rem; min-width: 10rem;
+			width: 24rem; min-width: 10rem;
 		}
 		.personcard{
 			width: 8.5rem;
@@ -44,16 +45,18 @@
 			height:10rem;
 		}
 		#ratingForm{
-			position:absolute;
-			top:100%;
+			position:fixed;
+			bottom:30%;
 			left:12.5%;
 			display:none;
+			z-index:9;
 		}
 		#modifyForm{
-			position:absolute;
-			top:60%;
+			position:fixed;
+			bottom:30%;
 			left:12.5%;
 			display:none;
+			z-index:8;
 		}
 		
 	</style>
@@ -134,13 +137,16 @@
 				    </div>
 				    <br>
 				    <c:if test="${movie.state ne 1}">
-				    	<div class="d-flex mx-5 justify-content-center">
-						    <div class="fs-3 noto">
+				    	<div class="d-flex mx-5 justify-content-center align-items-center">
+						    <div class="fs-3">
 								네티즌 평점 &nbsp;
 						    </div>
 						    <div>
-						    	<input type="text" class="kv-fa rating-loading" name="avgScore" value="${movie.avgScore / 2}" data-size="sm" readonly>
+						    	<input type="text" class="kv-fa rating-loading" value="${movie.avgScore / 2}" data-size="sm">
 						    </div>
+						    <div class="progress w-50 ms-3 mt-1" style="height:25px">
+				    			<div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" style="width:${movie.avgScore * 10}%">평점 ${movie.avgScore}</div>
+				    		</div>
 					    </div>
 				    </c:if>
 				    
@@ -253,17 +259,17 @@
 				    <div class="row mx-5">
 				    	<div>
 				    		<h3>동영상</h3>
-				    		<div class="d-flex ">
+				    		<div class="d-flex row g-3">
 				    			<c:forEach var="trailer" items="${movie.trailerList}">
 				    			
-				    				  <div class="card trailercard">
+				    				  <div class="card trailercard border-0">
 										  <div class="ratio ratio-4x3">
 											 <iframe src="https://www.youtube.com/embed/${trailer.trailerUrl}?rel=0" class="card-img" allowfullscreen></iframe>
 										  </div>
 										  <div class="card-body">
-										    <p class="card-title text-center">
+										    <h4 class="card-title text-center">
 										    	${trailer.trailerName}
-										    </p>
+										    </h4>
 										  </div>
 									  </div>
 									  
@@ -287,12 +293,12 @@
 				    	
 			    		<!-- 평점 리스트 -->
 			    		<table class="table caption-top">
-							<caption class="text-black">
+							<caption class="text-black py-3">
 								관람객 평점 <b>${totCnt}</b>건 
 								&nbsp;
 								<button class="write btn btn-outline-dark btn-sm">내 평점 등록</button>
 							</caption>
-							<thead class="mb-2">
+							<thead>
 								<tr>
 									<td colspan="2">이 영화에 대한 의견을 들려주세요.</td>
 								</tr>
@@ -300,7 +306,7 @@
 							<tbody class="table-group-divider">
 								<c:forEach var="rating" items="${list}">
 									<tr>
-										<td><input type="text" class="kv-fa rating-loading" value="${rating.ratingScore/2}" data-size="xs" readonly></td>
+										<td><input type="text" class="kv-fa rating-loading" value="${rating.ratingScore/2}" data-size="xs"></td>
 										<td class="w-100 d-flex justify-content-between m-0">
 											<div>
 												${rating.ratingContent}
@@ -317,7 +323,7 @@
 													<button type="button" class="btn btn-sm btn-outline-primary" onclick="ratingDelete()">삭제</button>
 													
 													<div class="card w-75" id="modifyForm">
-													  <form action="${conPath}/ratingModify.do">
+													  <form action="${conPath}/ratingModify.do" method="post">
 													  
 													      <input type="hidden" name="movieId" value="${movie.movieId}">
 													      <input type="hidden" name="userId" value="${user.userId}">
@@ -337,7 +343,7 @@
 																</h3>
 																<div class="d-flex mx-5 justify-content-center">
 																    <div>
-																    	<input type="text" class="kv-fa rating-loading" name="ratingScore" value="${rating.ratingScore / 2}" data-size="lg">
+																    	<input type="text" class="kv-fas rating-loading" name="ratingScore" value="${rating.ratingScore / 2}" data-size="lg">
 																    </div>
 															    </div>
 														  	</div>
@@ -422,7 +428,7 @@
 	</div>
 			
 	<div class="card w-75" id="ratingForm">
-	  <form action="${conPath}/ratingWrite.do">
+	  <form action="${conPath}/ratingWrite.do" method="post">
 	  
 	      <input type="hidden" id="movieId" name="movieId" value="${movie.movieId}">
 	      <input type="hidden" id="userId" name="userId" value="${user.userId}">
@@ -441,7 +447,7 @@
 				</h3>
 				<div class="d-flex mx-5 justify-content-center">
 				    <div>
-				    	<input type="text" class="kv-fa rating-loading" name="ratingScore" value="0" data-size="lg">
+				    	<input type="text" class="kv-fas rating-loading" name="ratingScore" value="0" data-size="lg">
 				    </div>
 			    </div>
 		  	</div>
@@ -530,14 +536,25 @@ $(document).on('ready', function () {
 	});
 	
 	//별점기능 추가
-       $('.kv-fa').rating({
-           theme: 'krajee-fa',
-           filledStar: '<i class="fa fa-star"></i>',
-           emptyStar: '<i class="fa fa-star-o"></i>',
-           stars:5,
-           max:5,
-           step:0.5,
-           starCaptions:{
+    $('.kv-fa').rating({
+        theme: 'krajee-fa',
+        filledStar: '<i class="fa fa-star"></i>',
+        emptyStar: '<i class="fa fa-star-o"></i>',
+        stars:5,
+        max:5,
+        step:0.5,
+        showCaption:false,
+        displayOnly:true,
+    });
+	
+    $('.kv-fas').rating({
+        theme: 'krajee-fa',
+        filledStar: '<i class="fa fa-star"></i>',
+        emptyStar: '<i class="fa fa-star-o"></i>',
+        stars:5,
+        max:5,
+        step:0.5,
+        starCaptions:{
            	0: '0',
            	0.5: '1',
            	1: '2',
@@ -550,14 +567,14 @@ $(document).on('ready', function () {
            	4.5: '9',
            	5: '10'
            }
-       });
-       $('.rating,.kv-fa').on(
-               'change', function () {
-                   console.log('Rating selected: ' + $(this).val());
-       });
+    });
+
+    $('.rating,.kv-fa,.kv-fas').on(
+            'change', function () {
+                console.log('Rating selected: ' + $(this).val());
+    });
        
-       
- 	  });
+});
 
 </script>
 </body>

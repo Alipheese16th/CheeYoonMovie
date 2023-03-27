@@ -144,7 +144,7 @@
 				</div>
 
                 <div class="d-flex justify-content-end pt-3">
-					<input type="reset" value="취소" class="btn btn-outline-dark btn-lg" onclick="history.back()">
+					<input type="reset" value="취소" class="btn btn-outline-dark btn-lg" onclick="location.href='${conPath}/main.do'">
 					<input type="submit" value="회원가입" class="btn btn-dark btn-lg ms-2">
                 </div>
 

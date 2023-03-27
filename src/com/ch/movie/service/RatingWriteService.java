@@ -14,7 +14,7 @@ public class RatingWriteService implements Service {
 		String movieId = request.getParameter("movieId");
 		String userId = request.getParameter("userId");
 		String ratingScoreStr = request.getParameter("ratingScore");
-		int ratingScore = 2 * Integer.parseInt(ratingScoreStr);
+		int ratingScore = (int)(2*Double.parseDouble(ratingScoreStr));
 		String ratingContent = request.getParameter("ratingContent");
 		
 		RatingDao rating = new RatingDao();

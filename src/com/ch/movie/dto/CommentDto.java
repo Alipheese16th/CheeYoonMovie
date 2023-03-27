@@ -8,14 +8,27 @@ public class CommentDto {
 	private String userId;
 	private String commentContent;
 	private Timestamp commentDate;
+	private String userName;
 	
-	public CommentDto(int commentNo, int boardNo, String userId, String commentContent, Timestamp commentDate) {
+	public CommentDto(int commentNo, int boardNo, String userId, String commentContent, Timestamp commentDate,
+			String userName) {
+		super();
 		this.commentNo = commentNo;
 		this.boardNo = boardNo;
 		this.userId = userId;
 		this.commentContent = commentContent;
 		this.commentDate = commentDate;
+		this.userName = userName;
 	}
+	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	public int getCommentNo() {
 		return commentNo;
 	}
@@ -46,9 +59,12 @@ public class CommentDto {
 	public void setCommentDate(Timestamp commentDate) {
 		this.commentDate = commentDate;
 	}
+
 	@Override
 	public String toString() {
 		return "CommentDto [commentNo=" + commentNo + ", boardNo=" + boardNo + ", userId=" + userId
-				+ ", commentContent=" + commentContent + ", commentDate=" + commentDate + "]";
+				+ ", commentContent=" + commentContent + ", commentDate=" + commentDate + ", userName=" + userName
+				+ "]";
 	}
+	
 }

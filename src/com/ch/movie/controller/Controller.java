@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ch.movie.service.AdminLoginService;
 import com.ch.movie.service.BoardContentService;
 import com.ch.movie.service.BoardDeleteService;
 import com.ch.movie.service.BoardListService;
@@ -31,6 +32,7 @@ import com.ch.movie.service.SearchMovieService;
 import com.ch.movie.service.Service;
 import com.ch.movie.service.UserEmailConfirmService;
 import com.ch.movie.service.UserIdConfirmService;
+import com.ch.movie.service.UserListService;
 import com.ch.movie.service.UserLoginService;
 import com.ch.movie.service.UserLogoutService;
 import com.ch.movie.service.UserModifyService;
@@ -234,10 +236,14 @@ public class Controller extends HttpServlet{
 		/* * * * * * * * * * * * * * * * * * * * * *
 		 * * * * * * * * admin 관련 요청  * * * * * * *
 		 * * * * * * * * * * * * * * * * * * * * * */
-		}else if(command.equals("/adminLoginView.do")){
-			viewPage = "admin/adminLogin.jsp";
+		}else if(command.equals("/adminLogin.do")){
+			service = new AdminLoginService();
+			viewPage = "userList.do";
 			
-		}else if(command.equals("/")){
+		}else if(command.equals("/userList.do")){
+			service = new UserListService();
+			service.execute(request, response);
+			viewPage = "admin/userList.jsp ";
 			
 		}else if(command.equals("/")){
 		}else if(command.equals("/")){

@@ -14,7 +14,7 @@ public class CommentWriteService implements Service {
 		int boardNo = Integer.parseInt(boardNoStr);
 		String userId = request.getParameter("userId");
 		String commentContent = request.getParameter("commentContent");
-		CommentDto dto = new CommentDto(0, boardNo, userId, commentContent, null);
+		CommentDto dto = new CommentDto(0, boardNo, userId, commentContent, null, null);
 		CommentDao comment = new CommentDao();
 		int result = comment.writeComment(dto);
 		if(result != CommentDao.SUCCESS) {

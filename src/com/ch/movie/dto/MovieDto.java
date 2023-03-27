@@ -14,13 +14,13 @@ public class MovieDto {
 	private String movieGrade;
 	private int movieAudience;
 	private int state;
-	private int avgScore;
+	private double avgScore;
 	private ArrayList<String> tagList;
 	private ArrayList<PersonDto> personList;
 	private ArrayList<TrailerDto> trailerList;
 	
 	public MovieDto(String movieId, String originalTitle, String movieTitle, String movieSummary, int movieRunning,
-			String movieImage, Date movieDate, String movieGrade, int movieAudience, int state, int avgScore,
+			String movieImage, Date movieDate, String movieGrade, int movieAudience, int state, double avgScore,
 			ArrayList<String> tagList, ArrayList<PersonDto> personList, ArrayList<TrailerDto> trailerList) {
 		super();
 		this.movieId = movieId;
@@ -39,7 +39,6 @@ public class MovieDto {
 		this.trailerList = trailerList;
 	}
 
-	
 	public String getOriginalTitle() {
 		return originalTitle;
 	}
@@ -80,11 +79,11 @@ public class MovieDto {
 		this.personList = personList;
 	}
 
-	public int getAvgScore() {
+	public double getAvgScore() {
 		return avgScore;
 	}
 
-	public void setAvgScore(int avgScore) {
+	public void setAvgScore(double avgScore) {
 		this.avgScore = avgScore;
 	}
 

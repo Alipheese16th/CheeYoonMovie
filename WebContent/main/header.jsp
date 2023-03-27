@@ -38,14 +38,22 @@
 
 <script>
 function withdrawal() {
-	
 	if (confirm("정말로 회원 탈퇴를 진행하시겠습니까?")) {
-	
 	   location.href = "${conPath}/withdrawal.do";
-	
 	}
-
 }
+
+$(function(){
+	
+	$('.form').submit(function(){
+		var q = $('#q').val();
+		if(q.trim() == ''){
+			alert('빈칸은 검색할 수 없습니다');
+			return false;
+		}
+	});
+	
+});
 
 </script>
 </head>
@@ -79,8 +87,8 @@ function withdrawal() {
 						</li>
 					</ul>
 				
-					<form action="${conPath}/search.do" class="d-flex" role="search">
-						<input class="form-control me-2" type="search" name="q" placeholder="영화 검색" aria-label="검색">
+					<form action="${conPath}/search.do" class="d-flex form" role="search">
+						<input class="form-control me-2" type="search" name="q" id="q" placeholder="영화 검색" aria-label="검색">
 						<button class="btn w-25" id="submit" type="submit">검색</button>
 					</form>
 				
@@ -132,8 +140,8 @@ function withdrawal() {
 						</ul>
 					</div>
 				
-					<form action="${conPath}/search.do" class="d-flex" role="search">
-						<input class="form-control me-2" type="search" name="q" placeholder="영화 검색" aria-label="검색">
+					<form action="${conPath}/search.do" class="d-flex form" role="search">
+						<input class="form-control me-2" type="search" name="q" id="q" placeholder="영화 검색" aria-label="검색">
 						<button class="btn w-25" id="submit" type="submit">검색</button>
 					</form>
 				
