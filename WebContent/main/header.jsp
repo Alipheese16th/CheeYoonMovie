@@ -35,6 +35,19 @@
 		color:black;
 	}
 </style>
+
+<script>
+function withdrawal() {
+	
+	if (confirm("정말로 회원 탈퇴를 진행하시겠습니까?")) {
+	
+	   location.href = "${conPath}/withdrawal.do";
+	
+	}
+
+}
+
+</script>
 </head>
 <body>
 
@@ -113,7 +126,7 @@
 						<ul class="dropdown-menu dropdown-menu-dark">
 							<li><a class="dropdown-item active" href="${conPath}/modifyView.do">정보수정</a></li>
 							<li><a class="dropdown-item" href="#">마이메뉴</a></li>
-							<li><a class="dropdown-item" href="${conPath}/withdrawal.do">회원탈퇴</a></li>
+							<li><a class="dropdown-item" onclick="withdrawal()">회원탈퇴</a></li>
 							<li><hr class="dropdown-divider"></li>
 							<li><a class="dropdown-item" href="${conPath}/logout.do">로그아웃</a></li>
 						</ul>

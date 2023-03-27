@@ -238,7 +238,7 @@ public class MovieDao {
 			while(rs.next()) {
 				String trailerName = rs.getString("trailerName");
 				String trailerUrl = rs.getString("trailerUrl");
-				trailerList.add(new TrailerDto(movieId, trailerName, trailerUrl));
+				trailerList.add(new TrailerDto(movieId, trailerName, trailerUrl, null));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -269,7 +269,7 @@ public class MovieDao {
 				String movieId = rs.getString("movieId");
 				String trailerName = rs.getString("trailerName");
 				String trailerUrl = rs.getString("trailerUrl");
-				trailerList.add(new TrailerDto(movieId, trailerName, trailerUrl));
+				trailerList.add(new TrailerDto(movieId, trailerName, trailerUrl, null));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -327,6 +327,125 @@ public class MovieDao {
 		return dtos;
 	}
 	
+	// 영화이름으로 영화 검색
+	public ArrayList<MovieDto> searchMovieTitle(String searchTitle) {
+		ArrayList<MovieDto> dtos = new ArrayList<MovieDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT M.*,(SELECT ROUND(AVG(RATINGSCORE),1) FROM RATING WHERE MOVIEID = M.MOVIEID) as avgScore\r\n" + 
+				"  FROM MOVIE M WHERE MOVIETITLE LIKE '%' || ? || '%' ORDER BY MOVIEDATE DESC";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchTitle);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				String movieId = rs.getString("movieId");
+				String originalTitle = rs.getString("originalTitle");
+				String movieTitle = rs.getString("movieTitle");
+				String movieSummary = rs.getString("movieSummary");
+				int movieRunning = rs.getInt("movieRunning");
+				String movieImage = rs.getString("movieImage");
+				Date movieDate = rs.getDate("movieDate");
+				String movieGrade = rs.getString("movieGrade");
+				int movieAudience = rs.getInt("movieAudience");
+				int state = rs.getInt("state");
+				int avgScore = rs.getInt("avgScore");
+				dtos.add(new MovieDto(movieId, originalTitle, movieTitle, movieSummary, movieRunning, movieImage, movieDate, movieGrade, 
+						movieAudience, state, avgScore, getTagList(movieId), MovieHasPersonList(movieId), getTrailerList(movieId)));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			System.out.println("영화검색(이름) 에러:"+searchTitle);
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return dtos;
+	}
+	// 태그로 영화 검색
+	public ArrayList<MovieDto> searchMovieTag(String searchTag) {
+		ArrayList<MovieDto> dtos = new ArrayList<MovieDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT M.*,(SELECT ROUND(AVG(RATINGSCORE),1) FROM RATING WHERE MOVIEID = M.MOVIEID) as avgScore " + 
+				"  FROM MOVIE M WHERE MOVIEID IN (SELECT MOVIEID FROM TAG WHERE TAG = ?)";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchTag);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				String movieId = rs.getString("movieId");
+				String originalTitle = rs.getString("originalTitle");
+				String movieTitle = rs.getString("movieTitle");
+				String movieSummary = rs.getString("movieSummary");
+				int movieRunning = rs.getInt("movieRunning");
+				String movieImage = rs.getString("movieImage");
+				Date movieDate = rs.getDate("movieDate");
+				String movieGrade = rs.getString("movieGrade");
+				int movieAudience = rs.getInt("movieAudience");
+				int state = rs.getInt("state");
+				int avgScore = rs.getInt("avgScore");
+				dtos.add(new MovieDto(movieId, originalTitle, movieTitle, movieSummary, movieRunning, movieImage, movieDate, movieGrade, 
+						movieAudience, state, avgScore, getTagList(movieId), MovieHasPersonList(movieId), getTrailerList(movieId)));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			System.out.println("영화검색(태그) 에러:"+searchTag);
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return dtos;
+	}
+	// 해당 검색 이름의 영화 트레일러 리스트
+	public ArrayList<TrailerDto> searchTrailerList(String searchTrailer) {
+		ArrayList<TrailerDto> dtos = new ArrayList<TrailerDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT T.*,MOVIETITLE FROM TRAILER T, MOVIE M " + 
+				"  WHERE T.MOVIEID = M.MOVIEID AND MOVIETITLE LIKE '%' || ? || '%'";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchTrailer);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				String movieId = rs.getString("movieId");
+				String movieTitle = rs.getString("movieTitle");
+				String trailerName = rs.getString("trailerName");
+				String trailerUrl = rs.getString("trailerUrl");
+				dtos.add(new TrailerDto(movieId, trailerName, trailerUrl, movieTitle));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			System.out.println("트레일러검색 에러:"+searchTrailer);
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return dtos;
+	}
+			
 	
 	// 영화등록
 		public int registerMovie(MovieDto dto) {
@@ -432,90 +551,6 @@ public class MovieDao {
 				}
 			}
 			return result;
-		}
-		// 영화이름으로 영화 검색
-		public ArrayList<MovieDto> searchMovieTitle(String searchTitle) {
-			ArrayList<MovieDto> dtos = new ArrayList<MovieDto>();
-			Connection conn = null;
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			String sql = "SELECT M.*,(SELECT ROUND(AVG(RATINGSCORE),1) FROM RATING WHERE MOVIEID = M.MOVIEID) as avgScore " + 
-					"  FROM MOVIE M WHERE MOVIETITLE LIKE '%' || ? || '%'";
-			try {
-				conn = ds.getConnection();
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, searchTitle);
-				rs = pstmt.executeQuery();
-				while(rs.next()) {
-					String movieId = rs.getString("movieId");
-					String originalTitle = rs.getString("originalTitle");
-					String movieTitle = rs.getString("movieTitle");
-					String movieSummary = rs.getString("movieSummary");
-					int movieRunning = rs.getInt("movieRunning");
-					String movieImage = rs.getString("movieImage");
-					Date movieDate = rs.getDate("movieDate");
-					String movieGrade = rs.getString("movieGrade");
-					int movieAudience = rs.getInt("movieAudience");
-					int state = rs.getInt("state");
-					int avgScore = rs.getInt("avgScore");
-					dtos.add(new MovieDto(movieId, originalTitle, movieTitle, movieSummary, movieRunning, movieImage, movieDate, movieGrade, 
-							movieAudience, state, avgScore, getTagList(movieId), MovieHasPersonList(movieId), getTrailerList(movieId)));
-				}
-			} catch (SQLException e) {
-				System.out.println(e.getMessage());
-				System.out.println("영화검색(이름) 에러:"+searchTitle);
-			}finally {
-				try {
-					if(rs!=null)rs.close();
-					if(pstmt!=null)pstmt.close();
-					if(conn!=null)conn.close();
-				} catch (SQLException e) {
-					System.out.println(e.getMessage());
-				}
-			}
-			return dtos;
-		}
-		// 태그로 영화 검색
-		public ArrayList<MovieDto> searchMovieTag(String searchTag) {
-			ArrayList<MovieDto> dtos = new ArrayList<MovieDto>();
-			Connection conn = null;
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			String sql = "SELECT M.*,(SELECT ROUND(AVG(RATINGSCORE),1) FROM RATING WHERE MOVIEID = M.MOVIEID) as avgScore " + 
-					"  FROM MOVIE M WHERE MOVIEID IN (SELECT MOVIEID FROM TAG WHERE TAG = ?)";
-			try {
-				conn = ds.getConnection();
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, searchTag);
-				rs = pstmt.executeQuery();
-				while(rs.next()) {
-					String movieId = rs.getString("movieId");
-					String originalTitle = rs.getString("originalTitle");
-					String movieTitle = rs.getString("movieTitle");
-					String movieSummary = rs.getString("movieSummary");
-					int movieRunning = rs.getInt("movieRunning");
-					String movieImage = rs.getString("movieImage");
-					Date movieDate = rs.getDate("movieDate");
-					String movieGrade = rs.getString("movieGrade");
-					int movieAudience = rs.getInt("movieAudience");
-					int state = rs.getInt("state");
-					int avgScore = rs.getInt("avgScore");
-					dtos.add(new MovieDto(movieId, originalTitle, movieTitle, movieSummary, movieRunning, movieImage, movieDate, movieGrade, 
-							movieAudience, state, avgScore, getTagList(movieId), MovieHasPersonList(movieId), getTrailerList(movieId)));
-				}
-			} catch (SQLException e) {
-				System.out.println(e.getMessage());
-				System.out.println("영화검색(태그) 에러:"+searchTag);
-			}finally {
-				try {
-					if(rs!=null)rs.close();
-					if(pstmt!=null)pstmt.close();
-					if(conn!=null)conn.close();
-				} catch (SQLException e) {
-					System.out.println(e.getMessage());
-				}
-			}
-			return dtos;
 		}
 		
 		// 특정 인물의 영화 출연작 리스트 

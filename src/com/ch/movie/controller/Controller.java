@@ -120,7 +120,6 @@ public class Controller extends HttpServlet{
 			service = new UserWithdrawalService();
 			service.execute(request, response);
 			viewPage = "main.do";
-		
 			
 		/* * * * * * * * * * * * * * * * * * * * * *
 		 * * * * * * * * board 관련 요청 * * * * * * * * 
@@ -191,7 +190,6 @@ public class Controller extends HttpServlet{
 			service.execute(request, response);
 			viewPage = "boardContent.do";
 			
-			
 		/* * * * * * * * * * * * * * * * * * * * * *
 		 * * * * * * * * movie 관련 요청  * * * * * * *
 		 * * * * * * * * * * * * * * * * * * * * * */
@@ -233,10 +231,14 @@ public class Controller extends HttpServlet{
 			service.execute(request, response);
 			viewPage = "movieContent.do";
 			
-		
-		
+		/* * * * * * * * * * * * * * * * * * * * * *
+		 * * * * * * * * admin 관련 요청  * * * * * * *
+		 * * * * * * * * * * * * * * * * * * * * * */
+		}else if(command.equals("/adminLoginView.do")){
+			viewPage = "admin/adminLogin.jsp";
+			
 		}else if(command.equals("/")){
-		}else if(command.equals("/")){
+			
 		}else if(command.equals("/")){
 		}else if(command.equals("/")){
 		}else if(command.equals("/")){

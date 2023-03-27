@@ -95,9 +95,9 @@
 				       	 	<div class="container">
 				         		<div class="carousel-caption sticky-bottom p-0">
 				          
-				           			<div class="box-container row">
+				           			<div class="box-container sticky-bottom p-0">
 				            			<div class="box col-3">
-				            				<img src="${conPath}/movieImg/${carousel.movieImage}" width="120px" height="180px">
+				            				<img src="${conPath}/movieImg/${carousel.movieImage}" width="160px" height="240px">
 				            			</div>
 				            			<div class="box col-9">
 					            			<h3>
@@ -120,14 +120,15 @@
 				       	 	<div class="container">
 				         		<div class="carousel-caption sticky-bottom p-0">
 				          
-				           			<div class="box-container row">
+				           			<div class="box-container  sticky-bottom p-0">
 				            			<div class="box col-3">
-				            				<img src="${conPath}/movieImg/${carousel.movieImage}" width="120px" height="180px">
+				            				<img src="${conPath}/movieImg/${carousel.movieImage}" width="160px" height="240px">
 				            			</div>
 				            			<div class="box col-9">
-					            			<h3>
-					            			${carousel.movieTitle}
-					            			</h3>
+					            			<h4>
+					            			${carousel.movieTitle}<br>
+					            			${carousel.originalTitle}
+					            			</h4>
 				            			</div>
 				            		</div>
 				          		</div>
@@ -172,7 +173,7 @@
 			</div>
         <!-- carousel end -->
         
-        <div class="container mt-5 py-2">
+        <div class="container mt-3 py-2">
         	<div class="row">
         		<h1 class="">현재 추천 영화들 !</h1>
         	</div>

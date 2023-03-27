@@ -77,7 +77,7 @@
 </c:if>
 
 
-	<div class="d-flex bg-secondary" id="wrapper"> <!-- bg-black text-white -->
+	<div class="d-flex bg-black" id="wrapper"> <!-- bg-black text-white -->
 	
 		<jsp:include page="../main/sidebar.jsp"/>
 		
@@ -261,7 +261,7 @@
 											 <iframe src="https://www.youtube.com/embed/${trailer.trailerUrl}?rel=0" class="card-img" allowfullscreen></iframe>
 										  </div>
 										  <div class="card-body">
-										    <p class="card-text">
+										    <p class="card-title text-center">
 										    	${trailer.trailerName}
 										    </p>
 										  </div>
