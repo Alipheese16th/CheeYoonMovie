@@ -18,6 +18,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 	<script>
 	$(document).ready(function(){
+		
 		$('.write').click(function(){
 			var user = "<c:out value='${user}'/>";
 			if(!user){
@@ -30,7 +31,15 @@
 		$('tr').css('cursor','pointer').click(function(){
 			var boardNo = $(this).children().eq(0).text();
 			if(!isNaN(boardNo)){
-				location.href = "${conPath}/boardContent.do?boardNo="+boardNo+"&pageNum=${pageNum}&search=${param.search}&type=${param.type}";
+				location.href = "${conPath}/boardContent.do?boardNo="+boardNo+"&pageNum=${pageNum}&search=${param.search}&type=${type}";
+			}
+		});
+		
+		$('.forma').submit(function(){
+			var qa = $('#qa').val();
+			if(qa.trim() == ''){
+				alert('빈칸은 검색할 수 없습니다');
+				return false;
 			}
 		});
 		

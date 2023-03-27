@@ -59,6 +59,8 @@
 			<div class="container">
 			
 				<form action="${conPath}/boardModify.do" method="post">
+				<input type="hidden" name="search" value="${param.search}">
+				<input type="hidden" name="type" value="${param.type}">
 				<input type="hidden" name="pageNum" value="${param.pageNum}">
 				<input type="hidden" name="boardNo" value="${board.boardNo}">
 				

@@ -65,6 +65,8 @@
 				<input type="hidden" name="boardIndent" value="${board.boardIndent}">
 				<input type="hidden" name="userId" value="${user.userId}">
 				<input type="hidden" name="pageNum" value="${param.pageNum}">
+				<input type="hidden" name="search" value="${param.search}">
+				<input type="hidden" name="type" value="${param.type}">
 				
 					<h1 class="my-5">자유게시판</h1>
 				    

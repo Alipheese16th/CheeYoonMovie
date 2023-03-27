@@ -16,6 +16,8 @@
 	  	<form action="${conPath}/commentModify.do">
 	  		<input type="hidden" name="commentPageNum" value="${param.commentPageNum}">
 	  		<input type="hidden" name="pageNum" value="${param.pageNum}">
+	  		<input type="hidden" name="search" value="${param.search}">
+	  		<input type="hidden" name="type" value="${param.type}">
 	  		<input type="hidden" name="commentNo" value="${comment.commentNo}">
 	  		<input type="hidden" name="boardNo" value="${comment.boardNo}">
 	  		<textarea name="commentContent" class="form-control ml-1 shadow-none textarea">${comment.commentContent}</textarea>

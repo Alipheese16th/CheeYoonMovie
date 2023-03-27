@@ -22,6 +22,7 @@
 	</style>
 	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 	<script>
+	
 	$(document).ready(function(){
 		$('.write').click(function(){
 			var user = "<c:out value='${user}'/>";
@@ -35,7 +36,7 @@
 		$('tr').css('cursor','pointer').click(function(){
 			var boardNo = $(this).children().eq(0).text();
 			if(!isNaN(boardNo)){
-				location.href = "${conPath}/boardContent.do?boardNo="+boardNo+"&pageNum=${pageNum}";
+				location.href = "${conPath}/boardContent.do?boardNo="+boardNo+"&pageNum=${pageNum}&search=${param.search}&type=${type}";
 			}
 		});
 		
@@ -43,11 +44,13 @@
 			var commentNo = $(this).attr('id');
 			var commentPageNum = $('#commentPageNum').val();
 			var pageNum = "<c:out value='${pageNum}'/>";
+			var search = "<c:out value='${param.search}'/>";
+			var type = "<c:out value='${type}'/>";
 			
 			$.ajax({
 				url : '${conPath}/commentModifyView.do',
 				type : 'post',
-				data : 'commentNo='+commentNo+'&commentPageNum='+commentPageNum+'&pageNum='+pageNum,
+				data : 'commentNo='+commentNo+'&commentPageNum='+commentPageNum+'&pageNum='+pageNum+'&search='+search+'&type='+type,
 				dataType : 'html',
 				success : function(data){
 					$('#comment'+commentNo).html(data);
@@ -56,14 +59,24 @@
 			
 		});
 	});
+	
 	function boardDelete() {
 		
 	  if (confirm("글 삭제를 진행하시겠습니까?")) {
 
-	    location.href = "${conPath}/boardDelete.do?boardNo=${board.boardNo}&pageNum=${pageNum}";
+	    location.href = "${conPath}/boardDelete.do?boardNo=${board.boardNo}&pageNum=${pageNum}&search=${param.search}&type=${type}";
 
 	  }
 
+	}
+	
+	function commentDelete() {
+	
+		if (confirm("댓글 삭제를 진행하시겠습니까?")) {
+			
+		location.href='${conPath}/commentDelete.do?boardNo=${dto.boardNo}&commentNo=${dto.commentNo}&commentPageNum=${commentPageNum}&pageNum=${pageNum}&search=${param.search}&type=${type}';
+
+		}
 	}
 	</script>
 	
@@ -135,8 +148,7 @@
 							  		<small><fmt:formatDate value="${dto.commentDate}" pattern="yy/MM/dd HH:mm:ss"/></small>
 							  		<c:if test="${user.userId eq dto.userId}">
 								  		<button type="button" id="${dto.commentNo}" class="btn btn-sm btn-outline-dark py-0 px-1 ms-2 commentModifyView">수정</button>
-								  		<button type="button" class="btn btn-sm btn-outline-dark py-0 px-1" 
-onclick="location.href='${conPath}/commentDelete.do?boardNo=${dto.boardNo}&commentNo=${dto.commentNo}&commentPageNum=${commentPageNum}&pageNum=${pageNum}'">삭제</button>
+								  		<button type="button" class="btn btn-sm btn-outline-dark py-0 px-1" onclick="commentDelete()">삭제</button>
 							  		</c:if>
 							  		
 							  	</div>
@@ -157,7 +169,7 @@ onclick="location.href='${conPath}/commentDelete.do?boardNo=${dto.boardNo}&comme
 								
 					<div class="paging text-center">
 						<c:if test="${commentStartPage > commentBLOCKSIZE }">
-							<a href="${conPath}/boardContent.do?commentPageNum=${commentStartPage-1}&boardNo=${board.boardNo}&pageNum=${pageNum}">[ 이전 ]</a>
+							<a href="${conPath}/boardContent.do?commentPageNum=${commentStartPage-1}&boardNo=${board.boardNo}&pageNum=${pageNum}&search=${param.search}&type=${type}">[ 이전 ]</a>
 						</c:if>
 						
 						<c:forEach var="i" begin="${commentStartPage}" end="${commentEndPage}">
@@ -165,12 +177,12 @@ onclick="location.href='${conPath}/commentDelete.do?boardNo=${dto.boardNo}&comme
 								[ <b>${i}</b> ]
 							</c:if>
 							<c:if test="${i ne commentCurrentPage }">
-								<a href="${conPath}/boardContent.do?commentPageNum=${i}&boardNo=${board.boardNo}&pageNum=${pageNum}">[ ${i} ]</a>
+								<a href="${conPath}/boardContent.do?commentPageNum=${i}&boardNo=${board.boardNo}&pageNum=${pageNum}&search=${param.search}&type=${type}">[ ${i} ]</a>
 							</c:if>
 						</c:forEach>
 						
 						<c:if test="${commentEndPage < commentPageCnt }">
-							<a href="${conPath}/boardContent.do?commentPageNum=${commentEndPage+1}&boardNo=${board.boardNo}&pageNum=${pageNum}">[ 다음 ]</a>
+							<a href="${conPath}/boardContent.do?commentPageNum=${commentEndPage+1}&boardNo=${board.boardNo}&pageNum=${pageNum}&search=${param.search}&type=${type}">[ 다음 ]</a>
 						</c:if>
 					</div>
 					
@@ -190,6 +202,8 @@ onclick="location.href='${conPath}/commentDelete.do?boardNo=${dto.boardNo}&comme
 					  <div class="card-body">
 					    <form action="${conPath}/commentWrite.do" method="post">
 					    	<input type="hidden" name="pageNum" id="pageNum" value="${pageNum}">
+					    	<input type="hidden" name="search" value="${param.search}">
+					    	<input type="hidden" name="type" value="${type}">
 					    	<input type="hidden" name="boardNo" value="${board.boardNo}">
 					    	<input type="hidden" name="userId" value="${user.userId}">
 					    	<textarea name="commentContent" class="form-control ml-1 shadow-none textarea"></textarea>
@@ -208,7 +222,7 @@ onclick="location.href='${conPath}/commentDelete.do?boardNo=${dto.boardNo}&comme
 			    	<div >
 			    		<c:if test="${user.userId eq board.userId}">
 			    			<button type="button" class="btn btn-primary" 
-			    				onclick="location.href='${conPath}/boardModifyView.do?boardNo=${board.boardNo}&pageNum=${pageNum}'">
+			    				onclick="location.href='${conPath}/boardModifyView.do?boardNo=${board.boardNo}&pageNum=${pageNum}&search=${param.search}&type=${type}'">
 			    				수정
 			    			</button>
 			    			<button type="button" class="btn btn-primary" onclick="boardDelete()">
@@ -216,7 +230,8 @@ onclick="location.href='${conPath}/commentDelete.do?boardNo=${dto.boardNo}&comme
 			    			</button>
 			    		</c:if>
 				    	<c:if test="${not empty user}">
-				    		<button type="button" class="btn btn-primary" onclick="location.href='${conPath}/boardReplyView.do?boardNo=${board.boardNo}&pageNum=${pageNum}'">답변글</button>
+				    		<button type="button" class="btn btn-primary" 
+				    		onclick="location.href='${conPath}/boardReplyView.do?boardNo=${board.boardNo}&pageNum=${pageNum}&search=${param.search}&type=${type}'">답변글</button>
 				    	</c:if>
 			    	</div>
 			    </div>

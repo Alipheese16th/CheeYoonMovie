@@ -307,7 +307,7 @@ public class BoardDao {
 	}
 	
 	
-	// 글 전체 검색
+	// 10-1 글 전체 검색
 	public ArrayList<BoardDto> searchBoardFull(String searchFull, int startRow, int endRow) {
 		ArrayList<BoardDto> dtos = new ArrayList<BoardDto>();
 		Connection conn = null;
@@ -360,7 +360,7 @@ public class BoardDao {
 		}
 		return dtos;
 	}
-	// 글 전체 검색 갯수(페이징)
+	// 10-2 글 전체 검색 갯수(페이징)
 	public int totalsearchFull(String searchFull) {
 		int total = 0;
 		Connection conn = null;
@@ -395,7 +395,7 @@ public class BoardDao {
 		return total;
 	}
 	
-	// 글제목으로 글 검색
+	// 11-1 글제목으로 글 검색
 	public ArrayList<BoardDto> searchBoardTitle(String searchTitle, int startRow, int endRow) {
 		ArrayList<BoardDto> dtos = new ArrayList<BoardDto>();
 		Connection conn = null;
@@ -443,7 +443,7 @@ public class BoardDao {
 		}
 		return dtos;
 	}
-	// 글 제목 검색 갯수(페이징)
+	// 11-2 글 제목 검색 갯수(페이징)
 	public int totalsearchTitle(String searchTitle) {
 		int total = 0;
 		Connection conn = null;
@@ -473,7 +473,7 @@ public class BoardDao {
 		return total;
 	}
 	
-	// 글 내용으로 글 검색
+	// 12-1 글 내용으로 글 검색
 	public ArrayList<BoardDto> searchBoardContent(String searchContent, int startRow, int endRow) {
 		ArrayList<BoardDto> dtos = new ArrayList<BoardDto>();
 		Connection conn = null;
@@ -521,8 +521,37 @@ public class BoardDao {
 		}
 		return dtos;
 	}
+	// 12-2 글 내용 검색 페이징
+	public int totalsearchContent(String searchContent) {
+		int total = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT COUNT(*) FROM BOARD B, USERS U " + 
+				"      WHERE B.USERID = U.USERID AND BOARDCONTENT LIKE '%' || ? || '%'";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchContent);
+			rs = pstmt.executeQuery();
+			rs.next();
+			total = rs.getInt(1);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			System.out.println("글 내용검색 페이징 에러:"+total);
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return total;
+	}
 	
-	// 작성자 이름으로 글 검색
+	// 13-1 작성자 이름으로 글 검색
 	public ArrayList<BoardDto> searchBoardUserName(String searchUserName, int startRow, int endRow) {
 		ArrayList<BoardDto> dtos = new ArrayList<BoardDto>();
 		Connection conn = null;
@@ -569,6 +598,35 @@ public class BoardDao {
 			}
 		}
 		return dtos;
+	}
+	// 13-2 작성자이름검색 페이징
+	public int totalsearchUserName(String searchUserName) {
+		int total = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT COUNT(*) FROM BOARD B, USERS U " + 
+				"      WHERE B.USERID = U.USERID AND USERNAME LIKE '%' || ? || '%'";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchUserName);
+			rs = pstmt.executeQuery();
+			rs.next();
+			total = rs.getInt(1);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			System.out.println("글검색 작성자이름 페이징 에러:"+total);
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return total;
 	}
 	
 	

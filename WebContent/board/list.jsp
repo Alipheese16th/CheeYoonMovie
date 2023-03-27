@@ -79,7 +79,7 @@
    	 	</c:if>
    	 	<c:if test="${startPage > BLOCKSIZE }">
 		    <li class="page-item">
-			    <a class="page-link" href="${conPath}/boardList.do?pageNum=${startPage-1}&search=${param.search}&type=${param.type}">
+			    <a class="page-link" href="${conPath}/boardList.do?pageNum=${startPage-1}&search=${param.search}&type=${type}">
 			    <span aria-hidden="true">&laquo;</span>
 			    </a>
 		    </li>
@@ -90,14 +90,14 @@
 				<li class="page-item active"><a class="page-link">${i}</a></li>
 			</c:if>
    	 		<c:if test="${i ne currentPage }">
-				<li class="page-item"><a class="page-link" href="${conPath}/boardList.do?pageNum=${i}&search=${param.search}&type=${param.type}">${i}</a></li>
+				<li class="page-item"><a class="page-link" href="${conPath}/boardList.do?pageNum=${i}&search=${param.search}&type=${type}">${i}</a></li>
 			</c:if>
    	 	
    	 	</c:forEach>
    	 	
    	 	<c:if test="${endPage < pageCnt }">
 			<li class="page-item">
-				<a class="page-link" href="${conPath}/boardList.do?pageNum=${endPage+1}&search=${param.search}&type=${param.type}">
+				<a class="page-link" href="${conPath}/boardList.do?pageNum=${endPage+1}&search=${param.search}&type=${type}">
 				<span aria-hidden="true">&raquo;</span>
 				</a>
 			</li>
@@ -116,18 +116,18 @@
 	
 	<div class="container my-2 text-center">
 		<p>자유게시판 글검색</p>
-		<form action="${conPath}/boardList.do" class="d-flex" role="search">
+		<form action="${conPath}/boardList.do" class="d-flex forma" role="search">
 		<input type="hidden" name="pageNum" value="${pageNum}">
 			<div class="d-flex w-75 m-auto">
 			
 				<select name="type" class="form-select w-25">
-				  <option selected value="1">전체</option>
-				  <option value="2">제목</option>
-				  <option value="3">내용</option>
-				  <option value="4">작성자</option>
+				  <option <c:if test="${type eq 'full'}">selected="selected"</c:if> value="full">전체</option>
+				  <option <c:if test="${type eq 'title'}">selected="selected"</c:if> value="title">제목</option>
+				  <option <c:if test="${type eq 'content'}">selected="selected"</c:if> value="content">내용</option>
+				  <option <c:if test="${type eq 'user'}">selected="selected"</c:if> value="user">작성자</option>
 				</select>
 				
-				<input class="form-control mx-2" type="search" name="search" id="search">
+				<input class="form-control mx-2" type="search" name="search" id="qa" value="${param.search}">
 				
 				<input type="submit" class="btn btn-primary" value="검색">
 				

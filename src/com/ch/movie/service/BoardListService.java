@@ -12,7 +12,7 @@ public class BoardListService implements Service {
 		
 		String type = request.getParameter("type");
 		if(type == null || type.equals("")) {
-			type = "0";
+			type = "default";
 		}
 		String pageNum = request.getParameter("pageNum");
 		if(pageNum == null || pageNum.equals("")) {
@@ -26,29 +26,32 @@ public class BoardListService implements Service {
 		BoardDao board = new BoardDao();
 		int totCnt = 0;
 		
-		if(type.equals("0")) { // 검색안한경우
-			
+		if(type.equals("default")) { // 검색안한경우
 			request.setAttribute("list", board.getBoardList(startRow, endRow));
 			totCnt = board.totalBoard();
 			
-		}else if(type.equals("1")) { // 전체 검색
-			
+		}else if(type.equals("full")) { // 전체 검색
 			String searchFull = request.getParameter("search").trim();
 			request.setAttribute("list", board.searchBoardFull(searchFull, startRow, endRow));
 			totCnt = board.totalsearchFull(searchFull);
 			
-		}else if(type.equals("2")) { // 제목검색
+		}else if(type.equals("title")) { // 제목 검색
 			
 			String searchTitle = request.getParameter("search").trim();
 			request.setAttribute("list", board.searchBoardTitle(searchTitle, startRow, endRow));
 			totCnt = board.totalsearchTitle(searchTitle);
 			
-		}else if(type.equals("3")) {
+		}else if(type.equals("content")) { // 내용 검색
+			String searchContent = request.getParameter("search").trim();
+			request.setAttribute("list", board.searchBoardContent(searchContent, startRow, endRow));
+			totCnt = board.totalsearchContent(searchContent);
 			
-		}else if(type.equals("4")) {
+		}else if(type.equals("user")) {
+			String searchUserName = request.getParameter("search").trim();
+			request.setAttribute("list", board.searchBoardUserName(searchUserName, startRow, endRow));
+			totCnt = board.totalsearchUserName(searchUserName);
 			
 		}
-		
 		
 		// 페이지 관련 항목들
 		int pageCnt = (int)Math.ceil((double)totCnt/PAGESIZE);
@@ -57,6 +60,9 @@ public class BoardListService implements Service {
 		if(endPage > pageCnt) {
 			endPage = pageCnt;
 		}
+		
+		request.setAttribute("type", type);
+		
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("pageCnt", pageCnt);
