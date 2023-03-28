@@ -39,7 +39,7 @@
 	    
 	    <!-- 관리자로그인창 -->
 	    <div class="card w-50" id="adminLogin">
-		  <form action="${conPath}/adminLogin.do">
+		  <form action="${conPath}/adminLogin.do" method="post">
 	  
 			  <div class="card-header bg-black text-white">
 			  	 관리자 로그인

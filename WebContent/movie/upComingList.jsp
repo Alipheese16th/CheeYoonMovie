@@ -27,7 +27,19 @@
 		.card img:hover, .card-title, .card-text{
 			cursor:pointer;
 		}
-		
+		.badge{
+			background-color:#FFFFFF;
+			color:black;
+		}
+		.mybtn{
+			width:150px;
+			text-align:left !important;
+		}
+		.badge{
+			position:absolute;
+			top:50%;
+			left:10%;
+		}
 		
 	</style>
 	<script>
@@ -115,15 +127,22 @@
 														</p>
 													</div>
 													<div class="col-md-4 d-flex align-items-center">
-														<p>
-														D-day : 
+													
+													
+													<button type="button" class="btn btn-dark btn-lg position-relative mybtn">
+													  d-day
+													  <span class="badge rounded-pill">
 														<jsp:useBean id="now" class="java.util.Date"/>
 														<fmt:formatDate var="today" value="${now}" pattern="yyyyMMdd000000" />
 														<fmt:parseDate var="nowfmt" value="${today}" pattern="yyyyMMddHHmmss"/>
 														<fmt:parseNumber var="nowfmtTime" value="${nowfmt.time / (1000*60*60*24)}" integerOnly="true" scope="request"/>
 														<fmt:parseNumber var="dbDtParse" value="${movie.movieDate.time / (1000*60*60*24)}" integerOnly="true" scope="request"/>
 														${dbDtParse - nowfmtTime}
-														</p>
+													  </span>
+													</button>
+													
+													
+													
 														
 													</div>
 												</div>

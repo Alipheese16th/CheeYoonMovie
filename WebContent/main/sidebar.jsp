@@ -38,13 +38,13 @@
 		    	<ul class="list-group list-group-flush">
 				  <li class="list-group-item list-group-item-action p-3" onclick="location.href='${conPath}/nowPlayingList.do'">현재 상영영화</li>
 				  <li class="list-group-item list-group-item-action p-3" onclick="location.href='${conPath}/upComingList.do'">개봉 예정영화</li>
-				  <li class="list-group-item list-group-item-action p-3" onclick="location.href='${conPath}/main.do'">예고편</li>
+				  <li class="list-group-item list-group-item-action p-3" onclick="location.href='${conPath}/trailerList.do'">예고편</li>
 				</ul>
 			</div>
 		    
-		    <a class="list-group-item list-group-item-action p-3 mt-3" href="#!">영화 랭킹</a><!-- active -->
+		    <a class="list-group-item list-group-item-action p-3 mt-3" href="${conPath}/movieRanking.do">영화 랭킹</a>
 		    <a class="list-group-item list-group-item-action p-3 mt-3" href="${conPath}/boardList.do">자유게시판</a>
-		    <a class="list-group-item list-group-item-action p-3 mt-3" href="#!">평점리스트</a>
+		    <a class="list-group-item list-group-item-action p-3 mt-3" href="${conPath}/ratingList.do">평점리스트</a>
 		    <a class="list-group-item list-group-item-action p-3 mt-3" href="#!">디렉토리</a>
 		    <a class="list-group-item list-group-item-action p-3 mt-3" href="${conPath}/credit.do">credit</a>
 		</div>

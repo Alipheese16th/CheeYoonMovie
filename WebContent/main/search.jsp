@@ -57,14 +57,14 @@
 </head>
 <body>
 
-	<div class="d-flex bg-black" id="wrapper"> <!-- bg-black text-white -->
+	<div class="d-flex" id="wrapper"> <!-- bg-black text-white -->
 		<jsp:include page="../main/sidebar.jsp"/>
 		<div id="page-content-wrapper">
 			<jsp:include page="../main/header.jsp"/>
 			
 			<div class="container">
 			
-				<div class="container mt-5 card m-auto mw-75 mw-25">
+				<div class="container pb-5">
 				
 		    	<h2 class="my-5 text-center">&#39;<span class="text-danger">${param.q}</span>&#39;에 대한 영화 통합검색결과 입니다.</h2>
 		    	

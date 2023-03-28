@@ -127,6 +127,78 @@ public class RatingDao {
 		}
 		return total;
 	}
+	
+	// 전체 평점 리스트(유저이름,영화이름,탑앤구문 최신순)
+	public ArrayList<RatingDto> allRatingList(int startRow, int endRow){
+		ArrayList<RatingDto> dtos = new ArrayList<RatingDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM " + 
+				"  (SELECT ROWNUM RN, A.* FROM " + 
+				"    (SELECT USERNAME, MOVIETITLE ,R.* " + 
+				"      FROM RATING R, USERS U, MOVIE M " + 
+				"      WHERE R.USERID = U.USERID AND R.MOVIEID = M.MOVIEID " + 
+				"      ORDER BY RATINGDATE DESC) A) " + 
+				"  WHERE RN BETWEEN ? AND ?";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,startRow);
+			pstmt.setInt(2,endRow);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				String movieId = rs.getString("movieId");
+				String userId = rs.getString("userId");
+				String ratingContent = rs.getString("ratingContent");
+				int ratingScore = rs.getInt("ratingScore");
+				Timestamp ratingDate = rs.getTimestamp("ratingDate");
+				String userName = rs.getString("userName");
+				String movieTitle = rs.getString("movieTitle");
+				dtos.add(new RatingDto(userId, movieId, ratingContent, ratingScore, ratingDate, userName, movieTitle));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage()+"전체평점리스트 에러");
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return dtos;
+	}
+	// 전체 평점 갯수 (페이징)
+	public int allTotalRating() {
+		int total = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT COUNT(*) FROM RATING";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.next();
+			total = rs.getInt(1);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			System.out.println("전체 평점갯수페이징 에러");
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return total;
+	}
+	
+	
 	// 평점 작성
 	public int writeRating(RatingDto dto) {
 		int 			 result = FAIL;

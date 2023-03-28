@@ -23,7 +23,7 @@
 		color:white;
 	}
 	.carousel-item:hover{
-		filter: brightness(80%);
+/* 		filter: brightness(80%); */
 		cursor:pointer;
 	}
 	
@@ -89,9 +89,7 @@
 					<c:if test="${status.first eq true}">
 					
 						<div class="carousel-item active" onclick="location.href='${conPath}/movieContent.do?movieId=${carousel.movieId}'">
-							<img class="bd-placeholder-img" src="https://img.youtube.com/vi/${carousel.trailerList[0].trailerUrl}/mqdefault.jpg" width="100%" height="400px">
-				        	
-				       		<rect width="100%" height="100%" fill="#777"></rect>
+							<img class="bd-placeholder-img" src="https://img.youtube.com/vi/${carousel.trailerList[0].trailerUrl}/maxresdefault.jpg" width="100%" height="500px">
 				       	 	<div class="container">
 				         		<div class="carousel-caption sticky-bottom p-0">
 				          
@@ -114,9 +112,7 @@
 					<c:if test="${status.first ne true}">
 					
 						<div class="carousel-item" onclick="location.href='${conPath}/movieContent.do?movieId=${carousel.movieId}'">
-							<img class="bd-placeholder-img" src="https://img.youtube.com/vi/${carousel.trailerList[0].trailerUrl}/mqdefault.jpg" width="100%" height="400px">
-				        	
-				       		<rect width="100%" height="100%" fill="#777"></rect>
+							<img class="bd-placeholder-img" src="https://img.youtube.com/vi/${carousel.trailerList[0].trailerUrl}/maxresdefault.jpg" width="100%" height="500px">
 				       	 	<div class="container">
 				         		<div class="carousel-caption sticky-bottom p-0">
 				          

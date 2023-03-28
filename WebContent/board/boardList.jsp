@@ -46,6 +46,33 @@
 	});
 	</script>
 	
+	<style>
+		.pagination > li > a{
+		    background-color: white;
+		    color: #5A4181;
+		}
+		
+		.pagination > li > a:focus,
+		.pagination > li > a:hover,
+		.pagination > li > span:focus,
+		.pagination > li > span:hover{
+		    color: #5a5a5a;
+		    background-color: #eee;
+		    border-color: #ddd;
+		}
+		
+		.pagination > .active > a{
+		    color: white;
+		    background-color: #444444 !Important;
+		    border: solid 1px #444444 !Important;
+		}
+		
+		.pagination > .active > a:hover{
+		    background-color: #444444 !Important;
+		    border: solid 1px #444444;
+		}
+	
+	</style>
 </head>
 <body>
 
@@ -69,13 +96,14 @@
 		
 			<jsp:include page="../main/header.jsp"/>
 			
-			<div class="container">
+			<div class="container pb-5">
 			
-		    <h1 class="my-5 text-center"><a href="${conPath}/boardList.do" class="text-decoration-none text-black">자유게시판</a></h1>
-		    
-			<jsp:include page="list.jsp"/>
+			    <h1 class="my-5 text-center"><a href="${conPath}/boardList.do" class="text-decoration-none text-black"><b>자유게시판</b></a></h1>
+			    
+				<jsp:include page="list.jsp"/>
 			    
 			</div>
+				
 			<jsp:include page="../main/footer.jsp"/>
 		</div>
 		

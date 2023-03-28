@@ -69,7 +69,7 @@
     
     <!-- 자유게시판 페이징 -->
     <nav aria-label="Page navigation example">
-	  <ul class="pagination justify-content-center">
+	  <ul class="pagination justify-content-center pb-2">
 	  	<c:if test="${startPage <= BLOCKSIZE }">
 		    <li class="page-item disabled">
 			    <a class="page-link">
@@ -114,26 +114,27 @@
 	</nav>
 	<!-- 자유게시판 페이징 끝 -->
 	
+	<!-- 검색 기능 시작 -->
 	<div class="container my-2 text-center">
-		<p>자유게시판 글검색</p>
 		<form action="${conPath}/boardList.do" class="d-flex forma" role="search">
 		<input type="hidden" name="pageNum" value="${pageNum}">
-			<div class="d-flex w-75 m-auto">
+			<div class="d-flex w-75 m-auto justify-content-center">
 			
-				<select name="type" class="form-select w-25">
+				<select name="type" class="form-select" style="width:100px">
 				  <option <c:if test="${type eq 'full'}">selected="selected"</c:if> value="full">전체</option>
 				  <option <c:if test="${type eq 'title'}">selected="selected"</c:if> value="title">제목</option>
 				  <option <c:if test="${type eq 'content'}">selected="selected"</c:if> value="content">내용</option>
 				  <option <c:if test="${type eq 'user'}">selected="selected"</c:if> value="user">작성자</option>
 				</select>
 				
-				<input class="form-control mx-2" type="search" name="search" id="qa" value="${param.search}">
+				<input class="form-control mx-2 w-25" type="search" name="search" id="qa" value="${param.search}">
 				
-				<input type="submit" class="btn btn-primary" value="검색">
+				<input type="submit" class="btn btn-outline-dark" value="검색">
 				
 			</div>
 		</form>
 	</div>
+	<!-- 검색 기능 끝 -->
 	
 </body>
 </html>

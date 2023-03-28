@@ -37,120 +37,111 @@
 			
 			<div class="container">
 			
-		    <h1 class="my-5 text-center">회원 목록</h1>
-		    
-			<table class="table table-hover caption-top mx-2">
-				<caption>회원리스트를 조회 할수 있습니다.</caption>
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>날짜</th>
-						<th>조회수</th>
-					</tr>
-				</thead>
-				<tbody class="table-group-divider">
-					<c:if test="${list.size() eq 0}">
-						<tr><td colspan="5">해당 페이지의 글이 없습니다</td></tr>
-					</c:if>
-					<c:if test="${list.size() ne 0}">
-						<c:forEach var="dto" items="${list}">
-						
+			    <h1 class="my-5 text-center">회원 목록</h1>
+			    
+				<table class="table table-hover caption-top mx-2">
+					<caption>회원리스트를 조회 할수 있습니다.</caption>
+					<thead>
 						<tr>
-							<td>${dto.boardNo }</td>
-							
-							<td class="w-50">
-								<c:forEach var="i" begin="1" end="${dto.boardIndent }"><!-- 답글 들여쓰기 처리 -->
-									<c:if test="${i ne dto.boardIndent }">
-										&nbsp; &nbsp; 
-									</c:if>
-									<c:if test="${i eq dto.boardIndent }">
-										└─
-									</c:if>
-								</c:forEach>
-									${dto.boardTitle }
-								<c:if test="${dto.commentCnt ne 0}">
-									[${dto.commentCnt}]
-								</c:if>
-								<c:if test="${dto.boardHit > 10 }">
-									<img src="${conPath}/img/hot.gif">
-								</c:if>
-							</td>
-							
-							<td>${dto.userId }</td>
-							
-							<td>
-								<fmt:formatDate value="${dto.boardDate }" pattern="yy/MM/dd"/>
-							</td>
-							
-							<td>${dto.boardHit }</td>
-							
+							<th>아이디</th>
+							<th>이름</th>
+							<th>이메일</th>
+							<th>전화번호</th>
+							<th>가입일</th>
 						</tr>
+					</thead>
+					<tbody class="table-group-divider">
+						<c:if test="${userList.size() eq 0}">
+							<tr><td colspan="5"></td></tr>
+						</c:if>
+						<c:if test="${userList.size() ne 0}">
+							<c:forEach var="user" items="${userList}">
+								<tr>
+									<td>${user.userId}</td>
+									<td>${user.userName}</td>
+									<td>${user.userEmail}</td>
+									<td>${user.userTel}</td>
+									<td>
+										<fmt:formatDate value="${user.userDate}" pattern="yy/MM/dd"/>
+									</td>
+								</tr>
+							</c:forEach>
 						
-						</c:forEach>
-					
-					</c:if>
-					
-				</tbody>
-			</table>
-		    <button class="write btn btn-outline-dark">글쓰기</button>
-		    
-		    <!-- 페이징 시작 -->
-		    <nav aria-label="Page navigation example">
-			  <ul class="pagination justify-content-center">
-			  	<c:if test="${startPage <= BLOCKSIZE }">
-				    <li class="page-item disabled">
-					    <a class="page-link">
-					    <span aria-hidden="true">&laquo;</span>
-					    </a>
-				    </li>
-		   	 	</c:if>
-		   	 	<c:if test="${startPage > BLOCKSIZE }">
-				    <li class="page-item">
-					    <a class="page-link" href="${conPath}/boardList.do?pageNum=${startPage-1}">
-					    <span aria-hidden="true">&laquo;</span>
-					    </a>
-				    </li>
-		    	</c:if>
-		   	 	
-		   	 	<c:forEach var="i" begin="${startPage}" end="${endPage}">
-		   	 		<c:if test="${i eq currentPage }">
-						<li class="page-item active"><a class="page-link">${i}</a></li>
-					</c:if>
-		   	 		<c:if test="${i ne currentPage }">
-						<li class="page-item"><a class="page-link" href="${conPath}/boardList.do?pageNum=${i}">${i}</a></li>
-					</c:if>
-		   	 	
-		   	 	</c:forEach>
-		   	 	
-		   	 	<c:if test="${endPage < pageCnt }">
-					<li class="page-item">
-						<a class="page-link" href="${conPath}/boardList.do?pageNum=${endPage+1}">
-						<span aria-hidden="true">&raquo;</span>
-						</a>
-					</li>
-				</c:if>
-		   	 	<c:if test="${endPage >= pageCnt }">
-					<li class="page-item disabled">
-						<a class="page-link">
-						<span aria-hidden="true">&raquo;</span>
-						</a>
-					</li>
-				</c:if>
+						</c:if>
+						
+					</tbody>
+				</table>
 			    
-			  </ul>
-			</nav>
-			<!-- 페이징 끝 -->
-		    
-		    
-		    
-		    
-			    
+			    <!-- 페이징 시작 -->
+			    <nav aria-label="Page navigation example">
+				  <ul class="pagination justify-content-center">
+				  
+				  	<c:if test="${startPage <= BLOCKSIZE }">
+					    <li class="page-item disabled">
+						    <a class="page-link">
+						    <span aria-hidden="true">&laquo;</span>
+						    </a>
+					    </li>
+			   	 	</c:if>
+			   	 	<c:if test="${startPage > BLOCKSIZE }">
+					    <li class="page-item">
+						    <a class="page-link" href="${conPath}/userList.do?pageNum=${startPage-1}">
+						    <span aria-hidden="true">&laquo;</span>
+						    </a>
+					    </li>
+			    	</c:if>
+			   	 	
+			   	 	<c:forEach var="i" begin="${startPage}" end="${endPage}">
+			   	 		<c:if test="${i eq currentPage }">
+							<li class="page-item active"><a class="page-link">${i}</a></li>
+						</c:if>
+			   	 		<c:if test="${i ne currentPage }">
+							<li class="page-item"><a class="page-link" href="${conPath}/userList.do?pageNum=${i}">${i}</a></li>
+						</c:if>
+			   	 	</c:forEach>
+			   	 	
+			   	 	<c:if test="${endPage < pageCnt }">
+						<li class="page-item">
+							<a class="page-link" href="${conPath}/userList.do?pageNum=${endPage+1}">
+							<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</c:if>
+			   	 	<c:if test="${endPage >= pageCnt }">
+						<li class="page-item disabled">
+							<a class="page-link">
+							<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</c:if>
+				    
+				  </ul>
+				</nav>
+				<!-- 페이징 끝 -->
+				
+				<br class="my-5">
+				
+				<div class="container my-2 text-center">
+					<form action="${conPath}/userList.do" class="d-flex" role="search">
+					<input type="hidden" name="pageNum" value="${pageNum}">
+						<div class="d-flex w-75 m-auto justify-content-center">
+						
+							<select name="type" class="form-select" style="width:100px">
+							  <option <c:if test="${type eq 'full'}">selected="selected"</c:if> value="full">전체</option>
+							  <option <c:if test="${type eq 'id'}">selected="selected"</c:if> value="id">아이디</option>
+							  <option <c:if test="${type eq 'name'}">selected="selected"</c:if> value="name">이름</option>
+							</select>
+							
+							<input class="form-control mx-2 w-25" type="search" name="search" value="${param.search}">
+							<input type="submit" class="btn btn-outline-primary" value="검색">
+							
+						</div>
+					</form>
+				</div>
+			
 			</div>
 			<jsp:include page="../main/footer.jsp"/>
 		</div>
-		
 	</div>
 			
 <!-- Bootstrap core JS-->

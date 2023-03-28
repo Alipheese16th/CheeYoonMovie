@@ -22,14 +22,17 @@ import com.ch.movie.service.CommentDeleteService;
 import com.ch.movie.service.CommentWriteService;
 import com.ch.movie.service.MainService;
 import com.ch.movie.service.MovieContentService;
+import com.ch.movie.service.MovieRankingService;
 import com.ch.movie.service.NowPlayingListService;
 import com.ch.movie.service.RatingConfirmService;
 import com.ch.movie.service.RatingDeleteService;
+import com.ch.movie.service.RatingListService;
 import com.ch.movie.service.RatingModifyService;
 import com.ch.movie.service.RatingWriteService;
 import com.ch.movie.service.RegisterService;
 import com.ch.movie.service.SearchMovieService;
 import com.ch.movie.service.Service;
+import com.ch.movie.service.TrailerListService;
 import com.ch.movie.service.UserEmailConfirmService;
 import com.ch.movie.service.UserIdConfirmService;
 import com.ch.movie.service.UserListService;
@@ -60,6 +63,10 @@ public class Controller extends HttpServlet{
 		String viewPage = null;
 		Service service = null;
 		
+		
+		/* * * * * * * * * * * * * * * * * * * * * *
+		 * * * * * * * * 비회원 관련 요청 * * * * * * * * 
+		 * * * * * * * * * * * * * * * * * * * * * */
 		if(command.equals("/main.do")) {
 			service = new MainService();
 			service.execute(request, response);
@@ -72,10 +79,7 @@ public class Controller extends HttpServlet{
 		
 		}else if(command.equals("/credit.do")){
 			viewPage = "main/credit.jsp";
-			
-		/* * * * * * * * * * * * * * * * * * * * * *
-		 * * * * * * * * 비회원 관련 요청 * * * * * * * * 
-		 * * * * * * * * * * * * * * * * * * * * * */
+		
 		}else if(command.equals("/registerView.do")){	// 회원가입 뷰 페이지
 			viewPage = "user/register.jsp";
 		
@@ -210,6 +214,21 @@ public class Controller extends HttpServlet{
 			service.execute(request, response);
 			viewPage = "movie/movieContent.jsp";
 		
+		}else if(command.equals("/movieRanking.do")){
+			service = new MovieRankingService();
+			service.execute(request, response);
+			viewPage = "movie/movieRanking.jsp";
+			
+		
+			
+			
+			
+		
+		}else if(command.equals("/trailerList.do")){
+			service = new TrailerListService();
+			service.execute(request, response);
+			viewPage = "movie/trailerList.jsp";
+		
 		/* * * * * * * * * * * * * * * * * * * * * *
 		 * * * * * * * * rating 관련 요청  * * * * * * *
 		 * * * * * * * * * * * * * * * * * * * * * */
@@ -232,19 +251,29 @@ public class Controller extends HttpServlet{
 			service = new RatingDeleteService();
 			service.execute(request, response);
 			viewPage = "movieContent.do";
+		
+		}else if(command.equals("/ratingList.do")){
+			service = new RatingListService();
+			service.execute(request, response);
+			viewPage = "movie/ratingList.jsp";
+			
 			
 		/* * * * * * * * * * * * * * * * * * * * * *
 		 * * * * * * * * admin 관련 요청  * * * * * * *
 		 * * * * * * * * * * * * * * * * * * * * * */
 		}else if(command.equals("/adminLogin.do")){
 			service = new AdminLoginService();
+			service.execute(request, response);
 			viewPage = "userList.do";
 			
 		}else if(command.equals("/userList.do")){
 			service = new UserListService();
 			service.execute(request, response);
-			viewPage = "admin/userList.jsp ";
+			viewPage = "admin/userList.jsp";
 			
+		
+		
+	
 		}else if(command.equals("/")){
 		}else if(command.equals("/")){
 		}else if(command.equals("/")){

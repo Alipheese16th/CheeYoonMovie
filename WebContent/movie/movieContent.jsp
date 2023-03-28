@@ -59,6 +59,35 @@
 			z-index:8;
 		}
 		
+		.pagination > li > a{
+		    background-color: white;
+		    color: #5A4181;
+		}
+		
+		.pagination > li > a:focus,
+		.pagination > li > a:hover,
+		.pagination > li > span:focus,
+		.pagination > li > span:hover{
+		    color: #5a5a5a;
+		    background-color: #eee;
+		    border-color: #ddd;
+		}
+		
+		.pagination > .active > a{
+		    color: white;
+		    background-color: #444444 !Important;
+		    border: solid 1px #444444 !Important;
+		}
+		
+		.pagination > .active > a:hover{
+		    background-color: #444444 !Important;
+		    border: solid 1px #444444;
+		}
+		.btn-dark:hover{
+			background-color:white;
+			color:#242424;
+		}
+		
 	</style>
 </head>
 <body>
@@ -92,7 +121,7 @@
 			    
 			    <div class="container mt-5 card m-auto mw-75 mw-25">
 			    
-				    <div class="row text-center card-header noto">
+				    <div class="row text-center card-header">
 				    	<div class="d-flex justify-content-center align-items-center">
 				    		<h1>
 				    		${movie.movieTitle}
@@ -288,7 +317,6 @@
 			    			<div class="progress" style="height:30px;">
 				    			<div class="progress-bar progress-bar-striped progress-bar-animated" style="width:${movie.avgScore * 10}%">평점 ${movie.avgScore}</div>
 				    		</div>
-				    		<br>
 				    	</div>
 				    	
 			    		<!-- 평점 리스트 -->
@@ -311,7 +339,7 @@
 											<div>
 												${rating.ratingContent}
 												<br>
-												<small class="fw-lighter">
+												<small class="text-muted">
 												${rating.userName}(${rating.userId}) &nbsp;
 												| &nbsp;
 												<span style="font-size:12px"><fmt:formatDate value="${rating.ratingDate}" pattern="yyyy-MM-dd HH:mm:ss" /></span>
@@ -319,8 +347,8 @@
 											</div>
 											<div>
 												<c:if test="${user.userId eq rating.userId}">
-													<button type="button" class="btn btn-sm btn-outline-primary modify">수정</button>
-													<button type="button" class="btn btn-sm btn-outline-primary" onclick="ratingDelete()">삭제</button>
+													<button type="button" class="btn btn-sm btn-outline-dark modify">수정</button>
+													<button type="button" class="btn btn-sm btn-outline-dark" onclick="ratingDelete()">삭제</button>
 													
 													<div class="card w-75" id="modifyForm">
 													  <form action="${conPath}/ratingModify.do" method="post">

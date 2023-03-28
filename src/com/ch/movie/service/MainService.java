@@ -13,7 +13,7 @@ public class MainService implements Service {
 		request.setAttribute("nowPlayingList", movie.nowPlayingMovie());
 		request.setAttribute("upComingList", movie.upComingMovie());
 		request.setAttribute("trailerList", movie.getTrailerList());
-		request.setAttribute("carouselList", movie.nowPlayingByAudience());
+		request.setAttribute("carouselList", movie.nowPlayingByAudience(1,50));
 
 	}
 

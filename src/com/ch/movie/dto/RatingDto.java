@@ -9,10 +9,10 @@ public class RatingDto {
 	private int ratingScore;
 	private Timestamp ratingDate;
 	private String userName;
+	private String movieTitle;
 	
 	public RatingDto(String userId, String movieId, String ratingContent, int ratingScore, Timestamp ratingDate,
 			String userName) {
-		super();
 		this.userId = userId;
 		this.movieId = movieId;
 		this.ratingContent = ratingContent;
@@ -20,7 +20,23 @@ public class RatingDto {
 		this.ratingDate = ratingDate;
 		this.userName = userName;
 	}
-	
+	public RatingDto(String userId, String movieId, String ratingContent, int ratingScore, Timestamp ratingDate,
+			String userName, String movieTitle) {
+		this.userId = userId;
+		this.movieId = movieId;
+		this.ratingContent = ratingContent;
+		this.ratingScore = ratingScore;
+		this.ratingDate = ratingDate;
+		this.userName = userName;
+		this.movieTitle = movieTitle;
+	}
+
+	public String getMovieTitle() {
+		return movieTitle;
+	}
+	public void setMovieTitle(String movieTitle) {
+		this.movieTitle = movieTitle;
+	}
 	public int getRatingScore() {
 		return ratingScore;
 	}
@@ -57,10 +73,11 @@ public class RatingDto {
 	public void setRatingDate(Timestamp ratingDate) {
 		this.ratingDate = ratingDate;
 	}
-
 	@Override
 	public String toString() {
 		return "RatingDto [userId=" + userId + ", movieId=" + movieId + ", ratingContent=" + ratingContent
-				+ ", ratingScore=" + ratingScore + ", ratingDate=" + ratingDate + ", userName=" + userName + "]";
+				+ ", ratingScore=" + ratingScore + ", ratingDate=" + ratingDate + ", userName=" + userName
+				+ ", movieTitle=" + movieTitle + "]";
 	}
+	
 }

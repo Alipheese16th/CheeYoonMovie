@@ -80,6 +80,37 @@
 	}
 	</script>
 	
+	<style>
+		.pagination > li > a{
+		    background-color: white;
+		    color: #5A4181;
+		}
+		
+		.pagination > li > a:focus,
+		.pagination > li > a:hover,
+		.pagination > li > span:focus,
+		.pagination > li > span:hover{
+		    color: #5a5a5a;
+		    background-color: #eee;
+		    border-color: #ddd;
+		}
+		
+		.pagination > .active > a{
+		    color: white;
+		    background-color: #444444 !Important;
+		    border: solid 1px #444444 !Important;
+		}
+		
+		.pagination > .active > a:hover{
+		    background-color: #444444 !Important;
+		    border: solid 1px #444444;
+		}
+		.btn-dark:hover{
+			background-color:white;
+			color:#242424;
+		}
+	</style>
+	
 </head>
 <body>
 
@@ -108,16 +139,16 @@
 			
 		    <div class="container">
 		    
-			    <h1 class="my-5 text-center"><a href="${conPath}/boardList.do" class="text-decoration-none text-black">자유게시판</a></h1>
+			    <h1 class="my-5 text-center"><a href="${conPath}/boardList.do" class="text-decoration-none text-black"><b>자유게시판</b></a></h1>
 
 			    <hr>
-			    <div>
-			    	${board.boardTitle}
+			    <div class="mx-2">
+			    	<h3>${board.boardTitle}</h3>
 			    </div>
 			    <hr>
-			    <div class="d-flex justify-content-between">
+			    <div class="d-flex justify-content-between mx-2">
 			    	<div >
-			    		${board.userName}(${board.userId})
+			    		<small>${board.userName}(${board.userId})</small>
 			    	</div>
 			    	<div >
 				    	<small>댓글 12</small>
@@ -127,7 +158,7 @@
 			    	</div>
 			    </div>
 			    <hr>
-		    	<div class="row">
+		    	<div class="row mx-2">
 		    		<pre id="content">${board.boardContent}</pre>
 		    	</div>
 		    	
@@ -143,7 +174,7 @@
 			   			
 			   				<div class="card mb-3" id="comment${dto.commentNo}">
 							  <div class="card-header d-flex justify-content-between py-0">
-							  	<div>${dto.userName}(${dto.userId})</div>
+							  	<div><small>${dto.userName}(${dto.userId})</small></div>
 							  	<div>
 							  		<small><fmt:formatDate value="${dto.commentDate}" pattern="yy/MM/dd HH:mm:ss"/></small>
 							  		<c:if test="${user.userId eq dto.userId}">
@@ -191,13 +222,13 @@
 		    	
 		    	
 		    	<c:if test="${empty user}">
-		    		<h3>댓글 작성 권한이 없습니다</h3>
+		    		<h4>댓글 작성 권한이 없습니다</h4>
 		    	</c:if>
 		    	
 		    	<c:if test="${not empty user}">
 		    		<div class="card mt-2">
 					  <div class="card-header">
-						댓글 작성 ${user.userName}님
+						댓글 작성 &nbsp; ${user.userName}님
 					  </div>
 					  <div class="card-body">
 					    <form action="${conPath}/commentWrite.do" method="post">
@@ -207,30 +238,29 @@
 					    	<input type="hidden" name="boardNo" value="${board.boardNo}">
 					    	<input type="hidden" name="userId" value="${user.userId}">
 					    	<textarea name="commentContent" class="form-control ml-1 shadow-none textarea"></textarea>
-					    	<input type="submit" class="btn btn-primary" value="댓글 등록">
+					    	<input type="submit" class="btn btn-dark mt-3" value="댓글 등록">
 					    </form>
 					  </div>
 					</div>
 		    	</c:if>
 	    		
 
-		    	<div class="d-flex justify-content-between">
+		    	<div class="d-flex justify-content-between my-3">
 			    	<div >
-			    		<button type="button" class="btn btn-primary">전체글</button>
-		    			<button type="button" class="btn btn-primary">개념글</button>
+			    		<button type="button" class="btn btn-outline-dark" onclick="location='${conPath}/boardList.do'">전체글 보기</button>
 			    	</div>
 			    	<div >
 			    		<c:if test="${user.userId eq board.userId}">
-			    			<button type="button" class="btn btn-primary" 
+			    			<button type="button" class="btn btn-dark" 
 			    				onclick="location.href='${conPath}/boardModifyView.do?boardNo=${board.boardNo}&pageNum=${pageNum}&search=${param.search}&type=${type}'">
 			    				수정
 			    			</button>
-			    			<button type="button" class="btn btn-primary" onclick="boardDelete()">
+			    			<button type="button" class="btn btn-dark" onclick="boardDelete()">
 			    				삭제
 			    			</button>
 			    		</c:if>
 				    	<c:if test="${not empty user}">
-				    		<button type="button" class="btn btn-primary" 
+				    		<button type="button" class="btn btn-dark" 
 				    		onclick="location.href='${conPath}/boardReplyView.do?boardNo=${board.boardNo}&pageNum=${pageNum}&search=${param.search}&type=${type}'">답변글</button>
 				    	</c:if>
 			    	</div>
