@@ -20,6 +20,7 @@ import com.ch.movie.service.BoardReplyViewService;
 import com.ch.movie.service.BoardWriteService;
 import com.ch.movie.service.CommentDeleteService;
 import com.ch.movie.service.CommentWriteService;
+import com.ch.movie.service.RegisterMovie;
 import com.ch.movie.service.MainService;
 import com.ch.movie.service.MovieContentService;
 import com.ch.movie.service.MovieRankingService;
@@ -279,11 +280,15 @@ public class Controller extends HttpServlet{
 			service.execute(request, response);
 			viewPage = "admin/userList.jsp";
 		
-		}else if(command.equals("/insertView.do")){
+		}else if(command.equals("/insert.do")){
 			viewPage = "admin/insert.jsp";
 			
+		}else if(command.equals("/RegisterMovie.do")){
+			service = new RegisterMovie();
+			service.execute(request, response);
+			viewPage = "insertView.do";
 			
-			
+		}else if(command.equals("/")){
 		}else if(command.equals("/")){
 		}else if(command.equals("/")){
 			

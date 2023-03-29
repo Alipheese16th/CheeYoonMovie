@@ -9,7 +9,6 @@
 <meta charset="UTF-8">
 <!-- 부트스트랩 아이콘 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 <style>
 	#submit{
 		font-size:14px;
@@ -140,7 +139,7 @@ $(function(){
 			
 					<ul class="navbar-nav me-auto mb-2 mb-md-0">
 						<li class="nav-item">
-							<a class="nav-link" href="${conPath}/insertView.do">등록페이지</a>
+							<a class="nav-link" href="${conPath}/insert.do">등록페이지</a>
 						</li>
 					</ul>
 				

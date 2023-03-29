@@ -17,7 +17,6 @@
 }
 
 </style>
-<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 </head>
 <body>
 <!-- Footer-->

@@ -67,12 +67,12 @@
 								
 					                <div class="form-outline">
 					                  <label class="form-label" for="movieTitle">영화 타이틀(한글)</label>
-					                  <input type="text" name="movieTitle" id="movieTitle" class="form-control" />
+					                  <input type="text" name="movieTitle" id="movieTitle" class="form-control" required="required"/>
 					                </div>
 					
 					                <div class="form-outline">
 					                  <label class="form-label" for="originalTitle">영화 타이틀(원제목 영어)</label>
-					                  <input type="text" name="originalTitle" id="originalTitle" class="form-control" />
+					                  <input type="text" name="originalTitle" id="originalTitle" class="form-control" required="required"/>
 					                </div>
 					
 									<div class="form-outline">

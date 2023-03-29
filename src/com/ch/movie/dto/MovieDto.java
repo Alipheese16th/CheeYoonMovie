@@ -19,6 +19,23 @@ public class MovieDto {
 	private ArrayList<PersonDto> personList;
 	private ArrayList<TrailerDto> trailerList;
 	
+	
+	
+	public MovieDto(String movieId, String originalTitle, String movieTitle, String movieSummary, int movieRunning,
+			String movieImage, Date movieDate, String movieGrade, int movieAudience, int state) {
+		super();
+		this.movieId = movieId;
+		this.originalTitle = originalTitle;
+		this.movieTitle = movieTitle;
+		this.movieSummary = movieSummary;
+		this.movieRunning = movieRunning;
+		this.movieImage = movieImage;
+		this.movieDate = movieDate;
+		this.movieGrade = movieGrade;
+		this.movieAudience = movieAudience;
+		this.state = state;
+	}
+
 	public MovieDto(String movieId, String originalTitle, String movieTitle, String movieSummary, int movieRunning,
 			String movieImage, Date movieDate, String movieGrade, int movieAudience, int state, double avgScore,
 			ArrayList<String> tagList, ArrayList<PersonDto> personList, ArrayList<TrailerDto> trailerList) {
