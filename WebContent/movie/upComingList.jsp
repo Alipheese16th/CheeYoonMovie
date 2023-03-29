@@ -15,6 +15,8 @@
 	<link rel="icon" type="image/x-icon" href="${conPath}/assets/favicon.ico" />
 	<!-- Core theme CSS (includes Bootstrap)-->
 	<link href="${conPath}/css/styles.css" rel="stylesheet" />
+	<!-- 부트스트랩 아이콘 -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 	
 	
@@ -32,6 +34,8 @@
 			color:black;
 		}
 		.mybtn{
+			background-color:#444444;
+			color:white;
 			width:150px;
 			text-align:left !important;
 		}
@@ -39,6 +43,10 @@
 			position:absolute;
 			top:50%;
 			left:10%;
+		}
+		.mybtn:hover{
+			background-color:#AAAAAA;
+			color:black;
 		}
 		
 	</style>
@@ -73,7 +81,11 @@
 			
 				<div class="container">
 				
-		    	<h1 class="my-5 text-center">개봉예정 영화 리스트</h1>
+		    	<h1 class="my-5 text-center">
+		    	<i class="bi bi-camera-reels-fill"></i>
+		    	
+		    	개봉예정 영화 리스트
+		    	</h1>
 		    	
 		    	<hr>
 		    	
@@ -129,7 +141,8 @@
 													<div class="col-md-4 d-flex align-items-center">
 													
 													
-													<button type="button" class="btn btn-dark btn-lg position-relative mybtn">
+													<button type="button" class="btn btn-lg position-relative rounded-pill mybtn"
+														onclick="location.href='${conPath}/movieContent.do?movieId=${movie.movieId}'">
 													  d-day
 													  <span class="badge rounded-pill">
 														<jsp:useBean id="now" class="java.util.Date"/>

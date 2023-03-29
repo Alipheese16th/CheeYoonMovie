@@ -23,8 +23,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="${conPath}/js/star-rating.js" type="text/javascript"></script>
     <script src="${conPath}/js/theme.js" type="text/javascript"></script>
-	<!-- star-rating -->
-	
+	<!-- 부트스트랩 아이콘 -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 	
 	<style>
 		.card img {
@@ -67,7 +67,11 @@
 			
 				<div class="container">
 				
-		    	<h1 class="my-5 text-center">현재상영작 영화 리스트</h1>
+		    	<h1 class="my-5 text-center">
+		    	<i class="bi bi-camera-reels"></i>
+		    	
+		    	현재상영작 영화 리스트
+		    	</h1>
 		    	
 		    	<hr>
 		    	

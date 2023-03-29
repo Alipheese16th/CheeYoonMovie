@@ -2,6 +2,7 @@ package com.ch.movie.dto;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 public class UserDto {
 	private String userId;
@@ -13,7 +14,28 @@ public class UserDto {
 	private String userTel;
 	private Timestamp userDate;
 	private Timestamp userLimit;
+	private ArrayList<BoardDto> boardList;
+	private ArrayList<CommentDto> commentList;
+	private ArrayList<RatingDto> ratingList;
 	
+	
+	public UserDto(String userId, String userPw, String userName, Date userBirth, String userGender, String userEmail,
+			String userTel, Timestamp userDate, Timestamp userLimit, ArrayList<BoardDto> boardList,
+			ArrayList<CommentDto> commentList, ArrayList<RatingDto> ratingList) {
+		this.userId = userId;
+		this.userPw = userPw;
+		this.userName = userName;
+		this.userBirth = userBirth;
+		this.userGender = userGender;
+		this.userEmail = userEmail;
+		this.userTel = userTel;
+		this.userDate = userDate;
+		this.userLimit = userLimit;
+		this.boardList = boardList;
+		this.commentList = commentList;
+		this.ratingList = ratingList;
+	}
+
 	public UserDto(String userId, String userPw, String userName, Date userBirth, String userGender, String userEmail,
 			String userTel, Timestamp userDate, Timestamp userLimit) {
 		this.userId = userId;
@@ -25,6 +47,26 @@ public class UserDto {
 		this.userTel = userTel;
 		this.userDate = userDate;
 		this.userLimit = userLimit;
+	}
+
+	
+	public ArrayList<BoardDto> getBoardList() {
+		return boardList;
+	}
+	public void setBoardList(ArrayList<BoardDto> boardList) {
+		this.boardList = boardList;
+	}
+	public ArrayList<CommentDto> getCommentList() {
+		return commentList;
+	}
+	public void setCommentList(ArrayList<CommentDto> commentList) {
+		this.commentList = commentList;
+	}
+	public ArrayList<RatingDto> getRatingList() {
+		return ratingList;
+	}
+	public void setRatingList(ArrayList<RatingDto> ratingList) {
+		this.ratingList = ratingList;
 	}
 
 	public String getUserId() {
@@ -103,7 +145,9 @@ public class UserDto {
 	public String toString() {
 		return "UserDto [userId=" + userId + ", userPw=" + userPw + ", userName=" + userName + ", userBirth="
 				+ userBirth + ", userGender=" + userGender + ", userEmail=" + userEmail + ", userTel=" + userTel
-				+ ", userDate=" + userDate + ", userLimit=" + userLimit + "]";
+				+ ", userDate=" + userDate + ", userLimit=" + userLimit + ", boardList=" + boardList + ", commentList="
+				+ commentList + ", ratingList=" + ratingList + "]";
 	}
+
 	
 }

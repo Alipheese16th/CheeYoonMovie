@@ -16,7 +16,32 @@
 	<!-- Core theme CSS (includes Bootstrap)-->
 	<link href="${conPath}/css/styles.css" rel="stylesheet" />
 	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+	<style>
+	.pagination > li > a{
+	    background-color: white;
+	    color: #5A4181;
+	}
 	
+	.pagination > li > a:focus,
+	.pagination > li > a:hover,
+	.pagination > li > span:focus,
+	.pagination > li > span:hover{
+	    color: #5a5a5a;
+	    background-color: #eee;
+	    border-color: #ddd;
+	}
+	
+	.pagination > .active > a{
+	    color: white;
+	    background-color: #444444 !Important;
+	    border: solid 1px #444444 !Important;
+	}
+	
+	.pagination > .active > a:hover{
+	    background-color: #444444 !Important;
+	    border: solid 1px #444444;
+	}
+	</style>
 </head>
 <body>
 
@@ -35,7 +60,7 @@
 		
 			<jsp:include page="../main/header.jsp"/>
 			
-			<div class="container">
+			<div class="container pb-5">
 			
 			    <h1 class="my-5 text-center">회원 목록</h1>
 			    
@@ -56,7 +81,7 @@
 						</c:if>
 						<c:if test="${userList.size() ne 0}">
 							<c:forEach var="user" items="${userList}">
-								<tr>
+								<tr onclick="godetail(${user.userId})">
 									<td>${user.userId}</td>
 									<td>${user.userName}</td>
 									<td>${user.userEmail}</td>
@@ -74,7 +99,7 @@
 			    
 			    <!-- 페이징 시작 -->
 			    <nav aria-label="Page navigation example">
-				  <ul class="pagination justify-content-center">
+				  <ul class="pagination justify-content-center pt-2">
 				  
 				  	<c:if test="${startPage <= BLOCKSIZE }">
 					    <li class="page-item disabled">
@@ -85,7 +110,7 @@
 			   	 	</c:if>
 			   	 	<c:if test="${startPage > BLOCKSIZE }">
 					    <li class="page-item">
-						    <a class="page-link" href="${conPath}/userList.do?pageNum=${startPage-1}">
+						    <a class="page-link" href="${conPath}/userList.do?pageNum=${startPage-1}&search=${search}">
 						    <span aria-hidden="true">&laquo;</span>
 						    </a>
 					    </li>
@@ -96,13 +121,13 @@
 							<li class="page-item active"><a class="page-link">${i}</a></li>
 						</c:if>
 			   	 		<c:if test="${i ne currentPage }">
-							<li class="page-item"><a class="page-link" href="${conPath}/userList.do?pageNum=${i}">${i}</a></li>
+							<li class="page-item"><a class="page-link" href="${conPath}/userList.do?pageNum=${i}&search=${search}">${i}</a></li>
 						</c:if>
 			   	 	</c:forEach>
 			   	 	
 			   	 	<c:if test="${endPage < pageCnt }">
 						<li class="page-item">
-							<a class="page-link" href="${conPath}/userList.do?pageNum=${endPage+1}">
+							<a class="page-link" href="${conPath}/userList.do?pageNum=${endPage+1}&search=${search}">
 							<span aria-hidden="true">&raquo;</span>
 							</a>
 						</li>
@@ -125,15 +150,9 @@
 					<form action="${conPath}/userList.do" class="d-flex" role="search">
 					<input type="hidden" name="pageNum" value="${pageNum}">
 						<div class="d-flex w-75 m-auto justify-content-center">
-						
-							<select name="type" class="form-select" style="width:100px">
-							  <option <c:if test="${type eq 'full'}">selected="selected"</c:if> value="full">전체</option>
-							  <option <c:if test="${type eq 'id'}">selected="selected"</c:if> value="id">아이디</option>
-							  <option <c:if test="${type eq 'name'}">selected="selected"</c:if> value="name">이름</option>
-							</select>
 							
-							<input class="form-control mx-2 w-25" type="search" name="search" value="${param.search}">
-							<input type="submit" class="btn btn-outline-primary" value="검색">
+							<input class="form-control mx-2 w-25" type="search" name="search" value="${search}" placeholder="id로 유저 검색">
+							<input type="submit" class="btn btn-outline-dark" value="검색">
 							
 						</div>
 					</form>
@@ -143,7 +162,22 @@
 			<jsp:include page="../main/footer.jsp"/>
 		</div>
 	</div>
-			
+
+<script>
+
+$(function(){
+	
+	$('tr').css('cursor','pointer').click(function(){
+		var userId = $(this).children().eq(0).text();
+		if(userId != '아이디'){
+			location.href = "${conPath}/userDetail.do?userId="+userId;
+		}
+	});
+	
+});
+
+	
+</script>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->

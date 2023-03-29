@@ -13,6 +13,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.ch.movie.dto.BoardDto;
+import com.ch.movie.dto.CommentDto;
+import com.ch.movie.dto.RatingDto;
 import com.ch.movie.dto.UserDto;
 
 public class UserDao {
@@ -171,7 +174,7 @@ public class UserDao {
 				String userTel = rs.getString("userTel");
 				Timestamp userDate = rs.getTimestamp("userDate");
 				Timestamp userLimit = rs.getTimestamp("userLimit");
-				dto = new UserDto(userId, userPw, userName, userBirth, userGender, userEmail, userTel, userDate, userLimit);
+				dto = new UserDto(userId, userPw, userName, userBirth, userGender, userEmail, userTel, userDate, userLimit,userBoardList(userId),userCommentList(userId),userRatingList(userId));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -318,6 +321,181 @@ public class UserDao {
 		return result;
 	}
 	
+	/////////////////////
+	//특정유저의 최근 자유게시판 글 목록
+	private ArrayList<BoardDto> userBoardList(String userId){
+		ArrayList<BoardDto> dtos = new ArrayList<BoardDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT B.*,(SELECT COUNT(*) FROM COMMENTS WHERE BOARDNO = B.BOARDNO) COMMENTCNT  FROM BOARD B " + 
+				"      WHERE USERID = ? ORDER BY BOARDDATE DESC";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int boardNo = rs.getInt("boardNo");
+				String boardTitle = rs.getString("boardTitle");
+				String boardContent = rs.getString("boardContent");
+				int boardHit = rs.getInt("boardHit");
+				Timestamp boardDate = rs.getTimestamp("boardDate");
+				Timestamp boardUpdate = rs.getTimestamp("boardUpdate");
+				int boardGroup = rs.getInt("boardGroup");
+				int boardStep = rs.getInt("boardStep");
+				int boardIndent = rs.getInt("boardIndent");
+				String boardIp = rs.getString("boardIp");
+				int commentCnt = rs.getInt("commentCnt");
+				dtos.add(new BoardDto(boardNo, userId, boardTitle, boardContent, boardHit, boardDate, boardUpdate, boardGroup, boardStep, boardIndent, boardIp, commentCnt));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return dtos;
+	}
 	
+	//특정유저의 댓글리스트
+	private ArrayList<CommentDto> userCommentList(String userId){
+		ArrayList<CommentDto> dtos = new ArrayList<CommentDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM COMMENTS WHERE USERID = ? ORDER BY COMMENTDATE DESC";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int commentNo = rs.getInt("commentNo");
+				int boardNo = rs.getInt("boardNo");
+				String commentContent = rs.getString("commentContent");
+				Timestamp commentDate = rs.getTimestamp("commentDate");
+				dtos.add(new CommentDto(commentNo, boardNo, userId, commentContent, commentDate));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return dtos;
+	}
+	// 특정 유저의 평점리스트
+	private ArrayList<RatingDto> userRatingList(String userId){
+		ArrayList<RatingDto> dtos = new ArrayList<RatingDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT MOVIETITLE, R.* FROM RATING R, MOVIE M WHERE R.MOVIEID = M.MOVIEID AND USERID = ? ORDER BY RATINGDATE DESC";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,userId);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				String movieId = rs.getString("movieId");
+				String ratingContent = rs.getString("ratingContent");
+				int ratingScore = rs.getInt("ratingScore");
+				Timestamp ratingDate = rs.getTimestamp("ratingDate");
+				String movieTitle = rs.getString("movieTitle");
+				dtos.add(new RatingDto(userId, movieId, ratingContent, ratingScore, ratingDate,null,movieTitle));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return dtos;
+	}
+	
+	// userId 로 회원검색
+	public ArrayList<UserDto> searchUser(String search, int startRow, int endRow) {
+		ArrayList<UserDto> dtos = new ArrayList<UserDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM " + 
+				"  (SELECT ROWNUM RN ,U.* FROM USERS U WHERE USERID LIKE '%' || ? || '%') " + 
+				"  WHERE RN BETWEEN ? AND ?";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,search);
+			pstmt.setInt(2,startRow);
+			pstmt.setInt(3,endRow);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				String userId = rs.getString("userId");
+				String userPw = rs.getString("userPw");
+				String userName = rs.getString("userName");
+				Date userBirth = rs.getDate("userBirth");
+				String userGender = rs.getString("userGender");
+				String userEmail = rs.getString("userEmail");
+				String userTel = rs.getString("userTel");
+				Timestamp userDate = rs.getTimestamp("userDate");
+				Timestamp userLimit = rs.getTimestamp("userLimit");
+				dtos.add(new UserDto(userId, userPw, userName, userBirth, userGender, userEmail, userTel, userDate, userLimit));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return dtos;
+	}
+	// userId로 회원검색 페이징 갯수
+	public int totalSearchUser(String search) {
+		int total = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT COUNT(*) FROM USERS WHERE USERID LIKE '%' || ? || '%'";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, search);
+			rs = pstmt.executeQuery();
+			rs.next();
+			total = rs.getInt(1);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return total;
+	}
 	
 }

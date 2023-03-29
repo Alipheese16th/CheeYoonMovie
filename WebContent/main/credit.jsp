@@ -15,6 +15,8 @@
 	<link rel="icon" type="image/x-icon" href="${conPath}/assets/favicon.ico" />
 	<!-- Core theme CSS (includes Bootstrap)-->
 	<link href="${conPath}/css/styles.css" rel="stylesheet" />
+	<!-- 부트스트랩 아이콘 -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 </head>
 <body style="background-color:#000508;">
@@ -32,10 +34,10 @@
 			
 				<section class="container text-white">
 					<div class="row vh-100 justify-content-center align-items-center">
-						<div class="col-md-6 col-xl-5">
+						<div class="col-md-5 col-xl-4">
 							<img class="img-fluid" src="${conPath}/personImg/cheeyoon.png" alt="프로필사진">
 						</div>
-						<div class="col-md-6 col-xl-5">
+						<div class="col-md-7 col-xl-6">
 							<h1 class="fw-bold text-info">신치윤</h1>
 							<p class="text-muted">공부중인 개발자 지망생</p>
 							
@@ -46,7 +48,8 @@
 							 미흡하지만 열심히 만들었습니다. 감사합니다.</p>
 							 
 							<p class="text-muted">email | shwoo1103@gmail.com</p>
-							<a href="https://github.com/Alipheese16th" target="_blank" class="btn btn-outline-info mt-3 rounded-pill">프로필 보기</a>
+							
+							<a href="https://github.com/Alipheese16th" target="_blank" class="btn btn-lg btn-outline-info mt-3 rounded-pill">GitHub <i class="bi bi-github"></i></a>
 						</div>
 					</div>
 				</section>

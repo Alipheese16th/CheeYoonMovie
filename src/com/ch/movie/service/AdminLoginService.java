@@ -17,7 +17,7 @@ public class AdminLoginService implements Service {
 		if(result == AdminDao.FAIL) {
 			request.setAttribute("adminLoginError", "관리자 로그인 실패 - 아이디와 비번을 확인하세요");
 		}else {
-			request.getSession().invalidate();
+			request.getSession().invalidate(); //기존 일반로그인은 해제
 			request.getSession().setAttribute("admin", admin.getAdmin(adminId));
 		}
 

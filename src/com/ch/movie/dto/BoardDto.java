@@ -17,6 +17,25 @@ public class BoardDto {
 	private int commentCnt;
 	private String userName;
 	
+	
+	public BoardDto(int boardNo, String userId, String boardTitle, String boardContent, int boardHit,
+			Timestamp boardDate, Timestamp boardUpdate, int boardGroup, int boardStep, int boardIndent, String boardIp,
+			int commentCnt) {
+		super();
+		this.boardNo = boardNo;
+		this.userId = userId;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.boardHit = boardHit;
+		this.boardDate = boardDate;
+		this.boardUpdate = boardUpdate;
+		this.boardGroup = boardGroup;
+		this.boardStep = boardStep;
+		this.boardIndent = boardIndent;
+		this.boardIp = boardIp;
+		this.commentCnt = commentCnt;
+	}
+
 	public BoardDto(int boardNo, String userId, String boardTitle, String boardContent, int boardHit,
 			Timestamp boardDate, Timestamp boardUpdate, int boardGroup, int boardStep, int boardIndent, String boardIp,
 			int commentCnt, String userName) {

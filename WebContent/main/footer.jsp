@@ -17,7 +17,7 @@
 }
 
 </style>
-
+<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 </head>
 <body>
 <!-- Footer-->
@@ -31,9 +31,11 @@
 	    	</p>
 	    	<br class="py-1">
 	    	<p class="text-end m-0">
-		    	<small class="text-muted">
-		    	<span class="text-decoration-none text-secondary adminLogin">관리자모드</span>
-		    	</small>
+	    		<c:if test="${empty admin}">
+	    			<small class="text-muted">
+			    	<span class="text-decoration-none text-secondary adminLogin">관리자모드</span>
+			    	</small>
+	    		</c:if>
 	    	</p>
 	    </div>
 	    

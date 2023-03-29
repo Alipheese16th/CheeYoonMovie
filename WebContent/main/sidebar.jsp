@@ -7,6 +7,8 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<!-- 부트스트랩 아이콘 -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 	<style>
 		.list-group-item{
 			background-color:black;
@@ -24,8 +26,8 @@
 <body class="sb-sidenav-toggled"> <!-- sb-sidnav || sb-sidnav-toggled -->
 	
 	<div class="bg-black text-center" id="sidebar-wrapper">
-		<div class="sidebar-heading">
-			<a href="${conPath}/main.do">LOGO</a>
+		<div class="sidebar-heading p-0" style="height:56px;">
+			<a href="${conPath}/main.do"><i class="bi bi-camera-fill" style="font-size:40px;"></i></a>
 		</div>
 		<div class="list-group list-group-flush">
 		    <a class="list-group-item list-group-item-action p-3 mt-3" href="${conPath}/main.do">영화 홈</a><!-- list-group-item-dark -->

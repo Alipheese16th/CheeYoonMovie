@@ -55,22 +55,18 @@
 	
 	.nowplaying .card img:hover{
 		transform: scale(1.1);
-  		transition: transform 2s;
- 		filter: brightness(80%);
+  		transition: transform 0.3s;
+/*  		filter: brightness(80%); */
  		cursor:pointer;
 	}
-	.trailer .card img:hover{
- 		transform: scale(1.1);
-  		transition: transform 2s;
- 		filter: brightness(80%);
- 		cursor:pointer;
-	}
+	
 	.upcoming .card img:hover{
 		transform: scale(1.1);
-  		transition: transform 2s;
- 		filter: brightness(80%);
+  		transition: transform 0.3s;
+/*  		filter: brightness(80%); */
  		cursor:pointer;
 	}
+
 	.card{
 		overflow:hidden;
 	}
@@ -98,9 +94,11 @@
 				            				<img src="${conPath}/movieImg/${carousel.movieImage}" width="160px" height="240px">
 				            			</div>
 				            			<div class="box col-9">
-					            			<h3>
-					            			${carousel.movieTitle}
-					            			</h3>
+					            			<h5>
+					            			<br>
+					            			${carousel.movieTitle}<br>
+					            			${carousel.trailerList[0].trailerName}
+					            			</h5>
 				            			</div>
 				            		</div>
 				          		</div>
@@ -121,10 +119,11 @@
 				            				<img src="${conPath}/movieImg/${carousel.movieImage}" width="160px" height="240px">
 				            			</div>
 				            			<div class="box col-9">
-					            			<h4>
+					            			<h5>
+					            			<br>
 					            			${carousel.movieTitle}<br>
-					            			${carousel.originalTitle}
-					            			</h4>
+					            			${carousel.trailerList[0].trailerName}
+					            			</h5>
 				            			</div>
 				            		</div>
 				          		</div>

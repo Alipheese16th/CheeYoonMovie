@@ -107,7 +107,11 @@
 		alert('${ratingDeleteError}');
 	</script>
 </c:if>
-
+<c:if test="${not empty param.next}">
+	<script>
+		location.href="${conPath}/${param.next}?selectId=${param.selectId}";
+	</script>
+</c:if>
 
 	<div class="d-flex bg-black" id="wrapper"> <!-- bg-black text-white -->
 	
@@ -512,7 +516,7 @@ function ratingDelete() {
 
 }
 
-$(document).on('ready', function () {
+$(function(){
 	
 	$('.modify').click(function(){
 		if ($('#modifyForm').css('display') == 'none') {
@@ -525,9 +529,6 @@ $(document).on('ready', function () {
 	        $('#modifyForm').css('display', 'none');
 	    }
 	});
-	
-	
-	
 	
 	$('.write').click(function(){
 		var user = "<c:out value='${user}'/>";

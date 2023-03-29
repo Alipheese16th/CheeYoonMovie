@@ -17,15 +17,9 @@
 	<link href="${conPath}/css/styles.css" rel="stylesheet" />
 	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 	
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 	
-	
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
-
-	<!-- include summernote css/js-->
-	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 	<script>
 		 $(document).ready(function() {
 			 $('#summernote').summernote({

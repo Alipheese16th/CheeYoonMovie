@@ -14,65 +14,9 @@
 	<!-- Favicon-->
 	<link rel="icon" type="image/x-icon" href="${conPath}/assets/favicon.ico" />
 	<!-- Core theme CSS (includes Bootstrap)-->
-	<link href="${conPath}/css/styles.css" rel="stylesheet" />
+	<link href="${conPath}/css/styles.css" rel="stylesheet" />	
 	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
-	<script>
-	$(document).ready(function(){
-		
-		$('.write').click(function(){
-			var user = "<c:out value='${user}'/>";
-			if(!user){
-				alert('글쓰기는 로그인한 회원만 가능합니다');
-			}else{
-				location.href ="${conPath}/boardWriteView.do";
-			}
-		});
-		
-		$('tr').css('cursor','pointer').click(function(){
-			var boardNo = $(this).children().eq(0).text();
-			if(!isNaN(boardNo)){
-				location.href = "${conPath}/boardContent.do?boardNo="+boardNo+"&pageNum=${pageNum}&search=${param.search}&type=${type}";
-			}
-		});
-		
-		$('.forma').submit(function(){
-			var qa = $('#qa').val();
-			if(qa.trim() == ''){
-				alert('빈칸은 검색할 수 없습니다');
-				return false;
-			}
-		});
-		
-	});
-	</script>
 	
-	<style>
-		.pagination > li > a{
-		    background-color: white;
-		    color: #5A4181;
-		}
-		
-		.pagination > li > a:focus,
-		.pagination > li > a:hover,
-		.pagination > li > span:focus,
-		.pagination > li > span:hover{
-		    color: #5a5a5a;
-		    background-color: #eee;
-		    border-color: #ddd;
-		}
-		
-		.pagination > .active > a{
-		    color: white;
-		    background-color: #444444 !Important;
-		    border: solid 1px #444444 !Important;
-		}
-		
-		.pagination > .active > a:hover{
-		    background-color: #444444 !Important;
-		    border: solid 1px #444444;
-		}
-	
-	</style>
 </head>
 <body>
 

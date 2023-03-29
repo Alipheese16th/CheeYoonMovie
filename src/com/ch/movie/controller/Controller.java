@@ -42,6 +42,7 @@ import com.ch.movie.service.UserModifyService;
 import com.ch.movie.service.UserWithdrawalService;
 import com.ch.movie.service.commentModifyService;
 import com.ch.movie.service.UpComingListService;
+import com.ch.movie.service.UserDetailService;
 import com.ch.movie.service.CommentModifyViewService;
 
 @WebServlet("*.do")
@@ -64,9 +65,7 @@ public class Controller extends HttpServlet{
 		Service service = null;
 		
 		
-		/* * * * * * * * * * * * * * * * * * * * * *
-		 * * * * * * * * 비회원 관련 요청 * * * * * * * * 
-		 * * * * * * * * * * * * * * * * * * * * * */
+		
 		if(command.equals("/main.do")) {
 			service = new MainService();
 			service.execute(request, response);
@@ -80,6 +79,10 @@ public class Controller extends HttpServlet{
 		}else if(command.equals("/credit.do")){
 			viewPage = "main/credit.jsp";
 		
+			
+		/* * * * * * * * * * * * * * * * * * * * * *
+		 * * * * * * * * 비회원 관련 요청 * * * * * * * * 
+		 * * * * * * * * * * * * * * * * * * * * * */
 		}else if(command.equals("/registerView.do")){	// 회원가입 뷰 페이지
 			viewPage = "user/register.jsp";
 		
@@ -126,6 +129,11 @@ public class Controller extends HttpServlet{
 			service = new UserWithdrawalService();
 			service.execute(request, response);
 			viewPage = "main.do";
+		
+		}else if(command.equals("/userDetail.do")){
+			service = new UserDetailService();
+			service.execute(request, response);
+			viewPage = "user/userDetail.jsp";
 			
 		/* * * * * * * * * * * * * * * * * * * * * *
 		 * * * * * * * * board 관련 요청 * * * * * * * * 
@@ -270,12 +278,12 @@ public class Controller extends HttpServlet{
 			service = new UserListService();
 			service.execute(request, response);
 			viewPage = "admin/userList.jsp";
+		
+		}else if(command.equals("/insertView.do")){
+			viewPage = "admin/insert.jsp";
 			
-		
-		
-	
-		}else if(command.equals("/")){
-		}else if(command.equals("/")){
+			
+			
 		}else if(command.equals("/")){
 		}else if(command.equals("/")){
 			

@@ -10,6 +10,16 @@ public class CommentDto {
 	private Timestamp commentDate;
 	private String userName;
 	
+	
+	
+	public CommentDto(int commentNo, int boardNo, String userId, String commentContent, Timestamp commentDate) {
+		this.commentNo = commentNo;
+		this.boardNo = boardNo;
+		this.userId = userId;
+		this.commentContent = commentContent;
+		this.commentDate = commentDate;
+	}
+
 	public CommentDto(int commentNo, int boardNo, String userId, String commentContent, Timestamp commentDate,
 			String userName) {
 		super();

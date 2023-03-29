@@ -23,7 +23,9 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="${conPath}/js/star-rating.js" type="text/javascript"></script>
     <script src="${conPath}/js/theme.js" type="text/javascript"></script>
-	<!-- star-rating -->
+	<!-- 부트스트랩 아이콘 -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+	
 	<style>
 		a{
 			text-decoration:none;
@@ -65,25 +67,32 @@
 		    border: solid 1px #444444;
 		}
 		
+		.mya:hover{
+			background-color: #444444;
+			color:white;
+		}
+		
 	</style>
 	
 </head>
 <body>
 
-	<div class="d-flex" id="wrapper"> <!-- bg-black text-white -->
+	<div class="d-flex bg-black" id="wrapper"> <!-- bg-black text-white -->
 		<jsp:include page="../main/sidebar.jsp"/>
 		<div id="page-content-wrapper">
 			<jsp:include page="../main/header.jsp"/>
 			
-			<div class="container">
+			<div class="container-fluid">
 			
-				<div class="container pb-5">
-				
-			    	<h2 class="my-5 text-center">영화 순위</h2>
+				<div class="container mt-5 card m-auto pb-5">
+					
+					<div class="text-center card-header">
+				    	<h1>영화 순위</h1>
+					</div>
 			    	
 			    	<div class="container">
 			    	
-				    	<div>
+				    	<div class="mt-5">
 					    	<ul class="nav nav-tabs">
 							  <li class="nav-item">
 							    <a class="nav-link <c:if test="${type eq 'default'}">active</c:if>" href="${conPath}/movieRanking.do?type=default">관람객순(현재 상영중)</a>
@@ -97,9 +106,10 @@
 							</ul>
 				    	</div>
 				    	<div class="d-flex justify-content-between m-3">
-				    		<div>순위</div>
+				    		<div>순위 <i class="bi bi-bar-chart-fill"></i></div>
 				    		<div>영화명</div>
 				    		<div>
+				    			<i class="bi bi-calendar-check"></i>
 				    			<jsp:useBean id="now" class="java.util.Date"/>
 								<fmt:formatDate  value="${now}" pattern="yyyy.MM.dd" />
 				    		</div>
@@ -110,7 +120,7 @@
 								<li class="py-2">
 									<div class="d-flex justify-content-between">
 										<div class="text-truncate">
-											<a href="${conPath}/movieContent.do?movieId=${movie.movieId}">
+											<a class="mya" href="${conPath}/movieContent.do?movieId=${movie.movieId}">
 												${movie.movieTitle} (${movie.originalTitle})
 											</a>
 										</div>
@@ -145,7 +155,7 @@
 				
 					<!-- 페이징 시작 -->
 				    <nav aria-label="Page navigation example">
-					  <ul class="pagination justify-content-center pb-2">
+					  <ul class="pagination justify-content-center py-2">
 					  	<c:if test="${startPage <= BLOCKSIZE }">
 						    <li class="page-item disabled">
 							    <a class="page-link">

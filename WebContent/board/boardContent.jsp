@@ -15,6 +15,7 @@
 	<link rel="icon" type="image/x-icon" href="${conPath}/assets/favicon.ico" />
 	<!-- Core theme CSS (includes Bootstrap)-->
 	<link href="${conPath}/css/styles.css" rel="stylesheet" />
+	
 	<style>
 	#content{
 		min-height:200px;
@@ -24,21 +25,6 @@
 	<script>
 	
 	$(document).ready(function(){
-		$('.write').click(function(){
-			var user = "<c:out value='${user}'/>";
-			if(!user){
-				alert('글쓰기는 로그인한 회원만 가능합니다');
-			}else{
-				location.href ="${conPath}/boardWriteView.do";
-			}
-		});
-		
-		$('tr').css('cursor','pointer').click(function(){
-			var boardNo = $(this).children().eq(0).text();
-			if(!isNaN(boardNo)){
-				location.href = "${conPath}/boardContent.do?boardNo="+boardNo+"&pageNum=${pageNum}&search=${param.search}&type=${type}";
-			}
-		});
 		
 		$('.commentModifyView').click(function(){
 			var commentNo = $(this).attr('id');
@@ -63,19 +49,14 @@
 	function boardDelete() {
 		
 	  if (confirm("글 삭제를 진행하시겠습니까?")) {
-
 	    location.href = "${conPath}/boardDelete.do?boardNo=${board.boardNo}&pageNum=${pageNum}&search=${param.search}&type=${type}";
-
 	  }
-
 	}
 	
 	function commentDelete() {
 	
 		if (confirm("댓글 삭제를 진행하시겠습니까?")) {
-			
 		location.href='${conPath}/commentDelete.do?boardNo=${dto.boardNo}&commentNo=${dto.commentNo}&commentPageNum=${commentPageNum}&pageNum=${pageNum}&search=${param.search}&type=${type}';
-
 		}
 	}
 	</script>
@@ -143,7 +124,7 @@
 
 			    <hr>
 			    <div class="mx-2">
-			    	<h3>${board.boardTitle}</h3>
+			    	<h5>${board.boardTitle}</h5>
 			    </div>
 			    <hr>
 			    <div class="d-flex justify-content-between mx-2">
@@ -151,15 +132,17 @@
 			    		<small>${board.userName}(${board.userId})</small>
 			    	</div>
 			    	<div >
-				    	<small>댓글 12</small>
+				    	<small>댓글 ${board.commentCnt}</small>
 				    	<small>조회수 ${board.boardHit}</small>
 				    	<small>작성일 <fmt:formatDate value="${board.boardDate}" pattern="yy/MM/dd HH:mm:ss"/></small>
-				    	<small>수정일 <fmt:formatDate value="${board.boardUpdate}" pattern="yy/MM/dd HH:mm:ss"/></small>
+				    	<c:if test="${not empty board.boardUpdate}">
+					    	<small>수정일 <fmt:formatDate value="${board.boardUpdate}" pattern="yy/MM/dd HH:mm:ss"/></small>
+				    	</c:if>
 			    	</div>
 			    </div>
 			    <hr>
 		    	<div class="row mx-2">
-		    		<pre id="content">${board.boardContent}</pre>
+		    		<pre id="content" class="fs-6">${board.boardContent}</pre>
 		    	</div>
 		    	
 		    	<hr>

@@ -11,6 +11,15 @@ public class RatingDto {
 	private String userName;
 	private String movieTitle;
 	
+	
+	
+	public RatingDto(String userId, String movieId, String ratingContent, int ratingScore, Timestamp ratingDate) {
+		this.userId = userId;
+		this.movieId = movieId;
+		this.ratingContent = ratingContent;
+		this.ratingScore = ratingScore;
+		this.ratingDate = ratingDate;
+	}
 	public RatingDto(String userId, String movieId, String ratingContent, int ratingScore, Timestamp ratingDate,
 			String userName) {
 		this.userId = userId;
