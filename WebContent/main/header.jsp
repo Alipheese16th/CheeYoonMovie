@@ -9,76 +9,29 @@
 <meta charset="UTF-8">
 <!-- 부트스트랩 아이콘 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-<style>
-	#submit{
-		font-size:14px;
-	}
-	.navbar{
-		background-color:#181818;
-		color:white;
-	}
-	.navbar a{
-		color:white;
-	}
-	.navbar a:hover{
-		background-color:white;
-		color:black;
-	}
-	.navbar #main:hover{
-		background-color:white;
-		color:black;
-	}
-	#submit{
-		background-color:#444444;
-		color:white;
-	}
-	#submit:hover{
-		background-color:white;
-		color:black;
-	}
-	
-</style>
+<link href="${conPath}/css/header.css" rel="stylesheet" />
 
-<script>
-function withdrawal() {
-	if (confirm("정말로 회원 탈퇴를 진행하시겠습니까?")) {
-	   location.href = "${conPath}/withdrawal.do";
-	}
-}
-
-$(function(){
-	
-	$('.form').submit(function(){
-		var q = $('#q').val();
-		if(q.trim() == ''){
-			alert('빈칸은 검색할 수 없습니다');
-			return false;
-		}
-	});
-	
-});
-
-</script>
 </head>
 <body>
-	
-		<nav class="navbar navbar-expand-lg"> <!-- navbar-light bg-light border-bottom -->
-	
-			<div class="container-fluid">
+
+	<nav class="navbar navbar-expand-lg"> <!-- navbar-light bg-light border-bottom -->
+
+		<div class="container-fluid">
 			
-				<!-- 사이드바 토글 버튼 -->
-				<button class="btn p-0" id="sidebarToggle">
-					<i class="bi bi-layout-sidebar-inset" style="color:white; font-size:24px;"></i>
-				</button>
-				
-				<a class="navbar-brand ms-5" id="main" href="${conPath}/main.do">
-				CheeYoonM<i class="bi bi-circle-fill" style="font-size:12px;"></i>vie
-				</a>
+			<!-- 사이드바 토글 버튼 -->
+			<button class="btn p-0" id="sidebarToggle">
+				<i class="bi bi-layout-sidebar-inset"></i>
+			</button>
 			
-				<!-- 글로벌바 토글 버튼 -->
-				<button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-					<img src="${conPath}/img/toggle.png">
-				</button>
+			<a class="navbar-brand ms-5" id="main" href="${conPath}/main.do">
+			CheeYoonM<i class="bi bi-circle-fill"></i>vie
+			</a>
+		
+			<!-- 글로벌바 토글 버튼 -->
+			<button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" 
+					aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+				<img src="${conPath}/img/toggle.png">
+			</button>
 			
 			<c:if test="${empty user and empty admin}"><%--로그인 전 화면 --%>
 			
@@ -118,7 +71,6 @@ $(function(){
 						</button>
 						<ul class="dropdown-menu dropdown-menu-dark">
 							<li><a class="dropdown-item active" href="${conPath}/modifyView.do">정보수정</a></li>
-							<li><a class="dropdown-item" onclick="withdrawal()">회원탈퇴</a></li>
 							<li><hr class="dropdown-divider"></li>
 							<li><a class="dropdown-item" href="${conPath}/logout.do">로그아웃</a></li>
 						</ul>
@@ -149,7 +101,6 @@ $(function(){
 						</button>
 						<ul class="dropdown-menu dropdown-menu-dark">
 							<li><a class="dropdown-item" href="${conPath}/userList.do">회원목록</a></li>
-							<li><a class="dropdown-item" href="#">임시버튼</a></li>
 							<li><hr class="dropdown-divider"></li>
 							<li><a class="dropdown-item" href="${conPath}/logout.do">로그아웃</a></li>
 						</ul>
@@ -164,12 +115,8 @@ $(function(){
 				
 			</c:if>
 			
-			
-			</div>
-		
-		</nav>
-		
-
-	
+		</div>
+	</nav>
+<script src="${conPath}/js/header.js"></script>
 </body>
 </html>

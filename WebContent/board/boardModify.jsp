@@ -26,20 +26,7 @@
 	<!-- include summernote css/js-->
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
-	<script>
-		 $(document).ready(function() {
-			 $('#summernote').summernote({
-			        height: 300,
-			        minHeight: null,
-			        maxHeight: null,
-			        lang : 'ko-KR',
-			        onImageUpload: function(files, editor, welEditable) {
-			                sendFile(files[0], editor, welEditable);
-			            }
-
-			    });
-		 });
-	</script>
+	<script src="${conPath}/js/summernote.js"></script>
 	<style>
 		div.note-popover{
 		display:none;

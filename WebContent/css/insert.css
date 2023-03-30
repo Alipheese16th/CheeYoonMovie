@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+#movieForm{
+	position:fixed;
+	top:0%;
+	left:12.5%;
+	display:none;
+	z-index:1;
+}
+#tagForm{
+	position:fixed;
+	top:30%;
+	left:25%;
+	display:none;
+	z-index:3;
+}
+#trailerForm{
+	position:fixed;
+	top:30%;
+	left:25%;
+	display:none;
+	z-index:2;
+}
+.card-header{
+	background-color:#444444;
+}
+.btn-dark:hover{
+	background-color:white;
+	color:black;
+}

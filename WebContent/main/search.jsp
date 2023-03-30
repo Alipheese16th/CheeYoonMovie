@@ -23,36 +23,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="${conPath}/js/star-rating.js" type="text/javascript"></script>
     <script src="${conPath}/js/theme.js" type="text/javascript"></script>
-	<!-- star-rating -->
-	
-	
-	<style>
-		.card img {
-			width: 70px;
-			height: 105px;
-			object-fit: cover;
-		}
-		.card img, .card-title, .card-text{
-			cursor:pointer;
-		}
-		
-		.trailercard{
-			width: 20rem; min-width: 10rem;
-		}
-		
-	</style>
-	<script>
-		
-		$(function(){
-			
-			$('.card img, .card-title, .card-text').click(function(){
-				var movieId = $(this).parents('.card').attr('id');
-				location.href = '${conPath}/movieContent.do?movieId='+movieId;
-			});
-			
-		});
-	
-	</script>
+	<link href="${conPath}/css/search.css" rel="stylesheet" />
 	
 </head>
 <body>
@@ -66,14 +37,14 @@
 			
 				<div class="container pb-5">
 				
-		    	<h2 class="my-5 text-center">&#39;<span class="text-danger">${param.q}</span>&#39;에 대한 영화 통합검색결과 입니다.</h2>
+		    	<h2 class="my-5 text-center">&#39;<span class="text-danger">${q}</span>&#39;에 대한 영화 통합검색결과 입니다.</h2>
 		    	
 		    	<p class="text-center"> 영화 | 태그 | 동영상 </p>
 		    	
 		    	<c:if test="${empty titleResultList and empty tagResultList and empty trailerResultList}">
 		    		<hr>
 		    		<br class="py-5">
-					<h3 class="py-5 text-center">&#39;<span class="text-danger">${param.q}</span>&#39;에 대한 검색 결과가 없습니다</h3>
+					<h3 class="py-5 text-center">&#39;<span class="text-danger">${q}</span>&#39;에 대한 검색 결과가 없습니다</h3>
 					<br class="py-5">
 		    		<hr>
 				</c:if>
@@ -88,49 +59,61 @@
 			    		<c:forEach var="movie" items="${titleResultList}">
 			    			
 				    		<div class="card mb-3 border-0" id="${movie.movieId}">
-								<div class="d-flex">
+				    		
+								<div class="d-flex justify-content-between">
 								
-									<div class="">
-										<img src="${conPath}/movieImg/${movie.movieImage}">
-									</div>
+									<div class="d-flex">
 									
-									<div class="ms-2 ps-2">
-										<div class="card-body p-0">
+										<div>
+											<img src="${conPath}/movieImg/${movie.movieImage}">
+										</div>
+										
+										<div class="ms-2 ps-2">
+											<div class="card-body p-0">
+													
+												<p class="card-title m-0">${movie.movieTitle}(${movie.originalTitle})</p>
+												<input type="text" class="kv-fa rating-loading" value="${movie.avgScore/2}" data-size="xs">
 												
-											<p class="card-title m-0">${movie.movieTitle}(${movie.originalTitle})</p>
-											<input type="text" class="kv-fa rating-loading" value="${movie.avgScore/2}" data-size="xs">
-											
-											<p class="card-text m-0">
-												<small class="text-muted">
-													<c:forEach var="tag" items="${movie.tagList}" varStatus="i">
-													${tag}<c:if test="${i.last eq false}">,</c:if>
-													</c:forEach>
-													|
-													${movie.movieRunning}분
-													|
-													${movie.movieDate}
-												</small>
-											</p>
-											<p class="card-text">
-												<small class="text-muted">
-													감독:
-													<c:forEach var="person" items="${movie.personList}">
-													<c:if test="${person.casting eq '감독'}">
-													${person.personName}
-													</c:if>
-													</c:forEach>
-													|
-													출연:
-													<c:forEach var="person" items="${movie.personList}" varStatus="i">
-													<c:if test="${person.casting ne '감독'}">
-													${person.personName}<c:if test="${i.last eq false}">,</c:if>
-													</c:if>
-													</c:forEach>
-												</small>
-											</p>
-											
+												<p class="card-text m-0">
+													<small class="text-muted">
+														<c:forEach var="tag" items="${movie.tagList}" varStatus="i">
+														${tag}<c:if test="${i.last eq false}">,</c:if>
+														</c:forEach>
+														|
+														${movie.movieRunning}분
+														|
+														${movie.movieDate}
+													</small>
+												</p>
+												<p class="card-text">
+													<small class="text-muted">
+														감독:
+														<c:forEach var="person" items="${movie.personList}">
+														<c:if test="${person.casting eq '감독'}">
+														${person.personName}
+														</c:if>
+														</c:forEach>
+														|
+														출연:
+														<c:forEach var="person" items="${movie.personList}" varStatus="i">
+														<c:if test="${person.casting ne '감독'}">
+														${person.personName}<c:if test="${i.last eq false}">,</c:if>
+														</c:if>
+														</c:forEach>
+													</small>
+												</p>
+												
+											</div>
 										</div>
 									</div>
+									
+									<div class="d-flex align-items-center">
+										<c:if test="${not empty admin}">
+											<button class="btn btn-outline-dark" 
+											onclick="location.href='${conPath}/updateMovieView.do?movieId=${movie.movieId}&q=${q}'">영화 수정</button>
+										</c:if>
+									</div>
+									
 								</div>
 							</div>
 							
@@ -150,49 +133,58 @@
 			    		<c:forEach var="movie" items="${tagResultList}">
 			    			
 				    		<div class="card mb-3 border-0" id="${movie.movieId}">
-								<div class="d-flex">
+								<div class="d-flex justify-content-between">
 								
-									<div class="">
-										<img src="${conPath}/movieImg/${movie.movieImage}">
-									</div>
-									
-									<div class="ms-2 ps-2">
-										<div class="card-body p-0">
+									<div class="d-flex">
+										<div>
+											<img src="${conPath}/movieImg/${movie.movieImage}">
+										</div>
+										
+										<div class="ms-2 ps-2">
+											<div class="card-body p-0">
+													
+												<p class="card-title m-0">${movie.movieTitle}(${movie.originalTitle})</p>
+												<input type="text" class="kv-fa rating-loading" value="${movie.avgScore/2}" data-size="xs">
 												
-											<p class="card-title m-0">${movie.movieTitle}(${movie.originalTitle})</p>
-											<input type="text" class="kv-fa rating-loading" value="${movie.avgScore/2}" data-size="xs">
-											
-											<p class="card-text m-0">
-												<small class="text-muted">
-													<c:forEach var="tag" items="${movie.tagList}" varStatus="i">
-													${tag}<c:if test="${i.last eq false}">,</c:if>
-													</c:forEach>
-													|
-													${movie.movieRunning}분
-													|
-													${movie.movieDate}
-												</small>
-											</p>
-											<p class="card-text">
-												<small class="text-muted">
-													감독:
-													<c:forEach var="person" items="${movie.personList}">
-													<c:if test="${person.casting eq '감독'}">
-													${person.personName}
-													</c:if>
-													</c:forEach>
-													|
-													출연:
-													<c:forEach var="person" items="${movie.personList}" varStatus="i">
-													<c:if test="${person.casting ne '감독'}">
-													${person.personName}<c:if test="${i.last eq false}">,</c:if>
-													</c:if>
-													</c:forEach>
-												</small>
-											</p>
-											
+												<p class="card-text m-0">
+													<small class="text-muted">
+														<c:forEach var="tag" items="${movie.tagList}" varStatus="i">
+														${tag}<c:if test="${i.last eq false}">,</c:if>
+														</c:forEach>
+														|
+														${movie.movieRunning}분
+														|
+														${movie.movieDate}
+													</small>
+												</p>
+												<p class="card-text">
+													<small class="text-muted">
+														감독:
+														<c:forEach var="person" items="${movie.personList}">
+														<c:if test="${person.casting eq '감독'}">
+														${person.personName}
+														</c:if>
+														</c:forEach>
+														|
+														출연:
+														<c:forEach var="person" items="${movie.personList}" varStatus="i">
+														<c:if test="${person.casting ne '감독'}">
+														${person.personName}<c:if test="${i.last eq false}">,</c:if>
+														</c:if>
+														</c:forEach>
+													</small>
+												</p>
+											</div>
 										</div>
 									</div>
+									
+									<div class="d-flex align-items-center">
+										<c:if test="${not empty admin}">
+											<button class="btn btn-outline-dark" 
+											onclick="location.href='${conPath}/updateMovieView.do?movieId=${movie.movieId}&q=${q}'">영화 수정</button>
+										</c:if>
+									</div>
+									
 								</div>
 							</div>
 							
@@ -263,33 +255,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="${conPath}/js/scripts.js"></script>
-<script>
-	$(document).on('ready', function () {
-			
-		$('.forms').submit(function(){
-			var qs = $('#qs').val();
-			if(qs.trim() == ''){
-				alert('빈칸은 검색할 수 없습니다');
-				return false;
-			}
-		});
-		
-		//별점기능 추가
-        $('.kv-fa').rating({
-            theme: 'krajee-fa',
-            filledStar: '<i class="fa fa-star"></i>',
-            emptyStar: '<i class="fa fa-star-o"></i>',
-            stars:5,
-            max:5,
-            step:0.5,
-            showCaption:false,
-            displayOnly:true,
-        });
-        $('.rating,.kv-fa').on(
-                'change', function () {
-                    console.log('Rating selected: ' + $(this).val());
-        });
-    });
-</script>
+<script src="${conPath}/js/search.js"></script>
+
 </body>
 </html>

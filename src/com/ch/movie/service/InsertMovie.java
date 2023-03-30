@@ -16,12 +16,10 @@ import com.ch.movie.dto.MovieDto;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-public class RegisterMovie implements Service {
+public class InsertMovie implements Service {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		
-		
 		
 		
 		String path = request.getServletContext().getRealPath("movieImg");
@@ -31,28 +29,38 @@ public class RegisterMovie implements Service {
 		try {
 			// 첨부한 파일을 서버에 저장하고, 파일이름 가져오기
 			MultipartRequest mRequest = new MultipartRequest(request,path,maxSize,"utf-8",new DefaultFileRenamePolicy());
+
 			movieImage = mRequest.getFilesystemName("movieImage");
 			movieImage = (movieImage == null ? "NOIMG.JPG" : movieImage);
 			String movieTitle = mRequest.getParameter("movieTitle");
 			String originalTitle = mRequest.getParameter("originalTitle");
 			String movieSummary = mRequest.getParameter("movieSummary");
+			int movieRunning = 0;
 			String movieRunningStr = mRequest.getParameter("movieRunning");
-			int movieRunning = Integer.parseInt(movieRunningStr);
+			if(!movieRunningStr.equals("")) {
+				movieRunning = Integer.parseInt(movieRunningStr);
+			}
+			Date movieDate = null;
 			String movieDateStr = mRequest.getParameter("movieDate");
-			Date movieDate = Date.valueOf(movieDateStr);
+			if(!movieDateStr.equals("")) {
+				movieDate = Date.valueOf(movieDateStr);
+			}
 			String movieGrade = mRequest.getParameter("movieGrade");
+			int movieAudience = 0;
 			String movieAudienceStr = mRequest.getParameter("movieAudience");
-			int movieAudience = Integer.parseInt(movieAudienceStr);
+			if(!movieAudienceStr.equals("")) {
+				movieAudience = Integer.parseInt(movieAudienceStr);
+			}
 			String stateStr = mRequest.getParameter("state");
 			int state = Integer.parseInt(stateStr);
 			
 			MovieDao movie = new MovieDao();
-			result = movie.registerMovie(new MovieDto(null, originalTitle, movieTitle, movieSummary, movieRunning, movieImage, movieDate, movieGrade, movieAudience, state));
+			result = movie.insertMovie(new MovieDto(null, originalTitle, movieTitle, movieSummary, movieRunning, movieImage, movieDate, movieGrade, movieAudience, state));
 			
-			if(result==1) {
-				request.setAttribute("registerResult", "영화등록 성공");				
+			if(result==0) {
+				request.setAttribute("rigsterMovieResult", "영화 등록 실패");				
 			}else {
-				request.setAttribute("registerResult", "영화등록 실패");				
+				request.setAttribute("rigsterMovieResult", "영화 등록 성공!");
 			}
 			
 		} catch (IOException e) {
@@ -62,7 +70,7 @@ public class RegisterMovie implements Service {
 		
 		// 이클립스에도 서버첨부파일 복사
 		File serverFile = new File(path+"/"+movieImage);
-		if(movieImage!=null && result==1){
+		if(movieImage!=null && !(movieImage.equals("NOIMG.JPG")) && result==1){
 			InputStream is = null;
 			OutputStream os = null;
 			try{

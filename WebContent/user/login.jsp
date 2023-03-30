@@ -42,10 +42,14 @@
 	                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
 	                    style="width: 185px;" alt="logo">
 	                </a>
-	                <h4 class="mt-1 mb-5 pb-1">영화 리뷰 사이트</h4>
+	                <h4 class="mt-1 mb-5 pb-1">CheeYoonMovie</h4>
                 </div>
 
                 <form action="${conPath}/login.do" method="post">
+                  <input type="hidden" name="next" value="${param.next}">
+                  <input type="hidden" name="boardNo" value="${param.boardNo}">
+                  <input type="hidden" name="movieId" value="${param.movieId}">
+                
                   <p>소유하신 계정으로 로그인하세요</p>
 
                   <div class="form-outline mb-4">
@@ -63,7 +67,7 @@
                   <div class="text-center pt-1 mb-5 pb-1">
                   	<input type="submit" class="btn btn-primary btn-block fa-lg gradient-custom-1 mb-3" value="로그인">
                     <hr>
-                    <a class="text-muted" href="#!">비밀번호를 잊으셨나요?</a>
+                    <a class="text-muted" onclick="openPop()">비밀번호를 잊으셨나요?</a>
                   </div>
 
                   <div class="d-flex align-items-center justify-content-center pb-4">
@@ -77,10 +81,12 @@
             </div>
             <div class="col-lg-6 d-flex align-items-center gradient-custom-1">
               <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                <h4 class="mb-4">저희는 영화 전문 리뷰사이트입니다</h4>
-                <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <h5 class="mb-4">저희는 영화 전문 리뷰사이트입니다</h5>
+                <p class="small mb-0"><p>방문해 주셔서 감사합니다.<br>
+							본 웹사이트는 이젠 아카데미에서 운영하는<br>
+							"디지털컨버전스 풀스택 웹개발자 과정"<br>
+							훈련생 신치윤이 만든 첫 개별 프로젝트입니다.<br>
+							 미흡하지만 열심히 만들었습니다. 감사합니다.</p></p>
               </div>
             </div>
           </div>
@@ -94,6 +100,12 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="${conPath}/js/scripts.js"></script>
+
+<script>
+	function openPop(){
+	    var popup = window.open('${conPath}/findPassword.do', '네이버팝업', 'width=500px,height=300px,top=450,left=220,scrollbars=yes');
+	 }
+</script>
 
 </body>
 </html>

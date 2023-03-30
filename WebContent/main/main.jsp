@@ -19,7 +19,6 @@
 	
 </head>
 <body>
-
 <c:if test="${not empty loginError}">
 	<script>
 		alert('${loginError}');
@@ -42,7 +41,11 @@
 		alert('${withdrawalResult}');
 	</script>
 </c:if>
-
+<c:if test="${not empty param.next}">
+	<script>
+		location.href="${conPath}/${param.next}?boardNo=${param.boardNo}&movieId=${param.movieId}";
+	</script>
+</c:if>
 
 	<div class="d-flex bg-black text-white" id="wrapper"> <!--  -->
 	

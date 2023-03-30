@@ -24,6 +24,11 @@
 	
 </head>
 <body>
+<c:if test="${empty user}">
+	<script>
+		location.href="${conPath}/loginView.do?next=modifyView.do";
+	</script>
+</c:if>
 
 <section class="h-100 bg-dark">
   <div class="container py-5 h-100">

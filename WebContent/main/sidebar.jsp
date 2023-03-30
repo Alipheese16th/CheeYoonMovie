@@ -9,25 +9,13 @@
 	<meta charset="UTF-8">
 	<!-- 부트스트랩 아이콘 -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-	<style>
-		.list-group-item{
-			background-color:black;
-			color:white;
-		}
-		.sidebar-heading{
-			background-color:#181818;
-		}
-		.sidebar-heading a{
-			text-decoration:none;
-			color:white;
-		}
-	</style>
+	<link href="${conPath}/css/sidebar.css" rel="stylesheet" />
 </head>
 <body class="sb-sidenav-toggled"> <!-- sb-sidnav || sb-sidnav-toggled -->
 	
 	<div class="bg-black text-center" id="sidebar-wrapper">
-		<div class="sidebar-heading p-0" style="height:56px;">
-			<a href="${conPath}/main.do"><i class="bi bi-camera-fill" style="font-size:40px;"></i></a>
+		<div class="sidebar-heading p-0">
+			<a href="${conPath}/main.do"><i class="bi bi-camera-fill"></i></a>
 		</div>
 		<div class="list-group list-group-flush">
 		    <a class="list-group-item list-group-item-action p-3 mt-3" href="${conPath}/main.do">영화 홈</a><!-- list-group-item-dark -->
@@ -40,14 +28,12 @@
 		    	<ul class="list-group list-group-flush">
 				  <li class="list-group-item list-group-item-action p-3" onclick="location.href='${conPath}/nowPlayingList.do'">현재 상영영화</li>
 				  <li class="list-group-item list-group-item-action p-3" onclick="location.href='${conPath}/upComingList.do'">개봉 예정영화</li>
-				  <li class="list-group-item list-group-item-action p-3" onclick="location.href='${conPath}/trailerList.do'">예고편</li>
 				</ul>
 			</div>
 		    
 		    <a class="list-group-item list-group-item-action p-3 mt-3" href="${conPath}/movieRanking.do">영화 랭킹</a>
 		    <a class="list-group-item list-group-item-action p-3 mt-3" href="${conPath}/boardList.do">자유게시판</a>
 		    <a class="list-group-item list-group-item-action p-3 mt-3" href="${conPath}/ratingList.do">평점리스트</a>
-		    <a class="list-group-item list-group-item-action p-3 mt-3" href="#!">디렉토리</a>
 		    <a class="list-group-item list-group-item-action p-3 mt-3" href="${conPath}/credit.do">credit</a>
 		</div>
 	</div>

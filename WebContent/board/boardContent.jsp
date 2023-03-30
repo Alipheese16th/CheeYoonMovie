@@ -15,15 +15,10 @@
 	<link rel="icon" type="image/x-icon" href="${conPath}/assets/favicon.ico" />
 	<!-- Core theme CSS (includes Bootstrap)-->
 	<link href="${conPath}/css/styles.css" rel="stylesheet" />
-	
-	<style>
-	#content{
-		min-height:200px;
-	}
-	</style>
 	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+	<link href="${conPath}/css/boardContent.css" rel="stylesheet" />
 	<script>
-	
+
 	$(document).ready(function(){
 		
 		$('.commentModifyView').click(function(){
@@ -45,56 +40,25 @@
 			
 		});
 	});
-	
+
 	function boardDelete() {
 		
 	  if (confirm("글 삭제를 진행하시겠습니까?")) {
 	    location.href = "${conPath}/boardDelete.do?boardNo=${board.boardNo}&pageNum=${pageNum}&search=${param.search}&type=${type}";
 	  }
 	}
-	
+
 	function commentDelete() {
-	
+
 		if (confirm("댓글 삭제를 진행하시겠습니까?")) {
 		location.href='${conPath}/commentDelete.do?boardNo=${dto.boardNo}&commentNo=${dto.commentNo}&commentPageNum=${commentPageNum}&pageNum=${pageNum}&search=${param.search}&type=${type}';
 		}
 	}
+
 	</script>
-	
-	<style>
-		.pagination > li > a{
-		    background-color: white;
-		    color: #5A4181;
-		}
-		
-		.pagination > li > a:focus,
-		.pagination > li > a:hover,
-		.pagination > li > span:focus,
-		.pagination > li > span:hover{
-		    color: #5a5a5a;
-		    background-color: #eee;
-		    border-color: #ddd;
-		}
-		
-		.pagination > .active > a{
-		    color: white;
-		    background-color: #444444 !Important;
-		    border: solid 1px #444444 !Important;
-		}
-		
-		.pagination > .active > a:hover{
-		    background-color: #444444 !Important;
-		    border: solid 1px #444444;
-		}
-		.btn-dark:hover{
-			background-color:white;
-			color:#242424;
-		}
-	</style>
 	
 </head>
 <body>
-
 <c:if test="${not empty commentWriteError}">
 	<script>
 		alert('${commentWriteError}');
@@ -160,7 +124,7 @@
 							  	<div><small>${dto.userName}(${dto.userId})</small></div>
 							  	<div>
 							  		<small><fmt:formatDate value="${dto.commentDate}" pattern="yy/MM/dd HH:mm:ss"/></small>
-							  		<c:if test="${user.userId eq dto.userId}">
+							  		<c:if test="${user.userId eq dto.userId or not empty admin}">
 								  		<button type="button" id="${dto.commentNo}" class="btn btn-sm btn-outline-dark py-0 px-1 ms-2 commentModifyView">수정</button>
 								  		<button type="button" class="btn btn-sm btn-outline-dark py-0 px-1" onclick="commentDelete()">삭제</button>
 							  		</c:if>
@@ -205,7 +169,7 @@
 		    	
 		    	
 		    	<c:if test="${empty user}">
-		    		<h4>댓글 작성 권한이 없습니다</h4>
+		    		<h4>댓글 작성 권한이 없습니다 <button class="nextlogin btn btn-outline-dark" onclick="location.href='${conPath}/loginView.do?next=boardContent.do&boardNo=${board.boardNo}'">로그인</button></h4>
 		    	</c:if>
 		    	
 		    	<c:if test="${not empty user}">
@@ -233,7 +197,7 @@
 			    		<button type="button" class="btn btn-outline-dark" onclick="location='${conPath}/boardList.do'">전체글 보기</button>
 			    	</div>
 			    	<div >
-			    		<c:if test="${user.userId eq board.userId}">
+			    		<c:if test="${user.userId eq board.userId or not empty admin}">
 			    			<button type="button" class="btn btn-dark" 
 			    				onclick="location.href='${conPath}/boardModifyView.do?boardNo=${board.boardNo}&pageNum=${pageNum}&search=${param.search}&type=${type}'">
 			    				수정
@@ -250,7 +214,6 @@
 			    </div>
 			    
 		    </div>
-			
 		    
 			<jsp:include page="list.jsp"/>
 			    

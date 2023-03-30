@@ -62,8 +62,8 @@ public class BoardListService implements Service {
 		}
 		
 		request.setAttribute("type", type);
-		
 		request.setAttribute("pageNum", pageNum);
+		
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("pageCnt", pageCnt);
 		request.setAttribute("BLOCKSIZE", BLOCKSIZE);

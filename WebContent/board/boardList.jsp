@@ -31,7 +31,6 @@
 	</script>
 </c:if>
 
-
 	<div class="d-flex" id="wrapper"> <!-- bg-black text-white -->
 	
 		<jsp:include page="../main/sidebar.jsp"/>

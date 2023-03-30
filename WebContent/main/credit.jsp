@@ -21,7 +21,6 @@
 </head>
 <body style="background-color:#000508;">
 	
-	
 	<div class="d-flex bg-black text-white" id="wrapper"> <!--  -->
 	
 		<jsp:include page="../main/sidebar.jsp"/>
@@ -49,7 +48,7 @@
 							 
 							<p class="text-muted">email | shwoo1103@gmail.com</p>
 							
-							<a href="https://github.com/Alipheese16th" target="_blank" class="btn btn-lg btn-outline-info mt-3 rounded-pill">GitHub <i class="bi bi-github"></i></a>
+							<a href="https://github.com/Alipheese16th/CheeYoonMovie" target="_blank" class="btn btn-lg btn-outline-info mt-3 rounded-pill">GitHub <i class="bi bi-github"></i></a>
 						</div>
 					</div>
 				</section>
@@ -59,7 +58,6 @@
 		</div>
 		
 	</div>
-	
 			
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

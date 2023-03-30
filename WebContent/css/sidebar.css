@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+.list-group-item{
+	background-color:black;
+	color:white;
+}
+.sidebar-heading{
+	background-color:#181818;
+	height:56px;
+}
+.sidebar-heading a{
+	text-decoration:none;
+	color:white;
+}
+.bi-camera-fill{
+	font-size:40px;
+}

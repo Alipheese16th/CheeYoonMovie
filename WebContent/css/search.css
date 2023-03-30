@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+.card img {
+	width: 70px;
+	height: 105px;
+	object-fit: cover;
+}
+.card img, .card-title, .card-text{
+	cursor:pointer;
+}
+
+.trailercard{
+	width: 20rem; min-width: 10rem;
+}

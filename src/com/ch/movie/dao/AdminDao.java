@@ -86,6 +86,61 @@ public class AdminDao {
 		}
 		return dto;
 	}
+	
+	// 태그 등록
+	public int insertTag(String movieId, String tag) {
+		int result = FAIL;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "INSERT INTO TAG(MOVIEID,TAG) VALUES(?,?)";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, movieId);
+			pstmt.setString(2, tag);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage()+"태그등록에러"+movieId+tag);
+		}finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return result;
+	}
+	// 태그 등록
+	public int insertTrailer(String movieId, String trailerName, String trailerUrl) {
+		int result = FAIL;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "INSERT INTO TRAILER(MOVIEID,TRAILERNAME,TRAILERURL) " + 
+				"  VALUES(?,?,?)";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, movieId);
+			pstmt.setString(2, trailerName);
+			pstmt.setString(3, trailerUrl);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage()+"트레일러등록에러");
+		}finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return result;
+	}
+	
+	
+	
+	
 	// 회원 제재
 	public int suspensionUser(String userId,Timestamp userLimit) {
 		int result = FAIL;

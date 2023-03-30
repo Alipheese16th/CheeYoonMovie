@@ -19,21 +19,7 @@
 	
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-	
-	<script>
-		 $(document).ready(function() {
-			 $('#summernote').summernote({
-			        height: 300,
-			        minHeight: null,
-			        maxHeight: null,
-			        lang : 'ko-KR',
-			        onImageUpload: function(files, editor, welEditable) {
-			                sendFile(files[0], editor, welEditable);
-			            }
-
-			    });
-		 });
-	</script>
+	<script src="${conPath}/js/summernote.js"></script>
 	<style>
 		div.note-popover{
 		display:none;
@@ -85,8 +71,8 @@
 					</div>
 					
 					<div class="d-flex justify-content-center">
-						<input type="submit" value="글쓰기" class="btn btn-primary mx-1">
-					  	<input type="reset" value="취소" class="btn btn-primary mx-1" onclick="history.back()">
+						<input type="submit" value="글쓰기" class="btn btn-dark mx-1">
+					  	<input type="reset" value="취소" class="btn btn-dark mx-1" onclick="history.back()">
 					</div>
 			    </form>
 			</div>

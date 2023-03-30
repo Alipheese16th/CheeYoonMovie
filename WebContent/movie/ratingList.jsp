@@ -25,6 +25,8 @@
     <script src="${conPath}/js/theme.js" type="text/javascript"></script>
 	<!-- 부트스트랩 아이콘 -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+	<!-- bootstrap-select -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
 	<style>
 	.trailer img{
 		height:200px;
@@ -97,8 +99,8 @@
 				<div class="container pb-5">
 					
 					<div class="card m-auto my-5 mycard">
-						<div class="card-header text-center">
-							<h3>네티즌 관람객 평점</h3>
+						<div class="card-header text-center text-white" style="background-color:#444444;">
+							<h3 class="my-3">네티즌 관람객 평점</h3>
 						</div>
 						<c:if test="${not empty movie}">
 							<div class="d-flex p-3">
@@ -180,10 +182,10 @@
 						</c:if>
 						
 						<div class="container p-3">
-							<label for="selectId"><span>현재 상영작</span> 평점보기</label>
-							<br>
+							<label for="selectId" class="pb-1"><span>현재 상영작</span> 평점보기</label>
+							
 							<form action="${conPath}/ratingList.do" id="selectForm">
-								<select name="selectId" id="selectId">
+								<select id="selectId" name="selectId" class="selectpicker my-select" data-live-search="true">
 									<option>현재 상영작</option>
 									<c:forEach var="nowp" items="${nowPlayingList}">
 										<option value="${nowp.movieId}">${nowp.movieTitle}</option>
@@ -208,7 +210,7 @@
 						<thead>
 							<tr>
 								<td><i class="bi bi-person-fill"></i> 글쓴이</td>
-								<td><i class="bi bi-chat-left-dots-fill"></i> 감상평</td>
+								<td><i class="bi bi-chat-dots"></i> 감상평</td>
 								<td><i class="bi bi-calendar3"></i> 날짜</td>
 							</tr>
 						</thead>
@@ -393,10 +395,14 @@
 	  </form>
 	</div>
 	<div id="result" style="display:none"></div>
+
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="${conPath}/js/scripts.js"></script>
+<!-- bootstrap-select -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
+
 <script>
 
 	function ratingDelete() {

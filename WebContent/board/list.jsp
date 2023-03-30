@@ -9,33 +9,7 @@
 	<meta charset="utf-8" />
 	<!-- 부트스트랩 아이콘 -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-	<style>
-		.pagination > li > a{
-		    background-color: white;
-		    color: #5A4181;
-		}
-		
-		.pagination > li > a:focus,
-		.pagination > li > a:hover,
-		.pagination > li > span:focus,
-		.pagination > li > span:hover{
-		    color: #5a5a5a;
-		    background-color: #eee;
-		    border-color: #ddd;
-		}
-		
-		.pagination > .active > a{
-		    color: white;
-		    background-color: #444444 !Important;
-		    border: solid 1px #444444 !Important;
-		}
-		
-		.pagination > .active > a:hover{
-		    background-color: #444444 !Important;
-		    border: solid 1px #444444;
-		}
-	
-	</style>
+	<link href="${conPath}/css/list.css" rel="stylesheet" />	
 	
 </head>
 <body>
@@ -43,9 +17,9 @@
 	<table class="table table-hover table-striped caption-top mx-2">
 		<caption>자유롭게 원하시는 글을 작성하세요</caption>
 		<thead>
-			<tr>
+			<tr class="text-center">
 				<th><i class="bi bi-justify"></i> 번호</th>
-				<th><i class="bi bi-chat-dots-fill"></i> 제목</th>
+				<th class="text-start"><i class="bi bi-chat-dots-fill"></i> 제목</th>
 				<th><i class="bi bi-person-fill"></i> 작성자</th>
 				<th><i class="bi bi-calendar3"></i> 날짜</th>
 				<th><i class="bi bi-fire"></i> 조회수</th>
@@ -59,7 +33,7 @@
 				<c:forEach var="dto" items="${list}">
 				
 				<tr>
-					<td>${dto.boardNo }</td>
+					<td class="text-center">${dto.boardNo }</td>
 					
 					<td class="w-50">
 						<c:forEach var="i" begin="1" end="${dto.boardIndent }"><!-- 답글 들여쓰기 처리 -->
@@ -79,13 +53,13 @@
 						</c:if>
 					</td>
 					
-					<td>${dto.userName}(${dto.userId})</td>
+					<td class="text-center">${dto.userName}(${dto.userId})</td>
 					
-					<td>
+					<td class="text-center">
 						<fmt:formatDate value="${dto.boardDate }" pattern="yy/MM/dd"/>
 					</td>
 					
-					<td>${dto.boardHit }</td>
+					<td class="text-center">${dto.boardHit }</td>
 					
 				</tr>
 				
@@ -166,38 +140,39 @@
 	</div>
 	<!-- 검색 기능 끝 -->
 	
-	<script>
-	$(document).ready(function(){
+<script>
+$(document).ready(function(){
 		
-		$('.write').click(function(){
-			var user = "<c:out value='${user}'/>";
-			if(!user){
-				alert('글쓰기는 로그인한 회원만 가능합니다');
-			}else{
-				location.href ="${conPath}/boardWriteView.do";
-			}
-		});
-		
-		$('tr').css('cursor','pointer').click(function(){
-			var boardNo = $(this).children().eq(0).text();
-			if(!isNaN(boardNo)){
-				location.href = "${conPath}/boardContent.do?boardNo="+boardNo+"&pageNum=${pageNum}&search=${param.search}&type=${type}";
-			}
-		});
-		
-		$('.forma').submit(function(){
-			var qa = $('#qa').val();
-			if(qa.trim() == ''){
-				alert('빈칸은 검색할 수 없습니다');
-				return false;
-			}
-		});
-		
-		$('#searchbtn').click(function(){
-			$('.forma').submit();
-		});
-		
+	$('.write').click(function(){
+		var user = "<c:out value='${user}'/>";
+		if(!user){
+			alert('글쓰기는 로그인한 회원만 가능합니다');
+			location.href="${conPath}/loginView.do?next=boardWriteView.do";
+		}else{
+			location.href ="${conPath}/boardWriteView.do";
+		}
 	});
-	</script>
+	
+	$('tr').css('cursor','pointer').click(function(){
+		var boardNo = $(this).children().eq(0).text();
+		if(!isNaN(boardNo)){
+			location.href = "${conPath}/boardContent.do?boardNo="+boardNo+"&pageNum=${pageNum}&search=${param.search}&type=${type}";
+		}
+	});
+	
+	$('.forma').submit(function(){
+		var qa = $('#qa').val();
+		if(qa.trim() == ''){
+			alert('빈칸은 검색할 수 없습니다');
+			return false;
+		}
+	});
+	
+	$('#searchbtn').click(function(){
+		$('.forma').submit();
+	});
+	
+});
+</script>
 </body>
 </html>

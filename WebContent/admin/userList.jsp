@@ -16,32 +16,7 @@
 	<!-- Core theme CSS (includes Bootstrap)-->
 	<link href="${conPath}/css/styles.css" rel="stylesheet" />
 	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
-	<style>
-	.pagination > li > a{
-	    background-color: white;
-	    color: #5A4181;
-	}
-	
-	.pagination > li > a:focus,
-	.pagination > li > a:hover,
-	.pagination > li > span:focus,
-	.pagination > li > span:hover{
-	    color: #5a5a5a;
-	    background-color: #eee;
-	    border-color: #ddd;
-	}
-	
-	.pagination > .active > a{
-	    color: white;
-	    background-color: #444444 !Important;
-	    border: solid 1px #444444 !Important;
-	}
-	
-	.pagination > .active > a:hover{
-	    background-color: #444444 !Important;
-	    border: solid 1px #444444;
-	}
-	</style>
+	<link href="${conPath}/css/userList.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -163,21 +138,7 @@
 		</div>
 	</div>
 
-<script>
-
-$(function(){
-	
-	$('tr').css('cursor','pointer').click(function(){
-		var userId = $(this).children().eq(0).text();
-		if(userId != '아이디'){
-			location.href = "${conPath}/userDetail.do?userId="+userId;
-		}
-	});
-	
-});
-
-	
-</script>
+<script src="${conPath}/js/userList.js"></script>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->

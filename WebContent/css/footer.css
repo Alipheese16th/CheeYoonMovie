@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+#adminLogin{
+	position:fixed;
+	bottom:10%;
+	left:25%;
+	display:none;
+	z-index:10;
+}

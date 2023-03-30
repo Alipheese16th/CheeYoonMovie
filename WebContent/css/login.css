@@ -41,6 +41,11 @@ border-bottom-right-radius: .3rem;
 }
 }
 
-
+section{
+	background:url('../img/ouou.png') no-repeat center;
+	background-size:cover;
+	height:100vh;
+	min-height:100vh;
+}
 
 

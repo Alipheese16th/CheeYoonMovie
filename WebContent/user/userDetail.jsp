@@ -33,6 +33,10 @@
 		.card a:hover{
 			text-decoration:underline;
 		}
+		.btn-dark:hover{
+			background-color:white;
+			color:black;
+		}
 	</style>
 </head>
 <body>
@@ -90,16 +94,20 @@
 				    				${rating.ratingContent}
 				    				</a>
 				    				&nbsp;
-				    				<small>(${rating.movieTitle} : ${rating.ratingScore}점)</small>
+				    				<small class="text-danger">(${rating.movieTitle} : ${rating.ratingScore}점)</small>
 				    			</div>
 				    			<div>
 				    				<fmt:formatDate value="${rating.ratingDate}" pattern="yy/MM/dd HH:mm:ss"/>
 				    			</div>
 				    		</div>
 				    	</c:forEach>
+				    	
 			    	</div>
 			    	
 			    	<div class="py-5"></div>
+			    	<div class="d-flex justify-content-end">
+			    		<button type="button" class="btn btn-dark me-5" onclick="withdrawal()">회원탈퇴</button>
+			    	</div>
 			    
 			    </div><!-- card container 끝 -->
 			    
@@ -108,11 +116,16 @@
 		</div>
 		
 	</div>
-	
-	
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="${conPath}/js/scripts.js"></script>
+<script>
+function withdrawal() {
+	if (confirm("정말로 회원 탈퇴를 진행하시겠습니까?")) {
+	   location.href = "${conPath}/withdrawal.do";
+	}
+}
+</script>
 </body>
 </html>

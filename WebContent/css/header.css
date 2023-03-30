@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+#submit{
+		font-size:14px;
+	}
+	.navbar{
+		background-color:#181818;
+		color:white;
+	}
+	.navbar a{
+		color:white;
+	}
+	.navbar a:hover{
+		background-color:white;
+		color:black;
+	}
+	.navbar #main:hover{
+		background-color:white;
+		color:black;
+	}
+	#submit{
+		background-color:#444444;
+		color:white;
+	}
+	#submit:hover{
+		background-color:white;
+		color:black;
+	}
+	.bi-layout-sidebar-inset{
+		color:white; font-size:24px;
+	}
+	.bi-circle-fill{
+		font-size:12px;
+	}
+	

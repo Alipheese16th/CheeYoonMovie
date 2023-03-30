@@ -597,27 +597,67 @@ public class MovieDao {
 		return total;
 	}
 	
+	
+	
+	// 모든 영화
+	public ArrayList<MovieDto> allMovie() {
+		ArrayList<MovieDto> dtos = new ArrayList<MovieDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM MOVIE";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				String movieId = rs.getString("movieId");
+				String originalTitle = rs.getString("originalTitle");
+				String movieTitle = rs.getString("movieTitle");
+				String movieSummary = rs.getString("movieSummary");
+				int movieRunning = rs.getInt("movieRunning");
+				String movieImage = rs.getString("movieImage");
+				Date movieDate = rs.getDate("movieDate");
+				String movieGrade = rs.getString("movieGrade");
+				int movieAudience = rs.getInt("movieAudience");
+				int state = rs.getInt("state");
+				dtos.add(new MovieDto(movieId, originalTitle, movieTitle, movieSummary, movieRunning, movieImage, movieDate, movieGrade, 
+						movieAudience, state));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return dtos;
+	}
+	
 	// 영화등록
-	public int registerMovie(MovieDto dto) {
+	public int insertMovie(MovieDto dto) {
 		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "INSERT INTO MOVIE(MOVIEID, ORIGINALTITLE, MOVIETITLE, MOVIESUMMARY, MOVIERUNNING, MOVIEIMAGE, " + 
 				"            MOVIEDATE, MOVIEGRADE, MOVIEAUDIENCE, STATE) " + 
-				"  VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				"  VALUES('m'||LPAD(MOVIE_SEQ.NEXTVAL,3,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dto.getMovieId());
-			pstmt.setString(2, dto.getOriginalTitle());
-			pstmt.setString(3, dto.getMovieTitle());
-			pstmt.setString(4, dto.getMovieSummary());
-			pstmt.setInt(5, dto.getMovieRunning());
-			pstmt.setString(6, dto.getMovieImage());
-			pstmt.setDate(7, dto.getMovieDate());
-			pstmt.setString(8, dto.getMovieGrade());
-			pstmt.setInt(9, dto.getMovieAudience());
-			pstmt.setInt(10, dto.getState());
+			pstmt.setString(1, dto.getOriginalTitle());
+			pstmt.setString(2, dto.getMovieTitle());
+			pstmt.setString(3, dto.getMovieSummary());
+			pstmt.setInt(4, dto.getMovieRunning());
+			pstmt.setString(5, dto.getMovieImage());
+			pstmt.setDate(6, dto.getMovieDate());
+			pstmt.setString(7, dto.getMovieGrade());
+			pstmt.setInt(8, dto.getMovieAudience());
+			pstmt.setInt(9, dto.getState());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

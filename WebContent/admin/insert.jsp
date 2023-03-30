@@ -15,28 +15,32 @@
 	<link rel="icon" type="image/x-icon" href="${conPath}/assets/favicon.ico" />
 	<!-- Core theme CSS (includes Bootstrap)-->
 	<link href="${conPath}/css/styles.css" rel="stylesheet" />
+	<!-- bootstrap-select -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
 	<!-- datepicker -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-
-	<style>
-	#movieForm{
-		position:fixed;
-		top:0%;
-		left:12.5%;
-		display:none;
-		z-index:9;
-	}
-	.card-header{
-		background-color:#444444;
-	}
-	</style>
-	
+	<link href="${conPath}/css/insert.css" rel="stylesheet" />
 </head>
 <body>
 
-	<div class="d-flex bg-black" id="wrapper"> <!-- bg-black text-white -->
+<c:if test="${not empty registerMovieError}">
+	<script>alert('${registerMovieError}');</script>
+</c:if>
+<c:if test="${not empty rigsterMovieResult}">
+	<script>alert('${rigsterMovieResult}');</script>
+</c:if>
+<c:if test="${not empty insertTagResult}">
+	<script>alert('${insertTagResult}');</script>
+</c:if>
+<c:if test="${not empty insertTrailerResult}">
+	<script>alert('${insertTrailerResult}');</script>
+</c:if>
+<c:if test="${not empty refreshMovieResult}">
+	<script>alert('${refreshMovieResult}');</script>
+</c:if>
+
+	<div class="d-flex bg-black" id="wrapper">
 		<jsp:include page="../main/sidebar.jsp"/>
 		<div id="page-content-wrapper">
 			<jsp:include page="../main/header.jsp"/>
@@ -48,11 +52,17 @@
 				    	<h2 class="m-0 p-2 text-white">관리자 등록 모드</h2>
 				    </div>
 				    
+				    <div class="d-flex justify-content-end mt-2">
+				    	<button class="btn btn-dark" onclick="location.href='${conPath}/refreshMovie.do'">영화 업데이트</button>
+				    </div>
+				    
 			    	<div class="container p-3">
 			    		
-			    		<div class="card">
-			    			<h5>영화 등록(태그포함)</h5>
-				    		<button class="insertMovie btn btn-outline-dark">영화 등록</button>
+			    		<div class="card p-5 text-center">
+			    			<h5>영화 등록</h5>
+			    			<div class="d-flex justify-content-center mt-3">
+					    		<button class="insertMovie btn btn-outline-dark w-50">영화 등록</button>
+			    			</div>
 			    		</div>
 			    		
 			    		<!-- 영화 등록 form -->
@@ -60,7 +70,7 @@
               				<form action="${conPath}/insertMovie.do" method="post" enctype="multipart/form-data">
               				
               					<div class="card-header text-white">
-									<h3 class="text-center">영화등록 form</h3>
+									<h3 class="text-center">영화 등록</h3>
 								</div>
 								
 								<div class="card-body">
@@ -125,25 +135,120 @@
 									    <input type="button" value="취소" id="movieCancel" class="btn btn-outline-dark w-25 mx-2">
 									    <input type="submit" value="확인" class="btn btn-dark w-25 mx-2">
 								    </div>
-					                
 				                
 				                </div>
 							</form>
 			            </div>
 			    		<!-- 영화 등록 form끝 -->
 				    	
-				    	
 				    	<hr>
 				    	
-				    	<div class="card">
+				    	<div class="card  p-5 text-center">
+			    			<h5>태그 등록</h5>
+			    			<div class="d-flex justify-content-center mt-3">
+				    			<button class="insertTag btn btn-outline-dark w-50">태그 등록</button>
+			    			</div>
+			    		</div>
+			    		
+			    		<!-- 태그 등록 form -->
+			    		<div class="card w-50" id="tagForm">
+              				<form action="${conPath}/insertTag.do" method="post">
+              				
+              					<div class="card-header text-white">
+									<h3 class="text-center">태그 등록</h3>
+								</div>
+								
+								<div class="card-body">
+								
+									<div class="form-outline mb-3">
+					                  <label class="form-label" for="tagId">영화아이디</label>
+					                  <select id="tagId" name="movieId" class="selectpicker my-select" data-live-search="true">
+					                  	  <c:forEach var="movie" items="${movieList}">
+					                  	  	<option value="${movie.movieId}">${movie.movieTitle}</option>
+					                  	  </c:forEach>
+								      </select>
+						            </div>
+					
+									<div class="form-outline mb-3">
+					                  <label class="form-label" for="tag">태그</label>
+					                  <input type="text" name="tag" id="tag" list="taglist" class="form-control form-control-sm w-50" />
+					                  <datalist id="taglist">
+					                  	<option value="공포"></option>
+					                  	<option value="판타지"></option>
+					                  	<option value="모험"></option>
+					                  	<option value="초능력"></option>
+					                  	<option value="애니메이션"></option>
+					                  	<option value="일상"></option>
+					                  	<option value="드라마"></option>
+					                  	<option value="코미디"></option>
+					                  	<option value="액션"></option>
+					                  	<option value="스릴러"></option>
+					                  	<option value="범죄"></option>
+					                  	<option value="멜로/로맨스"></option>
+					                  </datalist>
+					                </div>
+					                
+					                 <div class="d-flex justify-content-center">
+									    <input type="button" value="취소" id="tagCancel" class="btn btn-outline-dark w-25 mx-2">
+									    <input type="submit" value="확인" class="btn btn-dark w-25 mx-2">
+								    </div>
+					                
+				                
+				                </div>
+							</form>
+			            </div>
+			    		<!-- 태그 등록 form끝 -->
+			    		
+			    		<hr>
+				    	
+				    	<div class="card  p-5 text-center">
 				    		<h5>트레일러 등록</h5>
-							<button class="insertTrailer btn btn-outline-dark">예고편 등록</button>
+				    		<div class="d-flex justify-content-center mt-3">
+								<button class="insertTrailer btn btn-outline-dark w-50">예고편 등록</button>
+				    		</div>
 				    	</div>
 				    	
-				    	<hr>
+				    	<!-- 트레일러 등록 form -->
+			    		<div class="card w-50" id="trailerForm">
+              				<form action="${conPath}/insertTrailer.do" method="post">
+              				
+              					<div class="card-header text-white">
+									<h3 class="text-center">예고편 등록</h3>
+								</div>
+								
+								<div class="card-body">
+								
+									<div class="form-outline mb-3">
+					                  <label class="form-label" for="trailerId">영화아이디</label>
+					                  <select id="trailerId" name="movieId" class="selectpicker my-select" data-live-search="true">
+					                  	  <c:forEach var="movie" items="${movieList}">
+					                  	  	<option value="${movie.movieId}">${movie.movieTitle}</option>
+					                  	  </c:forEach>
+								      </select>
+						            </div>
+						            
+						            <div class="form-outline">
+					                  <label class="form-label" for="trailerName">예고편 종류</label>
+					                  <input type="text" name="trailerName" id="trailerName" class="form-control" required="required"/>
+					                </div>
+									
+									<div class="form-outline">
+					                  <label class="form-label" for="trailerUrl">유튜브url(v값)</label>
+					                  <input type="text" name="trailerUrl" id="trailerUrl" class="form-control" required="required"/>
+					                </div>
+					                
+					                 <div class="d-flex justify-content-center">
+									    <input type="button" value="취소" id="trailerCancel" class="btn btn-outline-dark w-25 mx-2">
+									    <input type="submit" value="확인" class="btn btn-dark w-25 mx-2">
+								    </div>
+					                
+				                
+				                </div>
+							</form>
+			            </div>
+			    		<!-- 트레일러 등록 form끝 -->
 
 			    	</div>
-			    	
 			    	
 			    	<div class="py-5"></div>
 			    
@@ -154,47 +259,16 @@
 		</div>
 		
 	</div>
-	
+
+<!-- datepicker -->
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="${conPath}/js/scripts.js"></script>
-<script>
-
-$(function() {
-	
-	$('.insertMovie').click(function(){
-		if ($('#movieForm').css('display') == 'none') {
-	        $('#movieForm').css('display', 'block');
-	    }
-	});
-	
-	$('#movieCancel').click(function(){
-		if ($('#movieForm').css('display') == 'block') {
-	        $('#movieForm').css('display', 'none');
-	    }
-	});
-	
-	
-	$("#datepicker").datepicker({
-		dateFormat: "yy-mm-dd",
-		dayNamesMin: [ "일", "월", "화", "수", "목", "금", "토" ],
-		monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-		yearSuffix: '년',
-		changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
-		changeYear: true,  // 년을 바꿀수 있는 셀렉트 박스를 표시한다.
-		showMonthAfterYear: true,
-		showOtherMonths: true,  // 현재 달이 아닌 달의 날짜도 회색으로 표시
-		//minDate: '-100y', // 현재날짜로부터 100년이전까지 년을 표시한다.
-		minDate: new Date(1900, 1 - 1, 1), // 1900년 1월 1일을 최소날짜로 세팅
-		maxDate: new Date(2100, 1 - 1, 1),	// 2100년 1월 1일을 최대날짜로 세팅
-		yearRange: 'c-100:c+100', // 년도 선택 셀렉트박스를 현재 년도에서 이전, 이후로 얼마의 범위를 표시할것인가.
-	});
-	
-       
-});
-
-</script>
+<!-- bootstrap-select -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
+<script src="${conPath}/js/insert.js"></script>
 
 </body>
 </html>

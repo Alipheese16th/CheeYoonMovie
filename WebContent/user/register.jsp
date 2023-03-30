@@ -16,6 +16,7 @@
 	<!-- Core theme CSS (includes Bootstrap)-->
 	<link href="${conPath}/css/styles.css" rel="stylesheet" />
 	<link href="${conPath}/css/register.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 	<!-- datepicker -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -42,7 +43,7 @@
             
               <div class="card-body p-md-5 text-black">
               
-                <h3 class="mb-5 text-center">회원가입 form</h3>
+                <h2 class="mb-5 text-center"><i class="bi bi-person-circle"></i> 회원가입</h2>
 
 
                 <div class="form-outline mb-2">

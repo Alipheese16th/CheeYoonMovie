@@ -350,7 +350,7 @@
 												</small>
 											</div>
 											<div>
-												<c:if test="${user.userId eq rating.userId}">
+												<c:if test="${user.userId eq rating.userId or not empty admin}">
 													<button type="button" class="btn btn-sm btn-outline-dark modify">수정</button>
 													<button type="button" class="btn btn-sm btn-outline-dark" onclick="ratingDelete()">삭제</button>
 													
@@ -534,6 +534,7 @@ $(function(){
 		var user = "<c:out value='${user}'/>";
 		if(!user){
 			alert('평점등록은 로그인한 회원만 가능합니다');
+			location.href="${conPath}/loginView.do?next=movieContent.do&movieId=${movie.movieId}";
 		}else{
 			var movieId = $('#movieId').val();
 			var userId = $('#userId').val();

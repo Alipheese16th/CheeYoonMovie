@@ -20,11 +20,15 @@ import com.ch.movie.service.BoardReplyViewService;
 import com.ch.movie.service.BoardWriteService;
 import com.ch.movie.service.CommentDeleteService;
 import com.ch.movie.service.CommentWriteService;
-import com.ch.movie.service.RegisterMovie;
+import com.ch.movie.service.InsertMovie;
+import com.ch.movie.service.InsertService;
+import com.ch.movie.service.InsertTag;
+import com.ch.movie.service.InsertTrailer;
 import com.ch.movie.service.MainService;
 import com.ch.movie.service.MovieContentService;
 import com.ch.movie.service.MovieRankingService;
 import com.ch.movie.service.NowPlayingListService;
+import com.ch.movie.service.PasswordResultService;
 import com.ch.movie.service.RatingConfirmService;
 import com.ch.movie.service.RatingDeleteService;
 import com.ch.movie.service.RatingListService;
@@ -33,7 +37,6 @@ import com.ch.movie.service.RatingWriteService;
 import com.ch.movie.service.RegisterService;
 import com.ch.movie.service.SearchMovieService;
 import com.ch.movie.service.Service;
-import com.ch.movie.service.TrailerListService;
 import com.ch.movie.service.UserEmailConfirmService;
 import com.ch.movie.service.UserIdConfirmService;
 import com.ch.movie.service.UserListService;
@@ -43,6 +46,9 @@ import com.ch.movie.service.UserModifyService;
 import com.ch.movie.service.UserWithdrawalService;
 import com.ch.movie.service.commentModifyService;
 import com.ch.movie.service.UpComingListService;
+import com.ch.movie.service.UpdateMovie;
+import com.ch.movie.service.UpdateMovieView;
+import com.ch.movie.service.RefreshMovie;
 import com.ch.movie.service.UserDetailService;
 import com.ch.movie.service.CommentModifyViewService;
 
@@ -65,8 +71,6 @@ public class Controller extends HttpServlet{
 		String viewPage = null;
 		Service service = null;
 		
-		
-		
 		if(command.equals("/main.do")) {
 			service = new MainService();
 			service.execute(request, response);
@@ -79,7 +83,6 @@ public class Controller extends HttpServlet{
 		
 		}else if(command.equals("/credit.do")){
 			viewPage = "main/credit.jsp";
-		
 			
 		/* * * * * * * * * * * * * * * * * * * * * *
 		 * * * * * * * * 비회원 관련 요청 * * * * * * * * 
@@ -112,6 +115,14 @@ public class Controller extends HttpServlet{
 			service = new UserLoginService();
 			service.execute(request, response);
 			viewPage = "main.do";
+		
+		}else if(command.equals("/findPassword.do")){
+			viewPage = "user/findPassword.jsp";
+			
+		}else if(command.equals("/passwordResult.do")){
+			service = new PasswordResultService();
+			service.execute(request, response);
+			viewPage = "user/passwordResult.jsp";
 			
 		}else if(command.equals("/logout.do")){
 			service = new UserLogoutService();
@@ -228,16 +239,6 @@ public class Controller extends HttpServlet{
 			service.execute(request, response);
 			viewPage = "movie/movieRanking.jsp";
 			
-		
-			
-			
-			
-		
-		}else if(command.equals("/trailerList.do")){
-			service = new TrailerListService();
-			service.execute(request, response);
-			viewPage = "movie/trailerList.jsp";
-		
 		/* * * * * * * * * * * * * * * * * * * * * *
 		 * * * * * * * * rating 관련 요청  * * * * * * *
 		 * * * * * * * * * * * * * * * * * * * * * */
@@ -266,7 +267,6 @@ public class Controller extends HttpServlet{
 			service.execute(request, response);
 			viewPage = "movie/ratingList.jsp";
 			
-			
 		/* * * * * * * * * * * * * * * * * * * * * *
 		 * * * * * * * * admin 관련 요청  * * * * * * *
 		 * * * * * * * * * * * * * * * * * * * * * */
@@ -281,23 +281,41 @@ public class Controller extends HttpServlet{
 			viewPage = "admin/userList.jsp";
 		
 		}else if(command.equals("/insert.do")){
+			service = new InsertService();
+			service.execute(request, response);
 			viewPage = "admin/insert.jsp";
 			
-		}else if(command.equals("/RegisterMovie.do")){
-			service = new RegisterMovie();
+		}else if(command.equals("/insertMovie.do")){
+			service = new InsertMovie();
 			service.execute(request, response);
-			viewPage = "insertView.do";
+			viewPage = "insert.do";
 			
-		}else if(command.equals("/")){
-		}else if(command.equals("/")){
-		}else if(command.equals("/")){
+		}else if(command.equals("/insertTag.do")){
+			service = new InsertTag();
+			service.execute(request, response);
+			viewPage = "insert.do";
+			
+		}else if(command.equals("/insertTrailer.do")){
+			service = new InsertTrailer();
+			service.execute(request, response);
+			viewPage = "insert.do";
+			
+		}else if(command.equals("/refreshMovie.do")){
+			service = new RefreshMovie();
+			service.execute(request, response);
+			viewPage = "insert.do";
+			
+		}else if(command.equals("/updateMovieView.do")){
+			service = new UpdateMovieView();
+			service.execute(request, response);
+			viewPage = "admin/updateMovie.jsp";
+			
+		}else if(command.equals("/updateMovie.do")){
+			service = new UpdateMovie();
+			service.execute(request, response);
+			viewPage = "search.do";
 			
 		}
-		
-		
-		
-		
-		
 		
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

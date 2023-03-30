@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+	#myCarousel{ /*캐러샐 크기 고정 */
+		width:900px;
+		margin:0 auto;
+	}
+
+	.box-container{ /* 캐러셀 안에 설명 넣기 (가장 아래쪽에)  */
+		display:flex;
+		align-items:flex-end;
+		text-align: center;
+	}
+	.box a{	/* 캐러샐 a태그설명 폰트색상 */
+		text-decoration:none;
+		color:white;
+	}
+	.carousel-item:hover{
+/* 		filter: brightness(80%); */
+		cursor:pointer;
+	}
+	
+	.nowplaying .card{	/* 현재상영작 카드높이 고정 */
+		height:400px;
+	}
+	.trailer .card{	/* 예고편 카드높이 고정 */
+		height:250px;
+	}
+	.upcoming .card{	/* 상영예고작 카드높이 고정 */
+		height:400px;
+	}
+	
+ 	.nowplaying .card-body,.upcoming .card-body{ /* 카드배경색 폰트색 */
+ 		background-color:#262626; 
+ 		color:white;
+	} 
+	.gogo{		/* 카드 보러가기 배경색 폰트색 */
+		background-color:#444444;
+		color:white;
+	}
+	.gogo:hover{	/* 카드 보러가기 호버 */
+		background-color:#DDDDDD;
+	}
+	.card a{
+		text-decoration:none;
+		color:white;
+	}
+	
+	.nowplaying .card img:hover{
+		transform: scale(1.1);
+  		transition: transform 0.3s;
+ 		cursor:pointer;
+	}
+	
+	.upcoming .card img:hover{
+		transform: scale(1.1);
+  		transition: transform 0.3s;
+ 		cursor:pointer;
+	}
+
+	.card{
+		overflow:hidden;
+	}
