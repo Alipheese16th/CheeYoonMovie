@@ -14,6 +14,7 @@ public class UserLoginService implements Service {
 		UserDao user = new UserDao();
 		int result = user.loginUser(userId, userPw);
 		if(result == UserDao.LOGIN_SUCCESS) {
+			request.getSession().invalidate(); // 기존 관리자 로그인되있으면 해제
 			request.getSession().setAttribute("user", user.getUser(userId));
 			// 로그인시 세션에 user 정보 추가
 		}else {

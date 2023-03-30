@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+.card img {
+	width: 100px;
+	height: 150px;
+	object-fit: cover;
+}
+.card img, .card-title, .card-text{
+	cursor:pointer;
+}

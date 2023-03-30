@@ -27,65 +27,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 	<!-- bootstrap-select -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
-	<style>
-	.trailer img{
-		height:200px;
-	}
-	.line{
-		height:1px;
-		background-color:gray;
-	}
-	.blank{
-		height:5px;
-	}
-	label span{
-		color:#FE5D00;
-	}
-	.mycard{
-		width:550px;
-	}
-	
-	.pagination > li > a{
-	    background-color: white;
-	    color: #5A4181;
-	}
-	
-	.pagination > li > a:focus,
-	.pagination > li > a:hover,
-	.pagination > li > span:focus,
-	.pagination > li > span:hover{
-	    color: #5a5a5a;
-	    background-color: #eee;
-	    border-color: #ddd;
-	}
-	
-	.pagination > .active > a{
-	    color: white;
-	    background-color: #444444 !Important;
-	    border: solid 1px #444444 !Important;
-	}
-	
-	.pagination > .active > a:hover{
-	    background-color: #444444 !Important;
-	    border: solid 1px #444444;
-	}
-	
-	#ratingForm{
-		position:fixed;
-		bottom:30%;
-		left:12.5%;
-		display:none;
-		z-index:9;
-	}
-	#modifyForm{
-		position:fixed;
-		bottom:30%;
-		left:12.5%;
-		display:none;
-		z-index:8;
-	}
-	
-	</style>
+	<link rel="stylesheet" href="${conPath}/css/ratingList.css">
 </head>
 <body>
 

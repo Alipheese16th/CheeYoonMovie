@@ -138,11 +138,22 @@
 		</div>
 	</div>
 
-<script src="${conPath}/js/userList.js"></script>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="${conPath}/js/scripts.js"></script>
+<script>
+	$(function(){
+		
+		$('tr').css('cursor','pointer').click(function(){
+			var userId = $(this).children().eq(0).text();
+			if(userId != '아이디'){
+				location.href = "${conPath}/userDetail.do?userId="+userId;
+			}
+		});
+		
+	});
+</script>
 
 </body>
 </html>

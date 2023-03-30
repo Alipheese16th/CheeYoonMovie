@@ -26,69 +26,8 @@
     <script src="${conPath}/js/star-rating.js" type="text/javascript"></script>
     <script src="${conPath}/js/theme.js" type="text/javascript"></script>
 	<!-- star-rating -->
-	
-	<style>
-	
-		.myHeight{
-			height:300px;
-		}
-		.myWidth{
-			width:200px;
-		}
-		.trailercard{
-			width: 24rem; min-width: 10rem;
-		}
-		.personcard{
-			width: 8.5rem;
-		}
-		.personimg{
-			height:10rem;
-		}
-		#ratingForm{
-			position:fixed;
-			bottom:30%;
-			left:12.5%;
-			display:none;
-			z-index:9;
-		}
-		#modifyForm{
-			position:fixed;
-			bottom:30%;
-			left:12.5%;
-			display:none;
-			z-index:8;
-		}
-		
-		.pagination > li > a{
-		    background-color: white;
-		    color: #5A4181;
-		}
-		
-		.pagination > li > a:focus,
-		.pagination > li > a:hover,
-		.pagination > li > span:focus,
-		.pagination > li > span:hover{
-		    color: #5a5a5a;
-		    background-color: #eee;
-		    border-color: #ddd;
-		}
-		
-		.pagination > .active > a{
-		    color: white;
-		    background-color: #444444 !Important;
-		    border: solid 1px #444444 !Important;
-		}
-		
-		.pagination > .active > a:hover{
-		    background-color: #444444 !Important;
-		    border: solid 1px #444444;
-		}
-		.btn-dark:hover{
-			background-color:white;
-			color:#242424;
-		}
-		
-	</style>
+    <link rel="stylesheet" href="${conPath}/css/movieContent.css" type="text/css"/>
+
 </head>
 <body>
 

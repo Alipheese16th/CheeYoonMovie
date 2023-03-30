@@ -25,54 +25,7 @@
     <script src="${conPath}/js/theme.js" type="text/javascript"></script>
 	<!-- 부트스트랩 아이콘 -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-	
-	<style>
-		a{
-			text-decoration:none;
-			color:black;
-		}
-		
-		.nav-tabs .nav-item .nav-link {
-		  background-color: #FFFFFF;
-		  color: #000000;
-		}
-		
-		.nav-tabs .nav-item .nav-link.active {
-		  background-color: #444444;
-		  color: #FFFFFF;
-		}
-		
-		.pagination > li > a{
-		    background-color: white;
-		    color: #5A4181;
-		}
-		
-		.pagination > li > a:focus,
-		.pagination > li > a:hover,
-		.pagination > li > span:focus,
-		.pagination > li > span:hover{
-		    color: #5a5a5a;
-		    background-color: #eee;
-		    border-color: #ddd;
-		}
-		
-		.pagination > .active > a{
-		    color: white;
-		    background-color: #444444 !Important;
-		    border: solid 1px #444444 !Important;
-		}
-		
-		.pagination > .active > a:hover{
-		    background-color: #444444 !Important;
-		    border: solid 1px #444444;
-		}
-		
-		.mya:hover{
-			background-color: #444444;
-			color:white;
-		}
-		
-	</style>
+	<link rel="stylesheet" href="${conPath}/css/movieRanking.css" type="text/css"/>
 	
 </head>
 <body>

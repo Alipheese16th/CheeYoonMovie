@@ -25,32 +25,7 @@
     <script src="${conPath}/js/theme.js" type="text/javascript"></script>
 	<!-- 부트스트랩 아이콘 -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-	
-	<style>
-		.card img {
-			width: 100px;
-			height: 150px;
-			object-fit: cover;
-		}
-		.card img, .card-title, .card-text{
-			cursor:pointer;
-		}
-		
-	</style>
-	<script>
-		
-		$(function(){
-
-			$('.card img, .card-title, .card-text').click(function(){
-				
-				var movieId = $(this).parents('.card').attr('id');
-				location.href = '${conPath}/movieContent.do?movieId='+movieId;
-				
-			});
-			
-		});
-	
-	</script>
+	<link rel="stylesheet" href="${conPath}/css/nowPlayingList.css" type="text/css"/>
 	
 </head>
 <body>
@@ -158,7 +133,13 @@
 <!-- Core theme JS-->
 <script src="${conPath}/js/scripts.js"></script>
 <script>
-	$(document).on('ready', function () {
+
+	$(function () {
+		$('.card img, .card-title, .card-text').click(function(){
+			var movieId = $(this).parents('.card').attr('id');
+			location.href = '${conPath}/movieContent.do?movieId='+movieId;
+		});
+		
 		//별점기능 추가
         $('.kv-fa').rating({
             theme: 'krajee-fa',

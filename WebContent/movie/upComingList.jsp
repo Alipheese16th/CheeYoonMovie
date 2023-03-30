@@ -18,66 +18,25 @@
 	<!-- 부트스트랩 아이콘 -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+	<link rel="stylesheet" href="${conPath}/css/upComingList.css">
 	
-	
-	<style>
-		.card img {
-			width: 100px;
-			height: 150px;
-			object-fit: cover;
-		}
-		.card img:hover, .card-title, .card-text{
-			cursor:pointer;
-		}
-		.badge{
-			background-color:#FFFFFF;
-			color:black;
-		}
-		.mybtn{
-			background-color:#444444;
-			color:white;
-			width:150px;
-			text-align:left !important;
-		}
-		.badge{
-			position:absolute;
-			top:50%;
-			left:10%;
-		}
-		.mybtn:hover{
-			background-color:#AAAAAA;
-			color:black;
-		}
-		
-	</style>
 	<script>
-		
 		$(function(){
-
 			$('.card img, .card-title, .card-text').click(function(){
-				
 				var movieId = $(this).parents('.card').attr('id');
 				location.href = '${conPath}/movieContent.do?movieId='+movieId;
-				
 			});
-			
 		});
-	
 	</script>
 	
 </head>
 <body>
 
 	<div class="d-flex" id="wrapper"> <!-- bg-black text-white -->
-	
 		<jsp:include page="../main/sidebar.jsp"/>
-		
 		<div id="page-content-wrapper">
-		
 			<jsp:include page="../main/header.jsp"/>
-			
 			<div class="container">
-			
 			
 				<div class="container">
 				

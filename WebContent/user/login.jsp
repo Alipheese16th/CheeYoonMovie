@@ -103,7 +103,7 @@
 
 <script>
 	function openPop(){
-	    var popup = window.open('${conPath}/findPassword.do', '네이버팝업', 'width=500px,height=300px,top=450,left=220,scrollbars=yes');
+	    var popup = window.open('${conPath}/findPassword.do', '비밀번호찾기', 'width=500px,height=300px,top=450,left=220,scrollbars=yes');
 	 }
 </script>
 

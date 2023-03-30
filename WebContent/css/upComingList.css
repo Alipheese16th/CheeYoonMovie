@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+.card img {
+	width: 100px;
+	height: 150px;
+	object-fit: cover;
+}
+.card img:hover, .card-title, .card-text{
+	cursor:pointer;
+}
+.badge{
+	background-color:#FFFFFF;
+	color:black;
+}
+.mybtn{
+	background-color:#444444;
+	color:white;
+	width:150px;
+	text-align:left !important;
+}
+.badge{
+	position:absolute;
+	top:50%;
+	left:10%;
+}
+.mybtn:hover{
+	background-color:#AAAAAA;
+	color:black;
+}
