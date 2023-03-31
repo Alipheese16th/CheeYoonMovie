@@ -17,45 +17,6 @@
 	<link href="${conPath}/css/styles.css" rel="stylesheet" />
 	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 	<link href="${conPath}/css/boardContent.css" rel="stylesheet" />
-	<script>
-
-	$(document).ready(function(){
-		
-		$('.commentModifyView').click(function(){
-			var commentNo = $(this).attr('id');
-			var commentPageNum = $('#commentPageNum').val();
-			var pageNum = "<c:out value='${pageNum}'/>";
-			var search = "<c:out value='${param.search}'/>";
-			var type = "<c:out value='${type}'/>";
-			
-			$.ajax({
-				url : '${conPath}/commentModifyView.do',
-				type : 'post',
-				data : 'commentNo='+commentNo+'&commentPageNum='+commentPageNum+'&pageNum='+pageNum+'&search='+search+'&type='+type,
-				dataType : 'html',
-				success : function(data){
-					$('#comment'+commentNo).html(data);
-				}
-			});
-			
-		});
-	});
-
-	function boardDelete() {
-		
-	  if (confirm("글 삭제를 진행하시겠습니까?")) {
-	    location.href = "${conPath}/boardDelete.do?boardNo=${board.boardNo}&pageNum=${pageNum}&search=${param.search}&type=${type}";
-	  }
-	}
-
-	function commentDelete() {
-
-		if (confirm("댓글 삭제를 진행하시겠습니까?")) {
-		location.href='${conPath}/commentDelete.do?boardNo=${dto.boardNo}&commentNo=${dto.commentNo}&commentPageNum=${commentPageNum}&pageNum=${pageNum}&search=${param.search}&type=${type}';
-		}
-	}
-
-	</script>
 	
 </head>
 <body>
@@ -227,6 +188,46 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="${conPath}/js/scripts.js"></script>
+
+<script>
+
+$(document).ready(function(){
+	
+	$('.commentModifyView').click(function(){
+		var commentNo = $(this).attr('id');
+		var commentPageNum = $('#commentPageNum').val();
+		var pageNum = "<c:out value='${pageNum}'/>";
+		var search = "<c:out value='${param.search}'/>";
+		var type = "<c:out value='${type}'/>";
+		
+		$.ajax({
+			url : '${conPath}/commentModifyView.do',
+			type : 'post',
+			data : 'commentNo='+commentNo+'&commentPageNum='+commentPageNum+'&pageNum='+pageNum+'&search='+search+'&type='+type,
+			dataType : 'html',
+			success : function(data){
+				$('#comment'+commentNo).html(data);
+			}
+		});
+		
+	});
+});
+
+function boardDelete() {
+	
+  if (confirm("글 삭제를 진행하시겠습니까?")) {
+    location.href = "${conPath}/boardDelete.do?boardGroup=${board.boardGroup}&boardStep=${board.boardStep}&boardIndent=${board.boardIndent}&pageNum=${pageNum}&search=${param.search}&type=${type}";
+  }
+}
+
+function commentDelete() {
+
+	if (confirm("댓글 삭제를 진행하시겠습니까?")) {
+	location.href='${conPath}/commentDelete.do?boardNo=${dto.boardNo}&commentNo=${dto.commentNo}&commentPageNum=${commentPageNum}&pageNum=${pageNum}&search=${param.search}&type=${type}';
+	}
+}
+
+</script>
 
 </body>
 </html>

@@ -46,7 +46,7 @@ public class BoardListService implements Service {
 			request.setAttribute("list", board.searchBoardContent(searchContent, startRow, endRow));
 			totCnt = board.totalsearchContent(searchContent);
 			
-		}else if(type.equals("user")) {
+		}else if(type.equals("user")) { // 작성자
 			String searchUserName = request.getParameter("search").trim();
 			request.setAttribute("list", board.searchBoardUserName(searchUserName, startRow, endRow));
 			totCnt = board.totalsearchUserName(searchUserName);

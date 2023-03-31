@@ -225,20 +225,25 @@ public class BoardDao {
 		}
 		return result;
 	}
-	// 글 삭제
-	public int deleteBoard(int boardNo) {
-		int 			 result = FAIL;
-		Connection 		   conn = null;
-		PreparedStatement pstmt = null;
-		String sql = "DELETE FROM BOARD WHERE BOARDNO = ?";
+	// 글 삭제 (230331 추가기능 - 답변글이 존재할시 답변글까지 삭제)
+	public int deleteBoard(int boardGroup, int boardStep, int boardIndent) {
+		int 			   count = 0;
+		Connection 		    conn = null;
+		PreparedStatement  pstmt = null;
+		String sql = "DELETE FROM BOARD WHERE BOARDGROUP=? AND (BOARDSTEP>=? AND " + 
+				"  BOARDSTEP<(SELECT NVL(MIN(BOARDSTEP),99) FROM BOARD WHERE BOARDGROUP=? AND BOARDSTEP>? AND BOARDINDENT<=?))";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, boardNo);
-			result = pstmt.executeUpdate();
+			pstmt.setInt(1, boardGroup);
+			pstmt.setInt(2, boardStep);
+			pstmt.setInt(3, boardGroup);
+			pstmt.setInt(4, boardStep);
+			pstmt.setInt(5, boardIndent);
+			count = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			System.out.println("글삭제 실패:"+boardNo);
+			System.out.println(e.getMessage()+"글삭제 에러");
 		}finally {
 			try {
 				if(pstmt!=null)pstmt.close();
@@ -247,8 +252,38 @@ public class BoardDao {
 				System.out.println(e.getMessage());
 			}
 		}
+		return count;
+	}
+	// 글 삭제 후 업데이트
+	public int afterdelete(int count, int boardGroup, int boardStep) {
+		int 			  result = 0;
+		Connection 		    conn = null;
+		PreparedStatement  pstmt = null;
+		String sql = "UPDATE BOARD SET BOARDSTEP = BOARDSTEP-? WHERE BOARDGROUP=? AND BOARDSTEP>?";
+		
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, count);
+			pstmt.setInt(2, boardGroup);
+			pstmt.setInt(3, boardStep);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
 		return result;
 	}
+	
+	
 	// 8. 답변글 쓰기 전단계(원글의 group,step 정보필요)
 	private void preReplyStep(int boardGroup, int boardStep) {
 		Connection 		   conn = null;
