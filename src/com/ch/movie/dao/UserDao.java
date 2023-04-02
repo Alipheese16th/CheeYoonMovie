@@ -173,8 +173,7 @@ public class UserDao {
 				String userEmail = rs.getString("userEmail");
 				String userTel = rs.getString("userTel");
 				Timestamp userDate = rs.getTimestamp("userDate");
-				Timestamp userLimit = rs.getTimestamp("userLimit");
-				dto = new UserDto(userId, userPw, userName, userBirth, userGender, userEmail, userTel, userDate, userLimit,userBoardList(userId),userCommentList(userId),userRatingList(userId));
+				dto = new UserDto(userId, userPw, userName, userBirth, userGender, userEmail, userTel, userDate, userBoardList(userId),userCommentList(userId),userRatingList(userId));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -252,8 +251,7 @@ public class UserDao {
 				String userEmail = rs.getString("userEmail");
 				String userTel = rs.getString("userTel");
 				Timestamp userDate = rs.getTimestamp("userDate");
-				Timestamp userLimit = rs.getTimestamp("userLimit");
-				dtos.add(new UserDto(userId, userPw, userName, userBirth, userGender, userEmail, userTel, userDate, userLimit));
+				dtos.add(new UserDto(userId, userPw, userName, userBirth, userGender, userEmail, userTel, userDate));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -454,8 +452,7 @@ public class UserDao {
 				String userEmail = rs.getString("userEmail");
 				String userTel = rs.getString("userTel");
 				Timestamp userDate = rs.getTimestamp("userDate");
-				Timestamp userLimit = rs.getTimestamp("userLimit");
-				dtos.add(new UserDto(userId, userPw, userName, userBirth, userGender, userEmail, userTel, userDate, userLimit));
+				dtos.add(new UserDto(userId, userPw, userName, userBirth, userGender, userEmail, userTel, userDate));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

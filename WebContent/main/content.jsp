@@ -86,7 +86,7 @@
         
         <div class="container py-2">
         	<div class="row">
-        		<h1>현재 추천 영화들 !</h1>
+        		<h1>현재 추천 영화</h1>
         	</div>
         </div>
         
@@ -127,7 +127,7 @@
 
 		<div class="container py-2">
         	<div class="row">
-        		<h1 class="m-0">예고편</h1>
+        		<h1 class="m-0">예고편 영상</h1>
         	</div>
         </div>
 		
@@ -151,7 +151,7 @@
 
 		<div class="container pb-2">
         	<div class="row">
-        		<h1>상영 예고 작품</h1>
+        		<h1>개봉 예정 영화</h1>
         	</div>
         </div>
         

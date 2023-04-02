@@ -34,7 +34,7 @@ public class UserModifyService implements Service {
 		String userTel = tel1 + "-" + tel2 + "-" + tel3;
 		
 		UserDao user = new UserDao();
-		UserDto dto = new UserDto(userId, userPw, userName, userBirth, userGender, userEmail, userTel, null, null);
+		UserDto dto = new UserDto(userId, userPw, userName, userBirth, userGender, userEmail, userTel, null);
 		int result = user.modifyUser(dto);
 		if(result == UserDao.SUCCESS) {
 			request.getSession().setAttribute("user", dto);

@@ -25,7 +25,7 @@ public class RegisterService implements Service {
 		String userTel = tel1 + "-" + tel2 + "-" + tel3;
 		
 		UserDao user = new UserDao();
-		int result = user.registerUser(new UserDto(userId, userPw, userName, userBirth, userGender, userEmail, userTel, null, null));
+		int result = user.registerUser(new UserDto(userId, userPw, userName, userBirth, userGender, userEmail, userTel, null));
 		if(result == UserDao.SUCCESS) {
 			request.setAttribute("userId", userId);
 			request.setAttribute("registerResult", "회원가입이 완료되었습니다. 감사합니다.");

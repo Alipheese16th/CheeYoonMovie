@@ -13,15 +13,15 @@ public class UserDto {
 	private String userEmail;
 	private String userTel;
 	private Timestamp userDate;
-	private Timestamp userLimit;
 	private ArrayList<BoardDto> boardList;
 	private ArrayList<CommentDto> commentList;
 	private ArrayList<RatingDto> ratingList;
 	
-	
+
 	public UserDto(String userId, String userPw, String userName, Date userBirth, String userGender, String userEmail,
-			String userTel, Timestamp userDate, Timestamp userLimit, ArrayList<BoardDto> boardList,
-			ArrayList<CommentDto> commentList, ArrayList<RatingDto> ratingList) {
+			String userTel, Timestamp userDate, ArrayList<BoardDto> boardList, ArrayList<CommentDto> commentList,
+			ArrayList<RatingDto> ratingList) {
+		super();
 		this.userId = userId;
 		this.userPw = userPw;
 		this.userName = userName;
@@ -30,14 +30,14 @@ public class UserDto {
 		this.userEmail = userEmail;
 		this.userTel = userTel;
 		this.userDate = userDate;
-		this.userLimit = userLimit;
 		this.boardList = boardList;
 		this.commentList = commentList;
 		this.ratingList = ratingList;
 	}
 
+
 	public UserDto(String userId, String userPw, String userName, Date userBirth, String userGender, String userEmail,
-			String userTel, Timestamp userDate, Timestamp userLimit) {
+			String userTel, Timestamp userDate) {
 		this.userId = userId;
 		this.userPw = userPw;
 		this.userName = userName;
@@ -46,7 +46,6 @@ public class UserDto {
 		this.userEmail = userEmail;
 		this.userTel = userTel;
 		this.userDate = userDate;
-		this.userLimit = userLimit;
 	}
 
 	
@@ -133,20 +132,12 @@ public class UserDto {
 		this.userDate = userDate;
 	}
 
-	public Timestamp getUserLimit() {
-		return userLimit;
-	}
-
-	public void setUserLimit(Timestamp userLimit) {
-		this.userLimit = userLimit;
-	}
-
 	@Override
 	public String toString() {
 		return "UserDto [userId=" + userId + ", userPw=" + userPw + ", userName=" + userName + ", userBirth="
 				+ userBirth + ", userGender=" + userGender + ", userEmail=" + userEmail + ", userTel=" + userTel
-				+ ", userDate=" + userDate + ", userLimit=" + userLimit + ", boardList=" + boardList + ", commentList="
-				+ commentList + ", ratingList=" + ratingList + "]";
+				+ ", userDate=" + userDate + ", boardList=" + boardList + ", commentList=" + commentList
+				+ ", ratingList=" + ratingList + "]";
 	}
 
 	

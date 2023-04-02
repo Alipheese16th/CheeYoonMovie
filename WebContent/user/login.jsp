@@ -67,7 +67,7 @@
                   <div class="text-center pt-1 mb-5 pb-1">
                   	<input type="submit" class="btn btn-primary btn-block fa-lg gradient-custom-1 mb-3" value="로그인">
                     <hr>
-                    <a class="text-muted" onclick="openPop()">비밀번호를 잊으셨나요?</a>
+                    <a class="text-muted findPw" onclick="openPop()">비밀번호를 잊으셨나요?</a>
                   </div>
 
                   <div class="d-flex align-items-center justify-content-center pb-4">
