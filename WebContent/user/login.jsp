@@ -63,7 +63,6 @@
                     <input type="password" name="userPw" id="userPw" class="form-control" 
                     	placeholder="비밀번호"/>
                   </div>
-
                   <div class="text-center pt-1 mb-5 pb-1">
                   	<input type="submit" class="btn btn-primary btn-block fa-lg gradient-custom-1 mb-3" value="로그인">
                     <hr>
