@@ -35,7 +35,7 @@
 ![간트차트](https://user-images.githubusercontent.com/117807553/229388603-f29b56d2-ab96-4db1-a51a-b9deb56d257c.JPG)
 
 ## 이용자 권한
-![이용자권한]((https://user-images.githubusercontent.com/117807553/229388604-3cb0cf8d-2f17-4f21-a306-8d950cb37de8.JPG)
+![이용자권한](https://user-images.githubusercontent.com/117807553/229388604-3cb0cf8d-2f17-4f21-a306-8d950cb37de8.JPG)
 
 ## Usecase Diagram
 ![유스케이스](https://user-images.githubusercontent.com/117807553/229388606-7c167fb1-7e6f-4b4d-86b7-36d28e51c309.JPG)
@@ -64,5 +64,7 @@
 ![실행화면8](https://user-images.githubusercontent.com/117807553/229388630-89fda3d6-c8a2-48e6-98d3-3a0d94b8ba1c.JPG)
 ![실행화면9](https://user-images.githubusercontent.com/117807553/229388632-fdf12f34-65a5-4e0a-9776-dad7853d4b8a.JPG)
 ![실행화면10](https://user-images.githubusercontent.com/117807553/229388634-78bf6f9c-504e-41c3-89f3-8fdfbcdfc19d.JPG)
+
+## 차후 개발 계획
 ![실행화면11](https://user-images.githubusercontent.com/117807553/229388635-9352972e-cad4-466c-bea0-5863a059ca69.JPG)
-![실행화면12](https://user-images.githubusercontent.com/117807553/229388636-2b388a03-f400-437a-85ae-62ff980cadfb.JPG)
+
