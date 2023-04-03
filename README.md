@@ -13,7 +13,7 @@
 - 오픈 Library : jQuery v3.4.1, jQueryUI, summerNoteEdit, bootstrap-select
 - 프로젝트 소개 : 도서관 웹 페이지와 도서관 관리 시스템을 통합하여 하나의 프로그램으로 이용 및 관리할 수 있는 통합형 도서관 관리 시스템이다
 
-![1메인](https://user-images.githubusercontent.com/117807553/228998549-bb2b2fa7-b3ad-4064-980a-24d5fdc3cfc2.JPG)
+![1메인](https://user-images.githubusercontent.com/117807553/229388601-64714d60-2cb9-475a-9564-dbe933c822de.JPG)
 
 ## 목차
 
@@ -29,31 +29,40 @@
 [10. 차후 개발내용]()<br>
 
 ## 작업분할 구조도
-![2작업분할도1](https://user-images.githubusercontent.com/117807553/228998692-8e75e9dc-ad71-4bf8-b4fa-d5067b71d523.JPG)
-![3작업분할도2](https://user-images.githubusercontent.com/117807553/228998774-92b7ab92-f491-43c4-a90f-8e96b05401f6.JPG)
+![작업분할도](https://user-images.githubusercontent.com/117807553/229388602-be0d9312-d4e5-4072-a39e-28012e3d01a7.JPG)
 
 ## Gantt Chart
-![4간트차트](https://user-images.githubusercontent.com/117807553/228998815-1d5060a6-21b9-4e5f-b162-4322085ab6f3.JPG)
+![간트차트](https://user-images.githubusercontent.com/117807553/229388603-f29b56d2-ab96-4db1-a51a-b9deb56d257c.JPG)
 
 ## 이용자 권한
-![5이용자권한](https://user-images.githubusercontent.com/117807553/228998851-5c4abb34-b8f5-4256-a792-728ae9b17267.JPG)
+![이용자권한]((https://user-images.githubusercontent.com/117807553/229388604-3cb0cf8d-2f17-4f21-a306-8d950cb37de8.JPG)
 
 ## Usecase Diagram
-![6유스케이스](https://user-images.githubusercontent.com/117807553/228998862-d06c9a12-172a-49dd-9e7d-54e0b99fe23e.JPG)
+![유스케이스](https://user-images.githubusercontent.com/117807553/229388606-7c167fb1-7e6f-4b4d-86b7-36d28e51c309.JPG)
 
 ## Sequence Diagram
-![7시퀀스다이어그램](https://user-images.githubusercontent.com/117807553/228998899-8674e46c-02cd-458f-b12c-68f9590bb607.JPG)
-![7시퀀스다이어그램2](https://user-images.githubusercontent.com/117807553/228998907-79bdc0ab-20d7-4673-877c-114b3e3f8bc1.JPG)
+![시퀀스다이어그램-회원](https://user-images.githubusercontent.com/117807553/229388607-40a0b5cc-10ee-4d53-b549-e8c13085a175.JPG)
+![시퀀스다이어그램-관리자](https://user-images.githubusercontent.com/117807553/229388609-4eaa7fc3-0078-4619-ae70-928df8242b16.JPG)
 
 ## 기능 정의서
-![8기능정의서](https://user-images.githubusercontent.com/117807553/228998916-5e223085-927b-4484-a640-11c0e97e8cb2.JPG)
+![기능정의서](https://user-images.githubusercontent.com/117807553/229388610-73b145c1-6bc0-443b-92f0-2a62fb3921ee.JPG)
 
 ## E-R Diagram
-![9erd](https://user-images.githubusercontent.com/117807553/228998924-6e36e2f4-c435-4155-9d15-5fc6299f1de1.JPG)
+![erd](https://user-images.githubusercontent.com/117807553/229388612-470ee53c-14d7-49be-90ff-1e06ff63d541.JPG)
 
 ## Project Source Explorer
-![10탐색기](https://user-images.githubusercontent.com/117807553/228998953-51657c23-2344-4f37-873c-c4b9164e3878.JPG)
+![소스파일](https://user-images.githubusercontent.com/117807553/229388613-670f15b0-c1b2-47c3-94bd-7b16a54f1213.JPG)
 
 ## 실행 화면
-![11실행화면](https://user-images.githubusercontent.com/117807553/228998959-f3c31a07-e031-4a87-8f21-3a59d8ec5b1f.JPG)
-
+![실행화면](https://user-images.githubusercontent.com/117807553/229388615-08d0a8f6-a21d-4034-add0-0e1098a509e0.JPG)
+![실행화면2](https://user-images.githubusercontent.com/117807553/229388617-4b0144d8-7f22-4b4b-988d-732687591d3d.JPG)
+![실행화면3](https://user-images.githubusercontent.com/117807553/229388620-9913126f-968e-4022-8578-2157a663521a.JPG)
+![실행화면4](https://user-images.githubusercontent.com/117807553/229388623-64d72f3f-e9b3-4e4e-8e7a-c6f75778a249.JPG)
+![실행화면5](https://user-images.githubusercontent.com/117807553/229388625-b88c94af-a753-4c3c-ab52-c54b6f8790ae.JPG)
+![실행화면6](https://user-images.githubusercontent.com/117807553/229388627-ce597e81-86d7-4e47-9faa-88dabe8da033.JPG)
+![실행화면7](https://user-images.githubusercontent.com/117807553/229388629-f6d9a5af-ec90-4981-a451-6bdf4193f53c.JPG)
+![실행화면8](https://user-images.githubusercontent.com/117807553/229388630-89fda3d6-c8a2-48e6-98d3-3a0d94b8ba1c.JPG)
+![실행화면9](https://user-images.githubusercontent.com/117807553/229388632-fdf12f34-65a5-4e0a-9776-dad7853d4b8a.JPG)
+![실행화면10](https://user-images.githubusercontent.com/117807553/229388634-78bf6f9c-504e-41c3-89f3-8fdfbcdfc19d.JPG)
+![실행화면11](https://user-images.githubusercontent.com/117807553/229388635-9352972e-cad4-466c-bea0-5863a059ca69.JPG)
+![실행화면12](https://user-images.githubusercontent.com/117807553/229388636-2b388a03-f400-437a-85ae-62ff980cadfb.JPG)
