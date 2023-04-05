@@ -5,13 +5,20 @@
 > 개별 프로젝트
 
 - **프로젝트 명** : CheeYoon Movie (영화 리뷰 게시판 통합 시스템)
+
 - **인 원** : 1 명
+
 - **기 간** : 2023.03.20 ~ 2023.03.31
+
 - **DBMS** : Oracle 11g Express Edition
+
 - **언어** : Java SE 8 Platform, HTML5, CSS, CSS3, JavaScript
+
 - **디자인 패턴** : MVC
+
 - **오픈 Library** : jQuery v3.4.1, jQueryUI, summerNoteEdit, bootstrap-select
-- **프로젝트 소개** : 도서관 웹 페이지와 도서관 관리 시스템을 통합하여 하나의 프로그램으로 이용 및 관리할 수 있는 통합형 도서관 관리 시스템이다
+
+- **프로젝트 소개** : 영화 조회 및 평점 기능과 자유게시판 시스템을 통합하여 하나의 프로그램으로 이용 및 관리할 수 있는 영화 리뷰 사이트
 
 ![1메인](https://user-images.githubusercontent.com/117807553/229388601-64714d60-2cb9-475a-9564-dbe933c822de.JPG)
 
