@@ -81,11 +81,11 @@
             <div class="col-lg-6 d-flex align-items-center gradient-custom-1">
               <div class="text-white px-3 py-4 p-md-5 mx-md-4">
                 <h5 class="mb-4">저희는 영화 전문 리뷰사이트입니다</h5>
-                <p class="small mb-0"><p>방문해 주셔서 감사합니다.<br>
+                <p class="small mb-0">방문해 주셔서 감사합니다.<br>
 							본 웹사이트는 이젠 아카데미에서 운영하는<br>
 							"디지털컨버전스 풀스택 웹개발자 과정"<br>
 							훈련생 신치윤이 만든 첫 개별 프로젝트입니다.<br>
-							 미흡하지만 열심히 만들었습니다. 감사합니다.</p></p>
+							 미흡하지만 열심히 만들었습니다. 감사합니다.</p>
               </div>
             </div>
           </div>
