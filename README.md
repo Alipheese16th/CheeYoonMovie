@@ -76,5 +76,5 @@
 ![exception](https://user-images.githubusercontent.com/117807553/238186790-593ba5f3-394d-4e88-a6d2-ea230c81255a.PNG)
 
 ## 차후 개발 계획
-![after](https://user-images.githubusercontent.com/117807553/238186793-136441af-c285-423d-b58c-ca8c39d59c2a.PNG)
+![after](https://user-images.githubusercontent.com/117807553/238188740-47263803-12f5-4105-b58c-0e76816c3b0f.png)
 
