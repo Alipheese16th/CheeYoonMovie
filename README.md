@@ -20,7 +20,7 @@
 
 - **프로젝트 소개** : 영화 조회 및 평점 기능과 자유게시판 시스템을 통합하여 하나의 프로그램으로 이용 및 관리할 수 있는 영화 리뷰 사이트
 
-![1메인](https://user-images.githubusercontent.com/117807553/229388601-64714d60-2cb9-475a-9564-dbe933c822de.JPG)
+![1메인](https://user-images.githubusercontent.com/117807553/238186621-ba5e02b0-d205-4255-9542-738e21af6c67.PNG)
 
 ## 목차
 
@@ -36,42 +36,45 @@
 [10. 차후 개발내용](https://github.com/Alipheese16th/CheeYoonMovie#%EC%B0%A8%ED%9B%84-%EA%B0%9C%EB%B0%9C-%EA%B3%84%ED%9A%8D)<br>
 
 ## 작업분할 구조도
-![작업분할도](https://user-images.githubusercontent.com/117807553/229388602-be0d9312-d4e5-4072-a39e-28012e3d01a7.JPG)
+![작업분할도](https://user-images.githubusercontent.com/117807553/238186683-25651ae2-bdba-4c4e-bdbb-7fdb732a8bed.PNG)
 
 ## Gantt Chart
-![간트차트](https://user-images.githubusercontent.com/117807553/229388603-f29b56d2-ab96-4db1-a51a-b9deb56d257c.JPG)
+![간트차트](https://user-images.githubusercontent.com/117807553/238186691-cc1af204-84f0-4144-969e-042a6d1ba650.PNG)
 
 ## 이용자 권한
-![이용자권한](https://user-images.githubusercontent.com/117807553/229388604-3cb0cf8d-2f17-4f21-a306-8d950cb37de8.JPG)
+![이용자권한](https://user-images.githubusercontent.com/117807553/238186999-98d5440d-a7b3-4c63-8f42-8ea29970bda0.png)
 
 ## Usecase Diagram
-![유스케이스](https://user-images.githubusercontent.com/117807553/229388606-7c167fb1-7e6f-4b4d-86b7-36d28e51c309.JPG)
+![유스케이스](https://user-images.githubusercontent.com/117807553/238186700-aee0d57f-f156-438c-ac5d-2e560750dbb4.PNG)
 
 ## Sequence Diagram
-![시퀀스다이어그램-회원](https://user-images.githubusercontent.com/117807553/229388607-40a0b5cc-10ee-4d53-b549-e8c13085a175.JPG)
-![시퀀스다이어그램-관리자](https://user-images.githubusercontent.com/117807553/229388609-4eaa7fc3-0078-4619-ae70-928df8242b16.JPG)
+![시퀀스다이어그램-회원](https://user-images.githubusercontent.com/117807553/238186702-279aa600-8c4f-4783-9e98-55acb492f056.PNG)
+![시퀀스다이어그램-관리자](https://user-images.githubusercontent.com/117807553/238186706-97cae740-356f-4754-97f5-598d69db31b6.PNG)
 
 ## 기능 정의서
-![기능정의서](https://user-images.githubusercontent.com/117807553/229388610-73b145c1-6bc0-443b-92f0-2a62fb3921ee.JPG)
+![기능정의서](https://user-images.githubusercontent.com/117807553/238186713-cfe1f938-9d96-4709-b544-519b12131b51.PNG)
 
 ## E-R Diagram
-![erd](https://user-images.githubusercontent.com/117807553/229388612-470ee53c-14d7-49be-90ff-1e06ff63d541.JPG)
+![erd](https://user-images.githubusercontent.com/117807553/238186715-463b040a-2ab4-4e6d-9714-8dcfbd30daec.PNG)
 
 ## Project Source Explorer
-![소스파일](https://user-images.githubusercontent.com/117807553/229388613-670f15b0-c1b2-47c3-94bd-7b16a54f1213.JPG)
+![소스파일](https://user-images.githubusercontent.com/117807553/238186720-3f3f3839-1f81-48c9-9bb0-c7a2b43c885b.PNG)
 
 ## 실행 화면
-![실행화면](https://user-images.githubusercontent.com/117807553/229388615-08d0a8f6-a21d-4034-add0-0e1098a509e0.JPG)
-![실행화면2](https://user-images.githubusercontent.com/117807553/229388617-4b0144d8-7f22-4b4b-988d-732687591d3d.JPG)
-![실행화면3](https://user-images.githubusercontent.com/117807553/229388620-9913126f-968e-4022-8578-2157a663521a.JPG)
-![실행화면4](https://user-images.githubusercontent.com/117807553/229388623-64d72f3f-e9b3-4e4e-8e7a-c6f75778a249.JPG)
-![실행화면5](https://user-images.githubusercontent.com/117807553/229388625-b88c94af-a753-4c3c-ab52-c54b6f8790ae.JPG)
-![실행화면6](https://user-images.githubusercontent.com/117807553/229388627-ce597e81-86d7-4e47-9faa-88dabe8da033.JPG)
-![실행화면7](https://user-images.githubusercontent.com/117807553/229388629-f6d9a5af-ec90-4981-a451-6bdf4193f53c.JPG)
-![실행화면8](https://user-images.githubusercontent.com/117807553/229388630-89fda3d6-c8a2-48e6-98d3-3a0d94b8ba1c.JPG)
-![실행화면9](https://user-images.githubusercontent.com/117807553/229388632-fdf12f34-65a5-4e0a-9776-dad7853d4b8a.JPG)
-![실행화면10](https://user-images.githubusercontent.com/117807553/229388634-78bf6f9c-504e-41c3-89f3-8fdfbcdfc19d.JPG)
+![main](https://user-images.githubusercontent.com/117807553/238186724-9c2e8f18-43e1-4b0f-be52-ee429ee8a2f9.PNG)
+![join](https://user-images.githubusercontent.com/117807553/238186727-47ad043f-40fb-4740-87a6-5f5e19ff38da.PNG)
+![login](https://user-images.githubusercontent.com/117807553/238186730-f5df4172-82b0-46da-9688-8438d70b6fc8.PNG)
+![mypage](https://user-images.githubusercontent.com/117807553/238186735-1e136f2f-c0c4-4353-9b24-db495de08302.PNG)
+![movielist](https://user-images.githubusercontent.com/117807553/238186739-c4b6fcbf-ac7d-4550-b5ac-5dd757105ea9.PNG)
+![moviedetail](https://user-images.githubusercontent.com/117807553/238186745-18c77778-683a-453b-ae74-2870d170138a.PNG)
+![moviesearch](https://user-images.githubusercontent.com/117807553/238186753-da933153-794b-4a30-b601-3457b1aeea21.PNG)
+![movierank](https://user-images.githubusercontent.com/117807553/238186766-658db4c4-a8a2-4db9-b7ed-596f37970813.PNG)
+![board](https://user-images.githubusercontent.com/117807553/238186773-1c69f40f-cffe-4dd1-bf50-4c01ed0528c5.PNG)
+![ratinglist](https://user-images.githubusercontent.com/117807553/238186777-6e14d856-b90e-462d-8017-25c671e1eb08.PNG)
+![adminlogin](https://user-images.githubusercontent.com/117807553/238186781-b810b051-a0e5-49e4-b7c3-97f0ede49788.PNG)
+![adminregist](https://user-images.githubusercontent.com/117807553/238186786-44b8b3f8-2153-48eb-9d38-a227d1bc21b2.PNG)
+![exception](https://user-images.githubusercontent.com/117807553/238186790-593ba5f3-394d-4e88-a6d2-ea230c81255a.PNG)
 
 ## 차후 개발 계획
-![실행화면11](https://user-images.githubusercontent.com/117807553/229388635-9352972e-cad4-466c-bea0-5863a059ca69.JPG)
+![after](https://user-images.githubusercontent.com/117807553/238186793-136441af-c285-423d-b58c-ca8c39d59c2a.PNG)
 
